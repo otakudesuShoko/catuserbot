@@ -50,13 +50,13 @@ async def amireallyalive(alive):
         await edit_or_reply(
             alive,
             f"<b>{CUSTOM_ALIVE_TEXT}</b>\n\n"
-            f"<b>{EMOJI} Master : {hmention}</b>\n"
-            f"<b>{EMOJI} Uptime :</b> <code>{uptime}</code>\n"
-            f"<b>{EMOJI} Python Version :</b> <code>{python_version()}</code>\n"
-            f"<b>{EMOJI} Telethon version :</b> <code>{version.__version__}</code>\n"
-            f"<b>{EMOJI} Catuserbot Version :</b> <code>{catversion}</code>\n"
-            f"<b>{EMOJI} Database :</b> <code>{check_sgnirts}</code>\n\n"
-            "    <a href = https://github.com/sandy1709/catuserbot><b>GoodCat</b></a> | <a href = https://github.com/Jisan09/catuserbot><b>BadCat</b></a> | <a href = https://t.me/catuserbot_support><b>Support</b></a>",
+            f"<b>👤 Master : {hmention}</b>\n"
+            f"<b>⏱ Uptime :</b> <code>{uptime}</code>\n"
+            f"<b>🐍 Python Version :</b> <code>{python_version()}</code>\n"
+            f"<b>⚒ Telethon version :</b> <code>{version.__version__}</code>\n"
+            f"<b>🛠 Catuserbot Version :</b> <code>{catversion}</code>\n"
+            f"<b>📚 Database :</b> <code>{check_sgnirts}</code>\n\n"
+            "    <a href = https://github.com/sandy1709/catuserbot><b>GoodCat</b></a> | <a href = https://github.com/Jisan09/catuserbot><b>BadCat</b></a> | <a href = https://github.com/otakudesuShoko/catuserbot><b>BadBoy</b></a>",
             parse_mode="html",
         )
 
