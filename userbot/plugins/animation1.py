@@ -261,6 +261,23 @@ async def _(event):
     await event.edit("EVERyBOdy iZ GangSTur UNtIL I ArRivE 🔥🔥🔥")
 
 
+@bot.on(admin_cmd(pattern="p$"))
+@bot.on(sudo_cmd(pattern="p$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "Punten")
+    await asyncio.sleep(2)
+    await event.edit("Wah rame nih, ehem")
+    await asyncio.sleep(2)
+    await event.edit("Mau pantun dulu bolehlah")
+    await asyncio.sleep(2)
+    await event.edit("anak dajjal belajar hukum")
+    await asyncio.sleep(2)
+    await event.edit("Assalamualaikum")
+    await asyncio.sleep(2)
+    
+    
 @bot.on(admin_cmd(pattern=f"charging$"))
 @bot.on(sudo_cmd(pattern=f"charging$", allow_sudo=True))
 async def timer_blankx(e):
@@ -287,7 +304,7 @@ async def timer_blankx(e):
 CMD_HELP.update(
     {
         "animation1": "__**PLUGIN NAME :** Animation1__\
-\n\n**📌 CMD ➥** `.stupid` | `.bombs` | `.call` | `.kill` | `.kell` | `.wtf` | `.ding` | `.hypno` | `.candy` | `.gangasta` | `.charging` \
+\n\n**📌 CMD ➥** `.stupid` | `.bombs` | `.call` | `.kill` | `.kell` |  `.p`  |  `.wtf` | `.ding` | `.hypno` | `.candy` | `.gangasta` | `.charging` \
 \n\n**USAGE   ➥  **These are animation bruh..Try & check yourself\
 "
     }
