@@ -192,7 +192,7 @@ async def nekobot(cat):
         else:
             await edit_delete(
                 cat,
-                "apa yang harus saya tweet? Beri beberapa teks dan format harus seperti ".tweet username; teks Anda` ",
+                "apa yang harus saya tweet? Beri beberapa teks dan format harus seperti `.tweet username ; your text` ",
                 5,
             )
             return
