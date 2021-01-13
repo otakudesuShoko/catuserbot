@@ -26,7 +26,7 @@ async def _(cat):
     reply_to_id = cat.message.id
     if cat.reply_to_msg_id:
         reply_to_id = cat.reply_to_msg_id
-    event = await edit_or_reply(cat, "Converting.....")
+    event = await edit_or_reply(cat, "Mengonversi.....")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -48,7 +48,7 @@ async def _(cat):
             os.remove(downloaded_file_name)
             await event.delete()
         else:
-            await event.edit("Can't Convert")
+            await event.edit("Tidak Dapat Mengonversi")
     else:
         await event.edit("Syntax : `.stoi` reply to a Telegram normal sticker")
 
