@@ -16,7 +16,7 @@ async def _(event):
     input_str = event.pattern_match.group(1)
     peer_id = event.chat_id
     if not event.is_group:
-        return await edit_delete(event, "`Idiot! ,This is not a group to lock things `")
+        return await edit_delete(event, "`Idiot! , Ini bukan grup untuk mengunci sesuatu `")
     chat_per = (await event.get_chat()).default_banned_rights
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if input_str in (("bots", "commands", "email", "forward", "url")):
@@ -37,7 +37,7 @@ async def _(event):
         if input_str == "msg":
             if msg:
                 return await edit_delete(
-                    event, "`This group is already locked with messaging permission`"
+                    event, "`Grup ini sudah dikunci dengan izin perpesanan`"
                 )
             else:
                 msg = True
@@ -45,7 +45,7 @@ async def _(event):
         elif input_str == "media":
             if media:
                 return await edit_delete(
-                    event, "`This group is already locked with sending media`"
+                    event, "`Grup ini sudah dikunci dengan media pengiriman`"
                 )
             else:
                 media = True
@@ -53,7 +53,7 @@ async def _(event):
         elif input_str == "sticker":
             if sticker:
                 return await edit_delete(
-                    event, "`This group is already locked with sending stickers`"
+                    event, "`Grup ini sudah dikunci dengan mengirim stiker`"
                 )
             else:
                 sticker = True
@@ -61,7 +61,7 @@ async def _(event):
         elif input_str == "preview":
             if embed_link:
                 return await edit_delete(
-                    event, "`This group is already locked with previewing links`"
+                    event, "`Grup ini sudah dikunci dengan tautan pratinjau`"
                 )
             else:
                 embed_link = True
@@ -69,7 +69,7 @@ async def _(event):
         elif input_str == "gif":
             if gif:
                 return await edit_delete(
-                    event, "`This group is already locked with sending GIFs`"
+                    event, "`Grup ini sudah dikunci dengan mengirim GIF`"
                 )
             else:
                 gif = True
@@ -85,7 +85,7 @@ async def _(event):
         elif input_str == "inline":
             if ainline:
                 return await edit_delete(
-                    event, "`This group is already locked with using inline bots`"
+                    event, "`Grup ini sudah dikunci dengan mengirim game`"
                 )
             else:
                 ainline = True
@@ -93,7 +93,7 @@ async def _(event):
         elif input_str == "poll":
             if gpoll:
                 return await edit_delete(
-                    event, "`This group is already locked with sending polls`"
+                    event, "`Grup ini sudah dikunci dengan mengirim jajak pendapat`"
                 )
             else:
                 gpoll = True
@@ -101,7 +101,7 @@ async def _(event):
         elif input_str == "invite":
             if adduser:
                 return await edit_delete(
-                    event, "`This group is already locked with adding members`"
+                    event, "`Grup ini sudah dikunci dengan menambahkan anggota`"
                 )
             else:
                 adduser = True
@@ -110,7 +110,7 @@ async def _(event):
             if cpin:
                 return await edit_delete(
                     event,
-                    "`This group is already locked with pinning messages by users`",
+                    "`Grup ini sudah dikunci dengan menyematkan pesan oleh pengguna`",
                 )
             else:
                 cpin = True
@@ -119,7 +119,7 @@ async def _(event):
             if changeinfo:
                 return await edit_delete(
                     event,
-                    "`This group is already locked with Changing group info by users`",
+                    "`Grup ini sudah dikunci dengan Mengubah info grup oleh pengguna`",
                 )
             else:
                 changeinfo = True
@@ -140,7 +140,7 @@ async def _(event):
         else:
             if input_str:
                 return await edit_delete(
-                    event, f"**Invalid lock type :** `{input_str}`", time=5
+                    event, f"**Jenis kunci tidak valid :** `{input_str}`", time=5
                 )
 
             else:
