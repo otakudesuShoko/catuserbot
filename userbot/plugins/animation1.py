@@ -108,7 +108,7 @@ async def _(event):
         "52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ ",
         "84%\n█████████████████████▒▒▒▒ ",
         "100%\n█████████████████████████ ",                
-        f"**{mention}**` Mampus Udah gua santet 😈`**\n", 
+        f"Mweheheh Mampus Udah gua santet 😈`**\n", 
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
@@ -133,7 +133,7 @@ async def _(event):
         "52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ ",
         "84%\n█████████████████████▒▒▒▒ ",
         "100%\n█████████████████████████ ",                
-        f"**{mention}**` Mampus Udah gua begal 😈`**\n", 
+        f"Mweheheh Mampus Udah gua begal 😈`**\n", 
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
@@ -152,8 +152,8 @@ async def _(event):
         "What",
         "What The",
         "What The F",
-        "What The F Brah",
-        "What The F Brah\n https://telegra.ph/file/e2972bf037db28f9ec8ed.png",
+        "What The Fuck",
+        "What The Fuck man\n https://telegra.ph/file/e2972bf037db28f9ec8ed.png",
     ]
     for i in animation_ttl:
 
