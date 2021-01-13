@@ -73,7 +73,7 @@ async def _(event):
     except (Exception) as exc:
         await edit_or_reply(event, str(exc))
     else:
-        await edit_or_reply(event, "Successfully Promoted")
+        await edit_or_reply(event, "User telah menjadi admin")
 
 
 @bot.on(admin_cmd(pattern=f"padmin$", outgoing=True))
@@ -83,28 +83,28 @@ async def _(event):
         return
     animation_interval = 1
     animation_ttl = range(20)
-    event = await edit_or_reply(event, "promoting.......")
+    event = await edit_or_reply(event, "Promot menjadi admin.......")
     animation_chars = [
         "**Promoting User As Admin...**",
         "**Enabling All Permissions To User...**",
-        "**(1) Send Messages: ☑️**",
-        "**(1) Send Messages: ✅**",
-        "**(2) Send Media: ☑️**",
-        "**(2) Send Media: ✅**",
-        "**(3) Send Stickers & GIFs: ☑️**",
-        "**(3) Send Stickers & GIFs: ✅**",
-        "**(4) Send Polls: ☑️**",
-        "**(4) Send Polls: ✅**",
-        "**(5) Embed Links: ☑️**",
-        "**(5) Embed Links: ✅**",
-        "**(6) Add Users: ☑️**",
-        "**(6) Add Users: ✅**",
-        "**(7) Pin Messages: ☑️**",
-        "**(7) Pin Messages: ✅**",
-        "**(8) Change Chat Info: ☑️**",
-        "**(8) Change Chat Info: ✅**",
-        "**Permission Granted Successfully**",
-        f"**pRoMooTeD SuCcEsSfUlLy bY: {DEFAULTUSER}**",
+        "**(1) Kirim Pesan: ☑️**",
+        "**(1) Kirim Pesan: ✅**",
+        "**(2) Kirim Media: ☑️**",
+        "**(2) Kirim Media: ✅**",
+        "**(3) Kirim Stiker & GIFs: ☑️**",
+        "**(3) Kirim Stiker & GIFs: ✅**",
+        "**(4) Kirim Polls: ☑️**",
+        "**(4) Kirim Polls: ✅**",
+        "**(5) Kirim Link: ☑️**",
+        "**(5) Kirim Link: ✅**",
+        "**(6) Tambahkan anggota: ☑️**",
+        "**(6) Tambahkan anggota: ✅**",
+        "**(7) Sematkan Pesan: ☑️**",
+        "**(7) Sematkan Pesan: ✅**",
+        "**(8) Ubah info group: ☑️**",
+        "**(8) Ubah info group: ✅**",
+        "**Izin Berhasil Diberikan**",
+        f"**Promot admin berhasil: {DEFAULTUSER}**",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
