@@ -51,7 +51,7 @@ async def set_not_afk(event):
     if "afk" not in current_message and "on" in USERAFK_ON:
         shite = await event.client.send_message(
             event.chat_id,
-            "`Urusan gua selesai! Anak anjing.\nOnline " + endtime + "`",
+            "`Urusan gua selesai! Anak anjing.`",
         )
         USERAFK_ON = {}
         afk_time = None
@@ -108,15 +108,15 @@ async def on_afk(event):
         msg = None
         if link and reason:
             message_to_reply = (
-                f"**☞AFK**\n\n**➥SEJAK :** `{endtime}`\n**➥ALASAN : **{reason}"
+                f"**☞AFK**\n**➥SEJAK :** `{endtime}`yang lalu\n**➥ALASAN : **{reason}"
             )
         elif reason:
             message_to_reply = (
-                f"**☞AFK**\n\n**➥SEJAK :** `{endtime}`\n**➥ALASAN : **`{reason}`"
+                f"**☞AFK**\n**➥SEJAK :** `{endtime}`yang lalu\n**➥ALASAN : **`{reason}`"
             )
         else:
             message_to_reply = (
-                f"`I am AFK\n\nAFK Since :{endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
+                f"**☞AFK**\n**➥SEJAK :`{endtime}`yang lalu\n**ALASAN :** Offline!!`"
             )
         if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
             msg = await event.reply(message_to_reply)
