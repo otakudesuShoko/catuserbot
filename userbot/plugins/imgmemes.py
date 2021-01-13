@@ -31,9 +31,9 @@ async def nekobot(cat):
         if cat.is_reply and not reply_to_id.media:
             text = reply_to_id.message
         else:
-            await edit_delete(cat, "`What should i search in google.`", 5)
+            await edit_delete(cat, "`Apa yang harus saya cari di google.`", 5)
             return
-    cate = await edit_or_reply(cat, "`Connecting to https://www.google.com/ ...`")
+    cate = await edit_or_reply(cat, "`Menghubungkan ke https://www.google.com/ ...`")
     text = deEmojify(text)
     if ";" in text:
         search, result = text.split(";")
@@ -66,9 +66,9 @@ async def nekobot(cat):
         if cat.is_reply and not reply.media:
             text = reply.message
         else:
-            await edit_delete(cat, "**Trump : **`What should I tweet`", 5)
+            await edit_delete(cat, "**Trump: ** `` Apa yang harus saya tweet`", 5)
             return
-    cate = await edit_or_reply(cat, "`Requesting trump to tweet...`")
+    cate = await edit_or_reply(cat, "`Meminta trump untuk buat tweet...`")
     try:
         hmm = Get(hmm)
         await cat.client(hmm)
@@ -97,9 +97,9 @@ async def nekobot(cat):
         if cat.is_reply and not reply.media:
             text = reply.message
         else:
-            await edit_delete(cat, "**Modi : **`What should I tweet`", 5)
+            await edit_delete(cat, "**Modi: ** `` Apa yang harus saya tweet`", 5)
             return
-    cate = await edit_or_reply(cat, "Requesting modi to tweet...")
+    cate = await edit_or_reply(cat, "Meminta modi untuk menge-tweet...")
     try:
         hmm = Get(hmm)
         await cat.client(hmm)
@@ -128,9 +128,9 @@ async def nekobot(cat):
         if cat.is_reply and not reply.media:
             text = reply.message
         else:
-            await edit_delete(cat, "`Give text to write on banner, man`", 5)
+            await edit_delete(cat, "`Berikan teks untuk ditulis di banner, man`", 5)
             return
-    cate = await edit_or_reply(cat, "`Your banner is under creation wait a sec...`")
+    cate = await edit_or_reply(cat, "`Banner Anda sedang dalam pembuatan, tunggu sebentar....`")
     try:
         hmm = Get(hmm)
         await cat.client(hmm)
@@ -159,9 +159,9 @@ async def nekobot(cat):
         if cat.is_reply and not reply.media:
             text = reply.message
         else:
-            await edit_delete(cat, "**Kanna : **`What should i show you`", 5)
+            await edit_delete(cat, "**Kanna: ** `` Apa yang harus saya tunjukkan`", 5)
             return
-    cate = await edit_or_reply(cat, "`Kanna is writing your text...`")
+    cate = await edit_or_reply(cat, "`Kanna sedang menulis teks Anda...`")
     try:
         hmm = Get(hmm)
         await e.client(hmm)
@@ -192,7 +192,7 @@ async def nekobot(cat):
         else:
             await edit_delete(
                 cat,
-                "what should I tweet? Give some text and format must be like `.tweet username ; your text` ",
+                "apa yang harus saya tweet? Beri beberapa teks dan format harus seperti ".tweet username; teks Anda` ",
                 5,
             )
             return
@@ -206,11 +206,11 @@ async def nekobot(cat):
     else:
         await edit_delete(
             cat,
-            "__what should I tweet? Give some text and format must be like__ `.tweet username ; your text`",
+            "__apa yang harus saya tweet? Beri beberapa teks dan format harus seperti ".tweet username; teks Anda_ `.tweet username ; your text`",
             5,
         )
         return
-    cate = await edit_or_reply(cat, f"`Requesting {username} to tweet...`")
+    cate = await edit_or_reply(cat, f"Membuat {username} twit keren...`")
     text = deEmojify(text)
     await asyncio.sleep(2)
     catfile = await tweets(text, username)
