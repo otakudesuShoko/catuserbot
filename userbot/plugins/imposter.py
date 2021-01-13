@@ -17,13 +17,13 @@ async def _(event):
         return
     name = event.pattern_match.group(2)
     cmd = event.pattern_match.group(1).lower()
-    text1 = await edit_or_reply(event, "Uhmm... Something is wrong here!!")
+    text1 = await edit_or_reply(event, "Uhmm ... Ada yang salah di sini!!")
     await asyncio.sleep(2)
     await text1.delete()
     stcr1 = await event.client.send_file(
         event.chat_id, "CAADAQADRwADnjOcH98isYD5RJTwAg"
     )
-    text2 = await event.reply(f"**{mention} :** I have to call discussion")
+    text2 = await event.reply(f"**{mention} :** Saya harus tekan tombol diskusi")
     await asyncio.sleep(3)
     await stcr1.delete()
     await text2.delete()
@@ -31,7 +31,7 @@ async def _(event):
         event.chat_id, "CAADAQADRgADnjOcH9odHIXtfgmvAg"
     )
     text3 = await event.reply(
-        f"**{mention} :** We have to eject the imposter or will lose "
+        f"**{mention} :** Kitaharus mengeluarkan penipu atau akan kalah "
     )
     await asyncio.sleep(3)
     await stcr2.delete()
@@ -39,20 +39,20 @@ async def _(event):
     stcr3 = await event.client.send_file(
         event.chat_id, "CAADAQADOwADnjOcH77v3Ap51R7gAg"
     )
-    text4 = await event.reply(f"**Others :** Where??? ")
+    text4 = await event.reply(f"**Teman :** Dimana??? ")
     await asyncio.sleep(2)
-    await text4.edit(f"**Others :** Who?? ")
+    await text4.edit(f"**Teman :** Siapa?? ")
     await asyncio.sleep(2)
-    await text4.edit(f"**{mention} :** Its {name} , I saw {name}  using vent,")
+    await text4.edit(f"**{mention} :** ini dia {name} , Saya melihat {name}  menggunakan vent,")
     await asyncio.sleep(3)
-    await text4.edit(f"**Others :**Okay.. Vote {name} ")
+    await text4.edit(f"**Teman :**Okay.. Vote {name} ")
     await asyncio.sleep(2)
     await stcr3.delete()
     await text4.delete()
     stcr4 = await event.client.send_file(
         event.chat_id, "CAADAQADLwADnjOcH-wxu-ehy6NRAg"
     )
-    catevent = await event.reply(f"{name} is ejected.......")
+    catevent = await event.reply(f"{name} dikeluarkan.......")
     await asyncio.sleep(2)
     await catevent.edit("ඞㅤㅤㅤㅤ ㅤㅤㅤㅤ")
     await asyncio.sleep(0.5)
@@ -98,7 +98,7 @@ async def _(event):
         return
     name = event.pattern_match.group(2)
     cmd = event.pattern_match.group(1).lower()
-    catevent = await edit_or_reply(event, f"{name} is ejected.......")
+    catevent = await edit_or_reply(event, f"{name} dikeluarkan.......")
     await asyncio.sleep(2)
     await catevent.edit("ඞㅤㅤㅤㅤ ㅤㅤㅤㅤ")
     await asyncio.sleep(0.8)
