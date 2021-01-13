@@ -42,7 +42,7 @@ async def variable(var):
     exe = var.pattern_match.group(1)
     heroku_var = app.config()
     if exe == "get":
-        cat = await edit_or_reply(var, "`Getting information...`")
+        cat = await edit_or_reply(var, "`Mendapatkan informasi...`")
         await asyncio.sleep(1.0)
         try:
             variable = var.pattern_match.group(2).split()[0]
@@ -165,11 +165,11 @@ async def dyno_usage(dyno):
     await asyncio.sleep(1.5)
     return await dyno.edit(
         "**Dyno Usage**:\n\n"
-        f" -> `Dyno usage for`  **{Config.HEROKU_APP_NAME}**:\n"
+        f" -> `Penggunaan Dyno Gua di`  **{Config.HEROKU_APP_NAME}**:\n"
         f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
         f"**|**  [`{AppPercentage}`**%**]"
         "\n\n"
-        " -> `Dyno hours quota remaining this month`:\n"
+        " -> `Sisa kuota Dyno gua bulan ini`:\n"
         f"     •  `{hours}`**h**  `{minutes}`**m**  "
         f"**|**  [`{percentage}`**%**]"
     )
