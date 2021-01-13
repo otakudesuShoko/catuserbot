@@ -37,7 +37,7 @@ from . import BOTLOG, BOTLOG_CHATID
 
 @bot.on(admin_cmd(outgoing=True, pattern="kickme$"))
 async def kickme(leave):
-    await leave.edit("Nope, no, no, I go away")
+    await leave.edit("Asu group apaan nih out aelah")
     await leave.client.kick_participant(leave.chat_id, "me")
 
 
