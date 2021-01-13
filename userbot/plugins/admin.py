@@ -130,7 +130,7 @@ async def promote(promt):
         delete_messages=True,
         pin_messages=True,
     )
-    catevent = await edit_or_reply(promt, "`Promoting...`")
+    catevent = await edit_or_reply(promt, "`Promot anak haram...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
         rank = "Admin"
@@ -138,7 +138,7 @@ async def promote(promt):
         return
     try:
         await promt.client(EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        await catevent.edit("`Promoted Successfully! Now gib Party`")
+        await catevent.edit("`Anak haram berhasil dipromot!woi`")
     except BadRequestError:
         await catevent.edit(NO_PERM)
         return
