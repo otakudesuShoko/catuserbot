@@ -18,12 +18,12 @@ async def _(event):
         mean = await urban.get_word(word)
         await edit_or_reply(
             event,
-            "Text: **{}**\n\nMeaning: **{}**\n\nExample: __{}__".format(
+            "Text: **{}**\n\nBerarti: **{}**\n\nContoh: __{}__".format(
                 mean.word, mean.definition, mean.example
             ),
         )
     except asyncurban.WordNotFoundError:
-        await edit_or_reply(event, "No result found for **" + word + "**")
+        await edit_or_reply(event, "Tidak ada hasil untuk **" + word + "**")
 
 
 @bot.on(admin_cmd(pattern="meaning (.*)"))
@@ -42,7 +42,7 @@ async def _(event):
                 output += f"☞__{i}__\n"
         await edit_or_reply(event, output)
     except Exception:
-        await edit_or_reply(event, f"Couldn't fetch meaning of {word}")
+        await edit_or_reply(event, f"Tidak dapat memahami arti dari {word}")
 
 
 CMD_HELP.update(
