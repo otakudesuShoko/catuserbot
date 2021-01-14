@@ -2,7 +2,7 @@ import os
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot.events import register
-from userbot import bot, TEMP_DOWNLOAD_DIRECTORY, CMD_HELP
+from userbot import bot, TMP_DOWNLOAD_DIRECTORY, CMD_HELP
 
 @bot.on(admin_cmd(pattern="kamuii(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="kamuii(?: |$)(.*)", allow_sudo=True))
@@ -45,7 +45,7 @@ async def _(fry):
         else:
             downloaded_file_name = await fry.client.download_media(
                 response.media,
-                TEMP_DOWNLOAD_DIRECTORY
+                TMP_DOWNLOAD_DIRECTORY
             )
             await fry.client.send_file(
                 fry.chat_id,
@@ -107,7 +107,7 @@ async def _(fry):
         else:
             downloaded_file_name = await fry.client.download_media(
                 response.media,
-                TEMP_DOWNLOAD_DIRECTORY
+                TMP_DOWNLOAD_DIRECTORY
             )
             await fry.client.send_file(
                 fry.chat_id,
