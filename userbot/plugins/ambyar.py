@@ -100,7 +100,7 @@ async def _(event):
     
 CMD_HELP.update(
     {
-        "animation1": "__**PLUGIN NAME :** ambyar__\
+        "ambyar": "__**PLUGIN NAME :** ambyar__\
 \n\n**📌 CMD ➥** `.bitch` | `.tidr` | `.skak` | ` \
 \n\n**USAGE   ➥  **These are animation bruh..Try & check yourself\
 "
