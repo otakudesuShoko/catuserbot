@@ -39,7 +39,7 @@ async def _(event):
     
  
  CMD_HELP.update(
-     [
+     {
           "salam": "__**PLUGIN NAME :** salam__\
  \n\n**📌 CMD ➥ `.p` | `.l` | \ 
  \n\n**USAGE   ➥  **Menjawab salam dan salam\
