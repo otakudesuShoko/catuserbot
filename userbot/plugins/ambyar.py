@@ -12,11 +12,11 @@ async def _(event):
     event = await edit_or_reply(event, "I'M A BROKENT HOME")
     await asyncio.sleep(2)
     await event.edit("🙂Tangisan hanya mengacaukan segalanya tapi senyuman membuat mereka yakin aku Tegar")
-    await asyncio.sleep(3)
+    await asyncio.sleep(5)
     await event.edit("☹️Setiap anak ingin keluarga yang sempurna\ntapi tidak semua anak memilikinya.")
-    await asyncio.sleep(3)
+    await asyncio.sleep(5)
     await event.edit("Sayangilah kedua orang tuamu dengan\nsepenuh hati selagi masih ada🙂")
-    await asyncio.sleep(3)
+    await asyncio.sleep(5)
    
     
 @bot.on(admin_cmd(pattern=f"tidr$", outgoing=True))
