@@ -57,37 +57,11 @@ async def _(event):
     await event.edit("**Yahahahah mampus lu dajjal😂**")    
     await asyncio.sleep(2)
     
-    
-@bot.on(admin_cmd(pattern="rindu$", outgoing=True))
-@bot.on(sudo_cmd(pattern="rindu$", allow_sudo=True))
-async def _(event):
-    if event.fwd_from:
-        return
-    animation_interval = 2
-    animation_ttl = range(0, 11)
-    event = await edit_or_reply(event, "rindu")
-    animation_chars = [
-            "`Connecting Ke server Rindu`",
-            "`Mencari kabar dia`",
-            "`Menahan Rindu..  0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Menahan Rindu.. 4%\n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Menahan Rindu.. 8%\n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Menahan Rindu.. 20%\n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Menahan Rindu.. 36%\n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Menahan Rindu.. 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Menahan Rindu.. 84%\n█████████████████████▒▒▒▒ `",
-            "`Menahan Rindu. 100%\n█████████RINDUKU███████████ `",
-            f"`Ternyata Rindu itu berat, Aku gak kuat biar kamu Saja ajg!!`\n",
-        ]
-        for i in animation_ttl:
-        await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 11])
-    
-    
+     
 CMD_HELP.update(
     {
         "ambyar": "__**PLUGIN NAME :** ambyar__\
-\n\n**📌 CMD ➥** `.bitch` | `.tidr` | `.skak` | `.rindu ` | \
+\n\n**📌 CMD ➥** `.bitch` | `.tidr` | `.skak` | `. \
 \n\n**USAGE   ➥  **These are animation bruh..Try & check yourself\
 "
     }
