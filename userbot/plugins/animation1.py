@@ -227,8 +227,20 @@ async def _(event):
         await asyncio.sleep(0.4)
         await event.edit("".join(deq))
         deq.rotate(1)
-
-
+   
+@bot.on(admin_cmd(pattern="c$"))
+@bot.on(sudo_cmd(pattern="c$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "Woii.. ")
+    await asyncio.sleep(2)
+    await event.edit("Cantik doang yang bawah udah ga rapat")
+    await asyncio.sleep(2)
+    await event.edit("Canda Rapat awokawok")    
+    await asyncio.sleep(2)
+    
+    
 @bot.on(admin_cmd(pattern="l$"))
 @bot.on(sudo_cmd(pattern="l$", allow_sudo=True))
 async def _(event):
@@ -243,8 +255,8 @@ async def _(event):
     await event.edit("Si Asep naik kapal selam..")
     await asyncio.sleep(2)
     await event.edit("Waalaikumsalam ")    
-    await asyncio.sleep(2)
-    
+    await asyncio.sleep(2)      
+ 
 
 @bot.on(admin_cmd(pattern="p$"))
 @bot.on(sudo_cmd(pattern="p$", allow_sudo=True))
@@ -261,20 +273,7 @@ async def _(event):
     await asyncio.sleep(2)
     await event.edit("Assalamualaikum")
     await asyncio.sleep(2)
-    
-    
-@bot.on(admin_cmd(pattern="c$"))
-@bot.on(sudo_cmd(pattern="c$", allow_sudo=True))
-async def _(event):
-    if event.fwd_from:
-        return
-    event = await edit_or_reply(event, "Woii.. ")
-    await asyncio.sleep(2)
-    await event.edit("Cantik doang yang bawah udah ga rapat")
-    await asyncio.sleep(2)
-    await event.edit("Canda Rapat awokawok")    
-    await asyncio.sleep(2)
-    
+
     
 @bot.on(admin_cmd(pattern="g$"))
 @bot.on(sudo_cmd(pattern="g$", allow_sudo=True))
@@ -315,7 +314,7 @@ async def timer_blankx(e):
 CMD_HELP.update(
     {
         "animation1": "__**PLUGIN NAME :** Animation1__\
-\n\n**📌 CMD ➥** `.stupid` | `.bombs` | `.call` | `.kill` | `.begl` |  `.p`  | `.l | `.g` | `.c` | `.wtf` | `.ding` | `.hypno` | `.candy` | `.cas` \
+\n\n**📌 CMD ➥** `.stupid` | `.bombs` | `.p` | `.l` | `.call` | `.kill` | `.begl` | `.g` | `.c` | `.wtf` | `.ding` | `.hypno` | `.candy` | `.cas` \
 \n\n**USAGE   ➥  **These are animation bruh..Try & check yourself\
 "
     }
