@@ -77,7 +77,8 @@ async def _(event):
             "`Menahan Rindu.. 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `",
             "`Menahan Rindu.. 84%\n█████████████████████▒▒▒▒ `",
             "`Menahan Rindu. 100%\n█████████RINDUKU███████████ `",
-            f"`Ternyata Rindu itu berat, Aku gak kuat biar kamu Saja ajg!!`"]
+            f"`Ternyata Rindu itu berat, Aku gak kuat biar kamu Saja ajg!!`\n",
+        ]
         for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 11])
