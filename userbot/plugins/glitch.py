@@ -22,21 +22,21 @@ async def glitch(cat):
     catinput = cat.pattern_match.group(2)
     reply = await cat.get_reply_message()
     catid = cat.reply_to_msg_id
-    cat = await edit_or_reply(cat, "```Glitching... 😁```")
+    cat = await edit_or_reply(cat, "```Memproses Glitch... 😁```")
     if not (reply and (reply.media)):
-        await cat.edit("`Media not found...`")
+        await cat.edit("`Media tidak ditemukan...`")
         return
     if not os.path.isdir("./temp/"):
         os.mkdir("./temp/")
     catsticker = await reply.download_media(file="./temp/")
     if not catsticker.endswith((".mp4", ".webp", ".tgs", ".png", ".jpg")):
         os.remove(catsticker)
-        await cat.edit("`Media not found...`")
+        await cat.edit("`Media tidak ditemukan...`")
         return
     os.path.join("./temp/", "glitch.png")
     if catinput:
         if not catinput.isdigit():
-            await cat.edit("`You input is invalid, check help`")
+            await cat.edit("`Masukan Anda tidak valid, periksa bantuan`")
             return
         catinput = int(catinput)
         if not 0 < catinput < 9:
@@ -51,7 +51,7 @@ async def glitch(cat):
         )
         stdout, stderr = (await runcmd(catcmd))[:2]
         if not os.path.lexists(catfile):
-            await cat.edit("`catsticker not found...`")
+            await cat.edit("`Stiker tidak ada...`")
             LOGS.info(stdout + stderr)
         glitch_file = catfile
     elif catsticker.endswith(".webp"):
@@ -65,7 +65,7 @@ async def glitch(cat):
         catfile = os.path.join("./temp/", "glitch.png")
         await take_screen_shot(catsticker, 0, catfile)
         if not os.path.lexists(catfile):
-            await cat.edit("```catsticker not found...```")
+            await cat.edit("```Stiker tidak ada..```")
             return
         glitch_file = catfile
     else:
