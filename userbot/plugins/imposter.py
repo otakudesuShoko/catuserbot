@@ -31,7 +31,7 @@ async def _(event):
         event.chat_id, "CAADAQADRgADnjOcH9odHIXtfgmvAg"
     )
     text3 = await event.reply(
-        f"**{mention} :** Kitaharus mengeluarkan penipu atau akan kalah "
+        f"**{mention} :** Kita harus mengeluarkan penipu atau akan kalah "
     )
     await asyncio.sleep(3)
     await stcr2.delete()
