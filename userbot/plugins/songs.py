@@ -19,10 +19,10 @@ from . import yt_search_api
 # =========================================================== #
 #                           STRINGS                           #
 # =========================================================== #
-SONG_SEARCH_STRING = "<code>wi8..! I am finding your song....</code>"
-SONG_NOT_FOUND = "<code>Sorry !I am unable to find any song like that</code>"
-SONG_SENDING_STRING = "<code>yeah..! i found something wi8..🥰...</code>"
-SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
+SONG_SEARCH_STRING = "<code>Sedang mencari lagu yang anda request..</code>"
+SONG_NOT_FOUND = "<code>Maaf! Konten lagu tidak ditemukan</code>"
+SONG_SENDING_STRING = "<code>Yeah! Lagu sudah ditemukan..</code>"
+SONGBOT_BLOCKED_STRING = "<code>Mohon unblok @songdl_bot lalu coba lagi</code>"
 # =========================================================== #
 #                                                             #
 # =========================================================== #
@@ -41,14 +41,14 @@ async def _(event):
         if reply.message:
             query = reply.message
     else:
-        await edit_or_reply(event, "`What I am Supposed to find `")
+        await edit_or_reply(event, "`Apa yang harus saya cari `")
         return
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    catevent = await edit_or_reply(event, "`Sedang mencari lagu yang anda minta...`")
     video_link = await yt_search(str(query))
     if not url(video_link):
         return await catevent.edit(
-            f"Sorry!. I can't find any related video/audio for `{query}`"
+            f"Mohon maaf konten tidak dapat ditemukan `{query}`"
         )
     cmd = event.pattern_match.group(1)
     if cmd == "song":
@@ -76,9 +76,9 @@ async def _(event):
     song_file = Path(f"{catname}.mp3")
     if not os.path.exists(song_file):
         return await catevent.edit(
-            f"Sorry!. I can't find any related video/audio for `{query}`"
+            f"Mohon maaf konten tidsk ada `{query}`"
         )
-    await catevent.edit("`yeah..! i found something wi8..🥰`")
+    await catevent.edit("`Yeah! Lagu sudah ditemukan..`")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
         catthumb = Path(f"{catname}.webp")
@@ -89,7 +89,7 @@ async def _(event):
         event.chat_id,
         song_file,
         force_document=False,
-        caption=f"<b><i>➥ Song :- {query}</i></b>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
+        caption=f"<b><i>➥ Lagu :- {query}</i></b>\n<b><i>➥ Hak Cipta :- {hmention}</i></b>",
         thumb=catthumb,
         supports_streaming=True,
         parse_mode="html",
@@ -123,14 +123,14 @@ async def _(event):
         if reply.message:
             query = reply.messag
     else:
-        event = await edit_or_reply(event, "What I am Supposed to find")
+        event = await edit_or_reply(event, "Apa yang seharusnya saya cari")
         return
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    catevent = await edit_or_reply(event, "`Sedang mencari lagu yang anda request..`")
     video_link = await yt_search(str(query))
     if not url(video_link):
         return await catevent.edit(
-            f"Sorry!. I can't find any related video/audio for `{query}`"
+            f"Mohon maaf konten tidak ditemukan`{query}`"
         )
     # thumb_cmd = thumb_dl.format(video_link=video_link)
     name_cmd = name_dl.format(video_link=video_link)
@@ -155,9 +155,9 @@ async def _(event):
         vsong_file = Path(f"{catname}.mkv")
     elif not os.path.exists(vsong_file):
         return await catevent.edit(
-            f"Sorry!. I can't find any related video/audio for `{query}`"
+            f"Mohon maaf konten tidak ditemukan `{query}`"
         )
-    await catevent.edit("`yeah..! i found something wi8..🥰`")
+    await catevent.edit("`yeah..! i Yeah! Lagu sudah ditemukan..🥰`")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
         catthumb = Path(f"{catname}.webp")
@@ -167,7 +167,7 @@ async def _(event):
         event.chat_id,
         vsong_file,
         force_document=False,
-        caption=f"<b><i>➥ Song :- {query}</i></b>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
+        caption=f"<b><i>➥ Lagu :- {query}</i></b>\n<b><i>➥ Hak Cipta :- {hmention}</i></b>",
         thumb=catthumb,
         supports_streaming=True,
         parse_mode="html",
@@ -229,7 +229,7 @@ async def cat_song_fetcer(event):
         await event.client.send_file(
             event.chat_id,
             music,
-            caption=f"<b><i>➥ Song :-</i></b> <code>{song}</code>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
+            caption=f"<b><i>➥ Lagu :-</i></b> <code>{song}</code>\n<b><i>➥ Hak Cipt :- {hmention}</i></b>",
             parse_mode="html",
             reply_to=reply_id_,
         )
@@ -245,7 +245,7 @@ async def kakashi(event):
     song = event.pattern_match.group(1)
     chat = "@SongsForYouBot"
     link = f"/song {song}"
-    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    catevent = await edit_or_reply(event, "`Sedang mencari lagu yang anda request...`")
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -257,13 +257,13 @@ async def kakashi(event):
         except YouBlockedUserError:
             await catevent.edit("```Please unblock @SongsForYouBot and try again```")
             return
-        await catevent.edit("`Sending Your Music...`")
+        await catevent.edit("`Mengirim Lagu kamu...`")
         await asyncio.sleep(1.5)
         await catevent.delete()
         await event.client.send_file(
             event.chat_id,
             music,
-            caption=f"<b><i>➥ Song :- {song}</i></b>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
+            caption=f"<b><i>➥ Lagu :- {song}</i></b>\n<b><i>➥ Hak Cipta :- {hmention}</i></b>",
             parse_mode="html",
         )
     await event.client.delete_messages(
@@ -279,10 +279,10 @@ async def kakashi(event):
     link = event.pattern_match.group(1)
     if ".com" not in link:
         catevent = await edit_or_reply(
-            event, "` I need a link to download something pro.`**(._.)**"
+            event, "` Saya butuh link untuj mencari lagu.`**(._.)**"
         )
     else:
-        catevent = await edit_or_reply(event, "**Initiating Download!**")
+        catevent = await edit_or_reply(event, "**Sedang download!**")
     chat = "@DeezLoadBot"
     async with event.client.conversation(chat) as conv:
         try:
