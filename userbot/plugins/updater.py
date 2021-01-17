@@ -210,7 +210,7 @@ async def upstream(event):
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
         return await event.respond(
-            'do "[`.update now`] or [`.update deploy`]" to update.Check `.info updater` for details'
+            'lakukan "[.update now] atau [.update deploy]" ke update. Periksa .info updater untuk detailnya'
         )
 
     if force_update:
