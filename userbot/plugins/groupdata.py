@@ -46,7 +46,7 @@ async def kickme(leave):
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "**Admins in this Group**: \n"
+    mentions = "**Anak haram di group ini**: \n"
     reply_message = None
     if event.reply_to_msg_id:
         reply_message = await event.get_reply_message()
@@ -54,7 +54,7 @@ async def _(event):
     to_write_chat = await event.get_input_chat()
     chat = None
     if input_str:
-        mentions_heading = "Admins in {} Group: \n".format(input_str)
+        mentions_heading = "Anak Haram {} Group: \n".format(input_str)
         mentions = mentions_heading
         try:
             chat = await event.client.get_entity(input_str)
@@ -64,7 +64,7 @@ async def _(event):
     else:
         chat = to_write_chat
         if not event.is_group:
-            await edit_or_reply(event, "Are you sure this is a group?")
+            await edit_or_reply(event, "Apakah kamu yakin ini sebuah group?")
             return
     try:
         async for x in event.client.iter_participants(
