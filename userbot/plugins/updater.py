@@ -218,7 +218,7 @@ async def upstream(event):
             "`Force-Syncing to latest stable userbot code, please wait...`"
         )
     if conf == "now":
-        await event.edit("`Updating userbot, please wait....`")
+        await event.edit("`Mengupdate Prindapanbot, Mohon Menunggu....`")
         await update(event, repo, ups_rem, ac_br)
     return
 
