@@ -31,7 +31,7 @@ async def _(event):
     try:
         translated = await getTranslate(text, dest=lan)
         after_tr_text = translated.text
-        output_str = f"**TRANSLATED from {LANGUAGES[translated.src].title()} to {LANGUAGES[lan].title()}**\
+        output_str = f"**Menerjemahkan dari {LANGUAGES[translated.src].title()} ke {LANGUAGES[lan].title()}**\
                 \n`{after_tr_text}`"
         await edit_or_reply(event, output_str)
     except Exception as exc:
@@ -50,16 +50,16 @@ async def translateme(trans):
     elif textx:
         message = textx.text
     else:
-        await edit_or_reply(trans, "`Give a text or reply to a message to translate!`")
+        await edit_or_reply(trans, "`Beri saya teks atau reply pesan anak haram!`")
         return
     try:
         reply_text = await getTranslate(deEmojify(message), dest=TRT_LANG)
     except ValueError:
-        await edit_delete(trans, "`Invalid destination language.`", time=5)
+        await edit_delete(trans, "`Mohon maaf kode bahasa salah.`", time=5)
         return
     source_lan = LANGUAGES[f"{reply_text.src.lower()}"]
     transl_lan = LANGUAGES[f"{reply_text.dest.lower()}"]
-    reply_text = f"**From {source_lan.title()}({reply_text.src.lower()}) to {transl_lan.title()}({reply_text.dest.lower()}) :**\n`{reply_text.text}`"
+    reply_text = f"**Dari {source_lan.title()}({reply_text.src.lower()}) ke {transl_lan.title()}({reply_text.dest.lower()}) :**\n`{reply_text.text}`"
 
     await edit_or_reply(trans, reply_text)
     if BOTLOG:
@@ -82,7 +82,7 @@ async def lang(value):
     else:
         await edit_or_reply(
             value,
-            f"`Invalid Language code !!`\n`Available language codes for TRT`:\n\n`{LANGUAGES}`",
+            f"`Kode bahasa Salah !!`\n`Kode bahasa yang tersedia`:\n\n`{LANGUAGES}`",
         )
         return
     await edit_or_reply(value, f"`Language for {scraper} changed to {LANG.title()}.`")
