@@ -37,7 +37,7 @@ async def fastpurger(purg):
         await purg.client.delete_messages(chat, msgs)
     done = await purg.client.send_message(
         purg.chat_id,
-        "Fast purge complete!\nPurged " + str(count) + " messages.",
+        "Hapus kenangan mantan!\nKenangan pahit " + str(count) + " Bersamanya.",
     )
 
     if BOTLOG:
@@ -66,7 +66,7 @@ async def purgeme(delme):
 
     smsg = await delme.client.send_message(
         delme.chat_id,
-        "`Purge complete!` Purged " + str(count) + " messages.",
+        "`Mencobe Move on!` \nHapus kenangan mantan sebanyak " + str(count) + " nice.",
     )
     if BOTLOG:
         await delme.client.send_message(
