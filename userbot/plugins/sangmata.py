@@ -16,7 +16,7 @@ async def _(event):
     if not input_str and not reply_message:
         catevent = await edit_or_reply(
             event,
-            "`reply to  user's text message to get name/username history or give userid`",
+            "`Balas pesan si anak haram untuk melihat idenitas aslinya`",
         )
         await asyncio.sleep(5)
         return await catevent.delete()
@@ -28,7 +28,7 @@ async def _(event):
                 u = await event.client.get_entity(input_str)
             except ValueError:
                 catevent = await edit_or_reply(
-                    event, "`Give userid or username to find name history`"
+                    event, "`Cantumkan nama atau username si anak haram `"
                 )
                 await asyncio.sleep(5)
                 return await catevent.delete()
@@ -36,12 +36,12 @@ async def _(event):
     else:
         uid = reply_message.sender_id
     chat = "@SangMataInfo_bot"
-    catevent = await edit_or_reply(event, "`Processing...`")
+    catevent = await edit_or_reply(event, "`Mengungkap identitas asli anak haram...`")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message(f"/search_id {uid}")
         except YouBlockedUserError:
-            await catevent.edit("`unblock @Sangmatainfo_bot and then try`")
+            await catevent.edit("`buka blokir @Sangmatainfo_bot `")
             await asyncio.sleep(5)
             return await catevent.delete()
         responses = []
@@ -53,11 +53,11 @@ async def _(event):
             responses.append(response.text)
         await event.client.send_read_acknowledge(conv.chat_id)
     if not responses:
-        await catevent.edit("`bot can't fetch results`")
+        await catevent.edit("`Anda kurang beruntung, Mohon bersabar`")
         await asyncio.sleep(5)
         return await catevent.delete()
     if "No records found" in responses:
-        await catevent.edit("`The user doesn't have any record`")
+        await catevent.edit("`Si Anak haram tidak punya nama `")
         await asyncio.sleep(5)
         return await catevent.delete()
     names, usernames = await sanga_seperator(responses)
