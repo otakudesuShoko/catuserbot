@@ -22,7 +22,7 @@ from . import catmemes
 async def source(e):
     await edit_or_reply(
         e,
-        "Klik [Master](https://t.me/Hyoneechan) Untuk melihat repo.",
+        "Klik [Master](https://github.com/otakudesuShoko/catuserbot) Untuk melihat repo.",
     )
 
 
