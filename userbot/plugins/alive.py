@@ -9,7 +9,7 @@ from . import StartTime, catdef, catversion, hmention, mention, reply_id
 
 
 CAT_IMG = Config.ALIVE_PIC
-CUSTOM_ALIVE_TEXT = Config.CUSTOM_ALIVE_TEXT or "you know my name, but no my life"
+CUSTOM_ALIVE_TEXT = Config.CUSTOM_ALIVE_TEXT or "Tobat jangan ngocok mulu, kasian tititmu"
 EMOJI = Config.CUSTOM_ALIVE_EMOJI or "✧✧"
 
 
@@ -23,19 +23,19 @@ async def amireallyalive(alive):
     _, check_sgnirts = check_data_base_heal_th()
     if CAT_IMG:
         cat_caption = f"<b>{CUSTOM_ALIVE_TEXT}</b>\n\n"
-        cat_caption += f"<b>{EMOJI} Master : {hmention}</b>\n"
-        cat_caption += f"<b>{EMOJI} Uptime :</b> <code>{uptime}</code>\n"
+        cat_caption += f"<b>👤 Master : {hmention}</b>\n"
+        cat_caption += f"<b>⏱ Uptime :</b> <code>{uptime}</code>\n"
         cat_caption += (
-            f"<b>{EMOJI} Python Version :</b> <code>{python_version()}</code>\n"
+            f"<b>🐍 Python Version :</b> <code>{python_version()}</code>\n"
         )
         cat_caption += (
-            f"<b>{EMOJI} Telethon version :</b> <code>{version.__version__}</code>\n"
+            f"<b>⚒ Telethon version :</b> <code>{version.__version__}</code>\n"
         )
         cat_caption += (
-            f"<b>{EMOJI} Catuserbot Version :</b> <code>{catversion}</code>\n"
+            f"<b>🛠 Prindapanbot Version :</b> <code>{catversion}</code>\n"
         )
-        cat_caption += f"<b>{EMOJI} Database :</b> <code>{check_sgnirts}</code>\n\n"
-        cat_caption += "    <a href = https://github.com/sandy1709/catuserbot><b>GoodBoyt</b></a> | <a href = https://github.com/Jisan09/catuserbot><b>BadBoy</b></a> | <a href = https://t.me/Hyoneechan><b>SadBoy</b></a>"
+        cat_caption += f"<b>📚 Database :</b> <code>{check_sgnirts}</code>\n\n"
+        cat_caption += "    <a href = https://github.com/sandy1709/catuserbot><b>GoodBoy</b></a> | <a href = https://github.com/Jisan09/catuserbot><b>BadBoy</b></a> | <a href = https://t.me/Hyoneechan><b>SadBoy</b></a>"
         await alive.client.send_file(
             alive.chat_id,
             CAT_IMG,
@@ -54,7 +54,7 @@ async def amireallyalive(alive):
             f"<b>⏱ Uptime :</b> <code>{uptime}</code>\n"
             f"<b>🐍 Python Version :</b> <code>{python_version()}</code>\n"
             f"<b>⚒ Telethon version :</b> <code>{version.__version__}</code>\n"
-            f"<b>🛠 Catuserbot Version :</b> <code>{catversion}</code>\n"
+            f"<b>🛠 Prindapanbot Version :</b> <code>{catversion}</code>\n"
             f"<b>📚 Database :</b> <code>{check_sgnirts}</code>\n\n"
             "    <a href = https://github.com/sandy1709/catuserbot><b>GoodBoy</b></a> | <a href = https://github.com/Jisan09/catuserbot><b>BadBoy</b></a> | <a href = https://t.me/Hyoneechan><b>SadBoy</b></a>",
             parse_mode="html",
@@ -68,7 +68,7 @@ async def amireallyalive(alive):
         return
     tgbotusername = Config.TG_BOT_USER_NAME_BF_HER
     reply_to_id = await reply_id(alive)
-    cat_caption = f"**Catuserbot is Up and Running**\n"
+    cat_caption = f"**Prindapanbot is Up and Running**\n"
     cat_caption += f"**  -Master :** {mention}\n"
     cat_caption += f"**  -Python Version :** `{python_version()}\n`"
     cat_caption += f"**  -Telethon version :** `{version.__version__}\n`"
