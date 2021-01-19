@@ -31,16 +31,16 @@ EMOJI_SEN = [
 ]
 
 KANGING_STR = [
-    "Using Witchery to kang this sticker...",
-    "Plagiarising hehe...",
-    "Inviting this sticker over to my pack...",
-    "Kanging this sticker...",
-    "Hey that's a nice sticker!\nMind if I kang?!..",
-    "hehe me stel ur stikér\nhehe.",
-    "Ay look over there (☉｡☉)!→\nWhile I kang this...",
-    "Roses are red violets are blue, kanging this sticker so my pacc looks cool",
-    "Imprisoning this sticker...",
-    "Mr.Steal Your Sticker is stealing this sticker... ",
+    "Eh beban keluarga stiker lu gua colong ya😈...",
+    "Anjay, stiker lu leh ugha gua simpen ya😝...",
+    "Mumpung rame nih nyolong stiker Ah...",
+    "Stiker anak haram dicolong moga ae berkah🙏...",
+    "Eh ajg nih stiker punya siapa, sini balikin!..",
+    "Jahaha Mampus stiker lu gua colong😅.",
+    "Punten nih stiker punya siapa?\nBodo Amatlah colong ae...",
+    "Tobat bro jangan maling stiker tross",
+    "Cih stiker burik najis!!\nColong ah😅...",
+    "Odading mang oleh ... ",
 ]
 
 
@@ -50,8 +50,8 @@ def verify_cond(catarray, text):
 
 def pack_name(userid, pack, is_anim):
     if is_anim:
-        return f"catuserbot_{userid}_{pack}_anim"
-    return f"catuserbot_{userid}_{pack}"
+        return f"Prindapanbot_{userid}_{pack}_anim"
+    return f"prindapanbot_{userid}_{pack}"
 
 
 def char_is_emoji(character):
@@ -66,9 +66,9 @@ def pack_nick(username, pack, is_anim):
             packnick = f"{Config.CUSTOM_STICKER_PACKNAME} Vol.{pack}"
     else:
         if is_anim:
-            packnick = f"@{username} Vol.{pack} (Animated)"
+            packnick = f"@{username} Eps.{pack} (Animated)"
         else:
-            packnick = f"@{username} Vol.{pack}"
+            packnick = f"@{username} Eps.{pack}"
     return packnick
 
 
@@ -154,16 +154,16 @@ async def newpacksticker(
         if otherpack:
             await edit_delete(
                 catevent,
-                f"`Sticker kanged to a Different Pack !\
-                \nAnd Newly created pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
+                f"`Stiker ditambahkan ke pack berbeda !\
+                \nBerhasil Menambahkan stiker klik` [INI](t.me/addstickers/{packname}) `Dengan emoji {emoji}`",
                 parse_mode="md",
                 time=10,
             )
         else:
             await edit_delete(
                 catevent,
-                f"`Sticker kanged successfully!\
-                \nYour Pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
+                f"`Stiker berhasil ditambahkan!\
+                \nKe koleksi klik` [INI](t.me/addstickers/{packname}) `Dengan emoji {emoji}`",
                 parse_mode="md",
                 time=10,
             )
@@ -200,11 +200,11 @@ async def add_to_pack(
         packname = pack_name(userid, pack, is_anim)
         packnick = pack_nick(username, pack, is_anim)
         await catevent.edit(
-            f"`Switching to Pack {str(pack)} due to insufficient space`"
+            f"`Memilih ke {str(pack)} ah mantap`"
         )
         await conv.send_message(packname)
         x = await conv.get_response()
-        if x.text == "Invalid pack selected.":
+        if x.text == "Pack tidak bisa.":
             return await newpacksticker(
                 catevent,
                 conv,
@@ -245,8 +245,8 @@ async def add_to_pack(
     if not pkang:
         await edit_delete(
             catevent,
-            f"`Sticker kanged successfully!\
-             \nYour Pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
+            f"`Stiker berhasil ditambahkan!\
+             \nPack kamu` [INI](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
             parse_mode="md",
             time=10,
         )
