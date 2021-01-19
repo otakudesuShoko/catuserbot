@@ -230,12 +230,12 @@ async def dyno_usage(dyno):
     return await dyno.edit(
         "**Info Pulsa Telkomsel**:\n\n"
         f" -> `Penggunaan Pulsa Anda di`  **{Config.HEROKU_APP_NAME}**:\n"
-        f"     •  `∞`**h**  `∞`**m**  "
-        f"**|**  [`Tak terhingga`]"
+        f"     •  `1000`**h**  `1000`**m**  "
+        f"**|**  [`100`**%**]"
         "\n\n"
         " -> `Sisa kuota Pulsa anda bulan ini`:\n"
-        f"     •  `∞`**h**  `∞`**m**  "
-        f"**|**  [`Tak terhingga`]"
+        f"     •  `999`**h**  `999`**m**  "
+        f"**|**  [`99`**%**]"
     )
 
 
