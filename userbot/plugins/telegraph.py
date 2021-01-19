@@ -20,7 +20,7 @@ auth_url = r["auth_url"]
 async def _(event):
     if event.fwd_from:
         return
-    catevent = await edit_or_reply(event, "`processing........`")
+    catevent = await edit_or_reply(event, "`Memproses media........`")
     if not os.path.isdir(Config.TEMP_DIR):
         os.makedirs(Config.TEMP_DIR)
     if BOTLOG:
@@ -42,7 +42,7 @@ async def _(event):
             end = datetime.now()
             ms = (end - start).seconds
             await catevent.edit(
-                f"`Downloaded to {downloaded_file_name} in {ms} seconds.`"
+                f"`Mendownload ke {downloaded_file_name} dalam {ms} detik.`"
             )
             if downloaded_file_name.endswith((".webp")):
                 resize_image(downloaded_file_name)
@@ -57,8 +57,8 @@ async def _(event):
                 ms_two = (end - start).seconds
                 os.remove(downloaded_file_name)
                 await catevent.edit(
-                    "**➥ Uploaded to :-** [Telegraph](https://telegra.ph{})\
-                    \n**➥ Uploaded in {} seconds **.\n**➥ Uploaded by :-** {}".format(
+                    "**➥ Link media :-** [Telegraph](https://telegra.ph{})\
+                    \n**➥ Diupload {} detik yng lalu **.\n**➥ Pelaku :-** {}".format(
                         media_urls[0], (ms + ms_two), (mention)
                     ),
                     link_preview=True,
