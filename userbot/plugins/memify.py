@@ -54,7 +54,7 @@ async def memes(cat):
     catinput = cat.pattern_match.group(2)
     reply = await cat.get_reply_message()
     if not (reply and (reply.media)):
-        await edit_or_reply(cat, "`Reply to supported Media...`")
+        await edit_or_reply(cat, "`Balas ke media yang mendukung...`")
         return
     catid = cat.reply_to_msg_id
     if catinput:
@@ -65,25 +65,25 @@ async def memes(cat):
             bottom = ""
     else:
         await edit_or_reply(
-            cat, "```what should i write on that u idiot give some text```"
+            cat, "```Woi anak haram beri teks jangan kosongkan```"
         )
         return
     if not os.path.isdir("./temp/"):
         os.mkdir("./temp/")
-    cat = await edit_or_reply(cat, "`Downloading media......`")
+    cat = await edit_or_reply(cat, "`Mendownload Media......`")
     from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
     await asyncio.sleep(2)
     catsticker = await reply.download_media(file="./temp/")
     if not catsticker.endswith((".mp4", ".webp", ".tgs", ".png", ".jpg", ".mov")):
         os.remove(catsticker)
-        await edit_or_reply(cat, "```Supported Media not found...```")
+        await edit_or_reply(cat, "```Media tidak ditemukan...```")
         return
     import base64
 
     if catsticker.endswith(".tgs"):
         await cat.edit(
-            "```Transfiguration Time! Mwahaha memifying this animated sticker! (」ﾟﾛﾟ)｣```"
+            "```Keren ! Menambahkan caption ke stiker!:v```"
         )
         catfile = os.path.join("./temp/", "meme.png")
         catcmd = (
@@ -96,27 +96,27 @@ async def memes(cat):
         meme_file = catfile
     elif catsticker.endswith(".webp"):
         await cat.edit(
-            "```Transfiguration Time! Mwahaha memifying this sticker! (」ﾟﾛﾟ)｣```"
+            "```Keren ! Menambahkan caption ke stiker!:v``"
         )
         catfile = os.path.join("./temp/", "memes.jpg")
         os.rename(catsticker, catfile)
         if not os.path.lexists(catfile):
-            await cat.edit("`Template not found... `")
+            await cat.edit("`template tidak ditemukan... `")
             return
         meme_file = catfile
     elif catsticker.endswith((".mp4", ".mov")):
         await cat.edit(
-            "```Transfiguration Time! Mwahaha memifying this video! (」ﾟﾛﾟ)｣```"
+            "```Keren ! Menambahkan caption ke stiker!:v```"
         )
         catfile = os.path.join("./temp/", "memes.jpg")
         await take_screen_shot(catsticker, 0, catfile)
         if not os.path.lexists(catfile):
-            await cat.edit("```Template not found...```")
+            await cat.edit("```template tidak ditemukan...```")
             return
         meme_file = catfile
     else:
         await cat.edit(
-            "```Transfiguration Time! Mwahaha memifying this image! (」ﾟﾛﾟ)｣```"
+            "```Keren ! Menambahkan caption ke stiker!:v```"
         )
         meme_file = catsticker
     try:
@@ -149,16 +149,16 @@ async def lang(event):
     global CNG_FONTS
     input_str = event.pattern_match.group(1)
     if not input_str:
-        await event.edit(f"**Available Fonts names are here:-**\n\n{FONTS}")
+        await event.edit(f"**Jenis huruf yang tersedia:-**\n\n{FONTS}")
         return
     if input_str not in font_list:
-        catevent = await edit_or_reply(event, "`Give me a correct font name...`")
+        catevent = await edit_or_reply(event, "`Beri nama yang benar...`")
         await asyncio.sleep(1)
-        await catevent.edit(f"**Available Fonts names are here:-**\n\n{FONTS}")
+        await catevent.edit(f"**Jenis huruf yang tersedia:-**\n\n{FONTS}")
     else:
         arg = f"userbot/helpers/styles/{input_str}"
         CNG_FONTS = arg
-        await edit_or_reply(event, f"**Fonts for Memify changed to :-** `{input_str}`")
+        await edit_or_reply(event, f"**Huruf caption ganti ke :-** `{input_str}`")
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="ascii ?(.*)"))
@@ -169,22 +169,22 @@ async def memes(cat):
     catinput = cat.pattern_match.group(1)
     reply = await cat.get_reply_message()
     if not (reply and (reply.media)):
-        await edit_or_reply(cat, "`Reply to supported Media...`")
+        await edit_or_reply(cat, "`Balas ke media yang mendukung...`")
         return
     catid = await reply_id(cat)
     if not os.path.isdir("./temp/"):
         os.mkdir("./temp/")
-    cat = await edit_or_reply(cat, "`Downloading media......`")
+    cat = await edit_or_reply(cat, "`Mendownload media......`")
     await asyncio.sleep(2)
     catsticker = await reply.download_media(file="./temp/")
     if not catsticker.endswith((".mp4", ".webp", ".tgs", ".png", ".jpg", ".mov")):
         os.remove(catsticker)
-        await edit_or_reply(cat, "```Supported Media not found...```")
+        await edit_or_reply(cat, "```media tidak mendukung...```")
         return
     jisanidea = None
     if catsticker.endswith(".tgs"):
         await cat.edit(
-            "```Transfiguration Time! Mwahaha converting to ascii image of this animated sticker! (」ﾟﾛﾟ)｣```"
+            "```Anjay! Mengubah stiker ke jenis media berbeda :v```"
         )
         catfile = os.path.join("./temp/", "meme.png")
         catcmd = (
@@ -192,24 +192,24 @@ async def memes(cat):
         )
         stdout, stderr = (await runcmd(catcmd))[:2]
         if not os.path.lexists(catfile):
-            await cat.edit("`Template not found...`")
+            await cat.edit("`media tidak mendukung...`")
             LOGS.info(stdout + stderr)
         meme_file = catfile
         jisanidea = True
     elif catsticker.endswith(".webp"):
         await cat.edit(
-            "```Transfiguration Time! Mwahaha converting to ascii image of this sticker! (」ﾟﾛﾟ)｣```"
+            "```Anjay! Mengubah stiker ke jenis media berbeda :v```"
         )
         catfile = os.path.join("./temp/", "memes.jpg")
         os.rename(catsticker, catfile)
         if not os.path.lexists(catfile):
-            await cat.edit("`Template not found... `")
+            await cat.edit("`Template tidak mendukung... `")
             return
         meme_file = catfile
         jisanidea = True
     elif catsticker.endswith((".mp4", ".mov")):
         await cat.edit(
-            "```Transfiguration Time! Mwahaha converting to ascii image of this video! (」ﾟﾛﾟ)｣```"
+            "```Anjay! Mengubah stiker ke jenis media berbeda :v```"
         )
         catfile = os.path.join("./temp/", "memes.jpg")
         await take_screen_shot(catsticker, 0, catfile)
