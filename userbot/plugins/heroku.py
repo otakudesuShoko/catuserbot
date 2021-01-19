@@ -77,7 +77,7 @@ async def variable(var):
             return
     elif exe == "set":
         variable = "".join(var.text.split(maxsplit=2)[2:])
-        cat = await edit_or_reply(var, "`Setting information...`")
+        cat = await edit_or_reply(var, "`Mengganti isi vars...`")
         if not variable:
             return await cat.edit("`.set var <ConfigVars-name> <value>`")
         value = "".join(variable.split(maxsplit=1)[1:])
@@ -86,10 +86,10 @@ async def variable(var):
             return await cat.edit("`.set var <ConfigVars-name> <value>`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
-            await cat.edit(f"`{variable}` **successfully changed to  ->  **`{value}`")
+            await cat.edit(f"`{variable}` **Sukses mengganti ke  ->  **`{value}`")
         else:
             await cat.edit(
-                f"`{variable}`**  successfully added with value`  ->  **{value}`"
+                f"`{variable}`**  sukse menambahkan data vars`  ->  **{value}`"
             )
         heroku_var[variable] = value
     elif exe == "del":
