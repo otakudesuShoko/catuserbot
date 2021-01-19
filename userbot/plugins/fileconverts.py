@@ -61,7 +61,7 @@ async def _(cat):
     reply_to_id = cat.message.id
     if cat.reply_to_msg_id:
         reply_to_id = cat.reply_to_msg_id
-    event = await edit_or_reply(cat, "Converting.....")
+    event = await edit_or_reply(cat, "mengubah file.....")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -117,7 +117,7 @@ async def get(event):
 @bot.on(sudo_cmd(pattern="ftoi$", allow_sudo=True))
 async def on_file_to_photo(event):
     target = await event.get_reply_message()
-    catt = await edit_or_reply(event, "Converting.....")
+    catt = await edit_or_reply(event, "mengubah file.....")
     try:
         image = target.media.document
     except AttributeError:
@@ -225,18 +225,18 @@ async def _(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        await edit_or_reply(event, "```Reply to any media file.```")
+        await edit_or_reply(event, "```Balas ke suatu media.```")
         return
     reply_message = await event.get_reply_message()
     if not reply_message.media:
-        await edit_or_reply(event, "reply to media file")
+        await edit_or_reply(event, "Balas ke file media")
         return
     input_str = event.pattern_match.group(1)
     if input_str is None:
         await edit_or_reply(event, "try `.nfc voice` or`.nfc mp3`")
         return
     if input_str in ["mp3", "voice"]:
-        event = await edit_or_reply(event, "converting...")
+        event = await edit_or_reply(event, "Mengubah file...")
     else:
         await edit_or_reply(event, "try `.nfc voice` or`.nfc mp3`")
         return
