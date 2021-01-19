@@ -24,7 +24,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "**Eh, beban keluarga tdr woi"" ")
+    event = await edit_or_reply(event, "**Eh, beban keluarga tdr woi** ")
     await asyncio.sleep(2)
     await event.edit("**Sadar gadangnya bukan untukmu**")
     await asyncio.sleep(2)
@@ -32,16 +32,60 @@ async def _(event):
     await asyncio.sleep(2)
     
 
-@bot.on(admin_cmd(pattern=f"tidr$", outgoing=True))
-@bot.on(sudo_cmd(pattern=f"tidr$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=f"pc$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"pc$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "**Eh, beban keluarga tdr woi"" ")
+    event = await edit_or_reply(event, "**Eh, yaela pc mulu jadian kaga** ")
     await asyncio.sleep(2)
-    await event.edit("**Sadar gadangnya bukan untukmu**")
+    await event.edit("**Percuma jadian  putus iya, ngewe kaga**")
     await asyncio.sleep(2)
-    await event.edit("**Melainkan untuk dia di akun satu**")    
+    await event.edit("**Canda ngewe😅**")    
+    await asyncio.sleep(2)
+    await event.edit("**Awokawok Canda monyet😜😅**")    
+    await asyncio.sleep(2)
+    
+    
+@bot.on(admin_cmd(pattern=f"tbat$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"tbat$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "**Eh beban keluarga!!** ")
+    await asyncio.sleep(2)
+    await event.edit("**Bapak lu kerja keras nafkahin keluarga**")
+    await asyncio.sleep(2)
+    await event.edit("**Anaknya kelakuannya  kek Sempak dajjal!! **")    
+    await asyncio.sleep(2)
+    await event.edit("**Tobat sadar lu anak haram!!**")    
+    await asyncio.sleep(2)
+    
+    
+@bot.on(admin_cmd(pattern=f"gabut$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"gabut$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "**Nyanyi dikit bolehlah ya😁** ")
+    await asyncio.sleep(2)
+    await event.edit("**Du🤸‍♂️**")
+    await asyncio.sleep(0.5)
+    await event.edit("**Du du🤸‍♂️ **")
+    await asyncio.sleep(0.5)
+    await event.edit("**Du du du du🤸‍♂️**")
+    await asyncio.sleep(0.5)
+    await event.edit("**Blackpink🤸‍♂️**")
+    await asyncio.sleep(2)
+    await event.edit("**Du🤸‍♂️**")
+    await asyncio.sleep(0.5)
+    await event.edit("**Du du🤸‍♂️ **")
+    await asyncio.sleep(0.5)
+    await event.edit("**Du du du du🤸‍♂️**")
+    await asyncio.sleep(0.5)
+    await event.edit("**Aye aye kimochi🤸‍♂️**")
+    await asyncio.sleep(2)
+    await event.edit("Asw gabut gua😑!!")    
     await asyncio.sleep(2)
     
     
@@ -61,7 +105,7 @@ async def _(event):
 CMD_HELP.update(
     {
         "ambyar": "__**PLUGIN NAME :** ambyar__\
-\n\n**📌 CMD ➥** `.bitch` | `.tidr` | `.skak` | `. \
+\n\n**📌 CMD ➥** `.bitch` | `.tidr` | `.skak` | `.pc` | `.tbat` | `.gabut` `. \
 \n\n**USAGE   ➥  **These are animation bruh..Try & check yourself\
 "
     }
