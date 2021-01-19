@@ -61,6 +61,26 @@ async def stylish_generator(event):
             ]
             string = string.replace(normaltextcharacter, hwcapitalcharacter)
     await edit_or_reply(event, string)
+    
+    
+@bot.on(admin_cmd(pattern="putracf(.*)", command="putracf (.*)"))
+@bot.on(sudo_cmd(pattern="putracf(.*)", command="putracf (.*)", allow_sudo=True))
+async def stylish_generator(event):
+    args = event.pattern_match.group(1)
+    if not args:
+        get = await event.get_reply_message()
+        args = get.text
+    if not args:
+        await edit_or_reply(event, "What I am Supposed to change give text")
+        return
+    string = "  ".join(args).lower()
+    for normaltextcharacter in string:
+        if normaltextcharacter in fonts.normaltext:
+            hwcapitalcharacter = fonts.brandleyhanditextfont[
+                fonts.normaltext.index(normaltextcharacter)
+            ]
+            string = string.replace(normaltextcharacter, brandleyhanditextcharacter)
+    await edit_or_reply(event, string)
 
 
 @bot.on(admin_cmd(pattern="doublef(.*)", command="doublef (.*)"))
