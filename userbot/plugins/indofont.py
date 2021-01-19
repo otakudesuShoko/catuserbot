@@ -167,8 +167,8 @@ async def stylish_generator(event):
 
 CMD_HELP.update(
     {
-        "fonts2": "__**PLUGIN NAME :** Fonts2__\
-        \n\n📌** CMD ➥** `.egyptf` | `.maref` | `.handcf` | `.doublef` | `.mock` | `.ghostf` | `.handsf` \
+        "indofont": "__**PLUGIN NAME :** indofont__\
+        \n\n📌** CMD ➥** `.egyptf` | `.maref` | `.handcf` | `.doublef` | `.mock` | `.ghostf` | `.putracf` | `.handsf` \
         \n\n**USAGE   ➥  **Use cmd <text> , it will change your text to that font.\
         \n\n**Example :** `.egyptf hello there`"
     }
