@@ -122,7 +122,7 @@ async def dyno_usage(dyno):
             dyno,
             "Set the required var in heroku to function this normally `HEROKU_API_KEY`.",
         )
-    dyno = await edit_or_reply(dyno, "`Mendapatkan info dyno...`")
+    dyno = await edit_or_reply(dyno, "`Mendapatkan info pulsa...`")
     useragent = (
         "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -175,6 +175,70 @@ async def dyno_usage(dyno):
     )
 
 
+@bot.on(admin_cmd(pattern="usange$", outgoing=True))
+@bot.on(sudo_cmd(pattern="usange$", allow_sudo=True))
+async def dyno_usage(dyno):
+    """
+    Get your account Dyno Usage
+    """
+    if HEROKU_APP_NAME is None:
+        return await edit_delete(
+            dyno,
+            "Set the required var in heroku to function this normally `HEROKU_APP_NAME`.",
+        )
+    dyno = await edit_or_reply(dyno, "`Mendapatkan info pulsa...`")
+    useragent = (
+        "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/80.0.3987.149 Mobile Safari/537.36"
+    )
+    user_id = Heroku.account().id
+    headers = {
+        "User-Agent": useragent,
+        "Authorization": f"Bearer {Config.HEROKU_API_KEY}",
+        "Accept": "application/vnd.heroku+json; version=3.account-quotas",
+    }
+    path = "/accounts/" + user_id + "/actions/get-quota"
+    r = requests.get(heroku_api + path, headers=headers)
+    if r.status_code != 200:
+        return await dyno.edit(
+            "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
+        )
+    result = r.json()
+    quota = result["account_quota"]
+    quota_used = result["quota_used"]
+
+    # - Used -
+    remaining_quota = quota - quota_used
+    percentage = math.floor(remaining_quota / quota * 100)
+    minutes_remaining = remaining_quota / 60
+    hours = math.floor(minutes_remaining / 60)
+    minutes = math.floor(minutes_remaining % 60)
+    # - Current -
+    App = result["apps"]
+    try:
+        App[0]["quota_used"]
+    except IndexError:
+        AppQuotaUsed = 0
+        AppPercentage = 0
+    else:
+        AppQuotaUsed = App[0]["quota_used"] / 60
+        AppPercentage = math.floor(App[0]["quota_used"] * 100 / quota)
+    AppHours = math.floor(AppQuotaUsed / 60)
+    AppMinutes = math.floor(AppQuotaUsed % 60)
+    await asyncio.sleep(1.5)
+    return await dyno.edit(
+        "**Info Pulsa Telkomsel**:\n\n"
+        f" -> `Penggunaan Pulsa Anda di`  **{Config.HEROKU_APP_NAME}**:\n"
+        f"     •  `∞`**h**  `∞`**m**  "
+        f"**|**  [`Tak terhingga`]"
+        "\n\n"
+        " -> `Sisa kuota Pulsa anda bulan ini`:\n"
+        f"     •  `∞`**h**  `∞`**m**  "
+        f"**|**  [`Tak terhingga`]"
+    )
+
+
 @bot.on(admin_cmd(pattern="herokulogs$", outgoing=True))
 @bot.on(sudo_cmd(pattern="herokulogs$", allow_sudo=True))
 async def _(dyno):
@@ -224,6 +288,8 @@ CMD_HELP.update(
     {
         "heroku": "__**PLUGIN NAME :** Heroku__\
   \n\n📌** CMD ➥** `.usage`\
+  \n**USAGE   ➥  **Check your heroku dyno hours status.\
+  \n\n📌** CMD ➥** `.usange`\
   \n**USAGE   ➥  **Check your heroku dyno hours status.\
   \n\n📌** CMD ➥** `.set var` <NEW VAR> <VALUE>\
   \n**USAGE   ➥  **Add new variable or update existing value variable\
