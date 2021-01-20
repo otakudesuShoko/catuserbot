@@ -17,7 +17,64 @@ async def _(event):
     await asyncio.sleep(5)
     await event.edit("Sayangilah kedua orang tuamu dengan\nsepenuh hati selagi masih ada🙂")
     await asyncio.sleep(5)
-   
+    
+    
+@bot.on(admin_cmd(pattern=f"oi$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"oi$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "`ioo....`")
+    await asyncio.sleep(3)
+    await event.edit("`Muka gw Burik...`")
+    await asyncio.sleep(3)
+    await event.edit("`Kayak Jemboot`.")
+    await asyncio.sleep(1)
+    await event.edit("`Muka Gw Burik gak Kek Kalian`")
+    
+    
+@bot.on(admin_cmd(pattern=f"ll$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"ll$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "`Lucinta luna berbatang....`")
+    await asyncio.sleep(3)
+    await event.edit("`Tapi gua suka...`")
+    await asyncio.sleep(3)
+    await event.edit("`punya tt gede`.")
+    await asyncio.sleep(1)
+    await event.edit("`I LOVE MEMEK RAKITAN`")
+    
+    
+@bot.on(admin_cmd(pattern=f"io$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"io$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "`oii....`")
+    await asyncio.sleep(3)
+    await event.edit("`Muka kalian Burik...`")
+    await asyncio.sleep(3)
+    await event.edit("`Kayak Jemboot`.")
+    await asyncio.sleep(1)
+    await event.edit("`Muka Gw Gak Burik Kek Kalian`")
+    
+    
+@bot.on(admin_cmd(pattern=f"oe$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"oe$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    event = await edit_or_reply(event, "`oee....`")
+    await asyncio.sleep(3)
+    await event.edit("`Muka kalian 8 bit...`")
+    await asyncio.sleep(3)
+    await event.edit("`Kayak Monyet`.")
+    await asyncio.sleep(1)
+    await event.edit("`Muka Gw Gak Burik Kek Kalian`")
+    
+    
     
 @bot.on(admin_cmd(pattern=f"tidr$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"tidr$", allow_sudo=True))
@@ -105,7 +162,8 @@ async def _(event):
 CMD_HELP.update(
     {
         "ambyar": "__**PLUGIN NAME :** ambyar__\
-\n\n**📌 CMD ➥** `.bitch` | `.tidr` | `.skak` | `.pc` | `.tbat` | `.gabut` `. \
+\n\n**📌 CMD ➥** `.bitch` | `.tidr` | `.skak` | `.pc` | `.tbat` | `.gabut` |`.oe` |`.oi`  ` | `.io `| `.ll  `. \
+ `. \
 \n\n**USAGE   ➥  **These are animation bruh..Try & check yourself\
 "
     }
