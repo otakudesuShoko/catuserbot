@@ -246,7 +246,7 @@ async def add_to_pack(
         await edit_delete(
             catevent,
             f"`Stiker berhasil ditambahkan!\
-             \nPack kamu` [INI](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
+             \nPack kamu` [INI](t.me/addstickers/{packname}) `emot {emoji}`",
             parse_mode="md",
             time=10,
         )
@@ -365,7 +365,7 @@ async def kang(args):
                     cmd,
                 )
         else:
-            await catevent.edit("`Brewing a new Pack...`")
+            await catevent.edit("`membuat pack baru...`")
             async with args.client.conversation("Stickers") as conv:
                 await newpacksticker(
                     catevent,
