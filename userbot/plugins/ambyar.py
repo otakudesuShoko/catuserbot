@@ -19,8 +19,8 @@ async def _(event):
     await asyncio.sleep(5)
     
     
-@bot.on(admin_cmd(pattern=f"oi$", outgoing=True))
-@bot.on(sudo_cmd(pattern=f"oi$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=f"io$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"io$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -47,8 +47,8 @@ async def _(event):
     await event.edit("`I LOVE MEMEK RAKITAN`")
     
     
-@bot.on(admin_cmd(pattern=f"io$", outgoing=True))
-@bot.on(sudo_cmd(pattern=f"io$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=f"oi$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"oi$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
