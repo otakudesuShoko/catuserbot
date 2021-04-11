@@ -43,7 +43,9 @@ async def _(event):
     await asyncio.sleep(2)
     await text4.edit(f"**Teman :** Siapa?? ")
     await asyncio.sleep(2)
-    await text4.edit(f"**{mention} :** ini dia {name} , Saya melihat {name}  menggunakan vent,")
+    await text4.edit(
+        f"**{mention} :** ini dia {name} , Saya melihat {name}  menggunakan vent,"
+    )
     await asyncio.sleep(3)
     await text4.edit(f"**Teman :**Okay.. Vote {name} ")
     await asyncio.sleep(2)

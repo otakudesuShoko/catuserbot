@@ -16,7 +16,9 @@ async def _(event):
     input_str = event.pattern_match.group(1)
     peer_id = event.chat_id
     if not event.is_group:
-        return await edit_delete(event, "`Idiot! , Ini bukan grup untuk mengunci sesuatu `")
+        return await edit_delete(
+            event, "`Idiot! , Ini bukan grup untuk mengunci sesuatu `"
+        )
     chat_per = (await event.get_chat()).default_banned_rights
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if input_str in (("bots", "commands", "email", "forward", "url")):

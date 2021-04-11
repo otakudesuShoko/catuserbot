@@ -18,9 +18,7 @@ async def stickerchat(catquotes):
         return
     reply = await catquotes.get_reply_message()
     if not reply:
-        await edit_or_reply(
-            catquotes, "`Tindakan anda salah . Balas di pesan`"
-        )
+        await edit_or_reply(catquotes, "`Tindakan anda salah . Balas di pesan`")
         return
     fetchmsg = reply.message
     repliedreply = None
@@ -51,9 +49,7 @@ async def stickerchat(catquotes):
         return
     reply = await catquotes.get_reply_message()
     if not reply:
-        await edit_or_reply(
-            catquotes, "`Tindakan anda salah, Balas di pesan`"
-        )
+        await edit_or_reply(catquotes, "`Tindakan anda salah, Balas di pesan`")
         return
     fetchmsg = reply.message
     repliedreply = await reply.get_reply_message()
@@ -103,9 +99,7 @@ async def _(event):
             return
         await event.client.send_read_acknowledge(conv.chat_id)
         if response.text.startswith("Hi!"):
-            await catevent.edit(
-                "```Mohon menonaktifkan privasi anda```"
-            )
+            await catevent.edit("```Mohon menonaktifkan privasi anda```")
         else:
             await catevent.delete()
             await event.client.send_message(event.chat_id, response.message)

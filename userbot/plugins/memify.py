@@ -64,9 +64,7 @@ async def memes(cat):
             top = catinput
             bottom = ""
     else:
-        await edit_or_reply(
-            cat, "```Woi anak haram beri teks jangan kosongkan```"
-        )
+        await edit_or_reply(cat, "```Woi anak haram beri teks jangan kosongkan```")
         return
     if not os.path.isdir("./temp/"):
         os.mkdir("./temp/")
@@ -82,9 +80,7 @@ async def memes(cat):
     import base64
 
     if catsticker.endswith(".tgs"):
-        await cat.edit(
-            "```Keren ! Menambahkan caption ke stiker!:v```"
-        )
+        await cat.edit("```Keren ! Menambahkan caption ke stiker!:v```")
         catfile = os.path.join("./temp/", "meme.png")
         catcmd = (
             f"lottie_convert.py --frame 0 -if lottie -of png {catsticker} {catfile}"
@@ -95,9 +91,7 @@ async def memes(cat):
             LOGS.info(stdout + stderr)
         meme_file = catfile
     elif catsticker.endswith(".webp"):
-        await cat.edit(
-            "```Keren ! Menambahkan caption ke stiker!:v``"
-        )
+        await cat.edit("```Keren ! Menambahkan caption ke stiker!:v``")
         catfile = os.path.join("./temp/", "memes.jpg")
         os.rename(catsticker, catfile)
         if not os.path.lexists(catfile):
@@ -105,9 +99,7 @@ async def memes(cat):
             return
         meme_file = catfile
     elif catsticker.endswith((".mp4", ".mov")):
-        await cat.edit(
-            "```Keren ! Menambahkan caption ke stiker!:v```"
-        )
+        await cat.edit("```Keren ! Menambahkan caption ke stiker!:v```")
         catfile = os.path.join("./temp/", "memes.jpg")
         await take_screen_shot(catsticker, 0, catfile)
         if not os.path.lexists(catfile):
@@ -115,9 +107,7 @@ async def memes(cat):
             return
         meme_file = catfile
     else:
-        await cat.edit(
-            "```Keren ! Menambahkan caption ke stiker!:v```"
-        )
+        await cat.edit("```Keren ! Menambahkan caption ke stiker!:v```")
         meme_file = catsticker
     try:
         san = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -183,9 +173,7 @@ async def memes(cat):
         return
     jisanidea = None
     if catsticker.endswith(".tgs"):
-        await cat.edit(
-            "```Anjay! Mengubah stiker ke jenis media berbeda :v```"
-        )
+        await cat.edit("```Anjay! Mengubah stiker ke jenis media berbeda :v```")
         catfile = os.path.join("./temp/", "meme.png")
         catcmd = (
             f"lottie_convert.py --frame 0 -if lottie -of png {catsticker} {catfile}"
@@ -197,9 +185,7 @@ async def memes(cat):
         meme_file = catfile
         jisanidea = True
     elif catsticker.endswith(".webp"):
-        await cat.edit(
-            "```Anjay! Mengubah stiker ke jenis media berbeda :v```"
-        )
+        await cat.edit("```Anjay! Mengubah stiker ke jenis media berbeda :v```")
         catfile = os.path.join("./temp/", "memes.jpg")
         os.rename(catsticker, catfile)
         if not os.path.lexists(catfile):
@@ -208,9 +194,7 @@ async def memes(cat):
         meme_file = catfile
         jisanidea = True
     elif catsticker.endswith((".mp4", ".mov")):
-        await cat.edit(
-            "```Anjay! Mengubah stiker ke jenis media berbeda :v```"
-        )
+        await cat.edit("```Anjay! Mengubah stiker ke jenis media berbeda :v```")
         catfile = os.path.join("./temp/", "memes.jpg")
         await take_screen_shot(catsticker, 0, catfile)
         if not os.path.lexists(catfile):

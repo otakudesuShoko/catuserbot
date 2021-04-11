@@ -61,8 +61,8 @@ async def stylish_generator(event):
             ]
             string = string.replace(normaltextcharacter, hwcapitalcharacter)
     await edit_or_reply(event, string)
-    
-    
+
+
 @bot.on(admin_cmd(pattern="putracf(.*)", command="putracf (.*)"))
 @bot.on(sudo_cmd(pattern="putracf(.*)", command="putracf (.*)", allow_sudo=True))
 async def stylish_generator(event):

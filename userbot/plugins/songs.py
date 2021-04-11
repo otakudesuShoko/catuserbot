@@ -47,9 +47,7 @@ async def _(event):
     catevent = await edit_or_reply(event, "`Sedang mencari lagu yang anda minta...`")
     video_link = await yt_search(str(query))
     if not url(video_link):
-        return await catevent.edit(
-            f"Mohon maaf konten tidak dapat ditemukan `{query}`"
-        )
+        return await catevent.edit(f"Mohon maaf konten tidak dapat ditemukan `{query}`")
     cmd = event.pattern_match.group(1)
     if cmd == "song":
         q = "128k"
@@ -75,9 +73,7 @@ async def _(event):
     #    return await catevent.edit(f"**Error :** `{stderr}`")
     song_file = Path(f"{catname}.mp3")
     if not os.path.exists(song_file):
-        return await catevent.edit(
-            f"Mohon maaf konten tidsk ada `{query}`"
-        )
+        return await catevent.edit(f"Mohon maaf konten tidsk ada `{query}`")
     await catevent.edit("`Yeah! Lagu sudah ditemukan..`")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
@@ -129,9 +125,7 @@ async def _(event):
     catevent = await edit_or_reply(event, "`Sedang mencari lagu yang anda request..`")
     video_link = await yt_search(str(query))
     if not url(video_link):
-        return await catevent.edit(
-            f"Mohon maaf konten tidak ditemukan`{query}`"
-        )
+        return await catevent.edit(f"Mohon maaf konten tidak ditemukan`{query}`")
     # thumb_cmd = thumb_dl.format(video_link=video_link)
     name_cmd = name_dl.format(video_link=video_link)
     video_cmd = video_dl.format(video_link=video_link)
@@ -154,9 +148,7 @@ async def _(event):
     if not os.path.exists(vsong_file):
         vsong_file = Path(f"{catname}.mkv")
     elif not os.path.exists(vsong_file):
-        return await catevent.edit(
-            f"Mohon maaf konten tidak ditemukan `{query}`"
-        )
+        return await catevent.edit(f"Mohon maaf konten tidak ditemukan `{query}`")
     await catevent.edit("`yeah..! i Yeah! Lagu sudah ditemukan..🥰`")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):

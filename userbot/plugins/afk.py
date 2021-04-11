@@ -111,9 +111,7 @@ async def on_afk(event):
                 f"**☞AFK**\n**➥SEJAK :** `{endtime}` yang lalu\n**➥ALASAN : **{reason}"
             )
         elif reason:
-            message_to_reply = (
-                f"**☞AFK**\n**➥SEJAK :** `{endtime}` yang lalu\n**➥ALASAN : **`{reason}`"
-            )
+            message_to_reply = f"**☞AFK**\n**➥SEJAK :** `{endtime}` yang lalu\n**➥ALASAN : **`{reason}`"
         else:
             message_to_reply = (
                 f"**☞AFK**\n**➥SEJAK :`{endtime}` yang lalu\n**ALASAN :** Offline!!`"
@@ -169,7 +167,9 @@ async def _(event):
             afk_time = datetime.now()
         USERAFK_ON = f"on: {reason}"
         if reason:
-            await edit_delete(event, f"`☞Gua offline dulu cok!\n➥Karena :~` {reason}", 5)
+            await edit_delete(
+                event, f"`☞Gua offline dulu cok!\n➥Karena :~` {reason}", 5
+            )
         else:
             await edit_delete(event, f"`Eh, anak haram gua off dulu! `", 5)
         if BOTLOG:

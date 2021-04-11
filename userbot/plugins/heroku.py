@@ -210,22 +210,21 @@ async def dyno_usage(dyno):
 
     # - Used -
     remaining_quota = quota - quota_used
-    percentage = math.floor(remaining_quota / quota * 100)
+    math.floor(remaining_quota / quota * 100)
     minutes_remaining = remaining_quota / 60
-    hours = math.floor(minutes_remaining / 60)
-    minutes = math.floor(minutes_remaining % 60)
+    math.floor(minutes_remaining / 60)
+    math.floor(minutes_remaining % 60)
     # - Current -
     App = result["apps"]
     try:
         App[0]["quota_used"]
     except IndexError:
         AppQuotaUsed = 0
-        AppPercentage = 0
     else:
         AppQuotaUsed = App[0]["quota_used"] / 60
-        AppPercentage = math.floor(App[0]["quota_used"] * 100 / quota)
-    AppHours = math.floor(AppQuotaUsed / 60)
-    AppMinutes = math.floor(AppQuotaUsed % 60)
+        math.floor(App[0]["quota_used"] * 100 / quota)
+    math.floor(AppQuotaUsed / 60)
+    math.floor(AppQuotaUsed % 60)
     await asyncio.sleep(1.5)
     return await dyno.edit(
         "**Info Pulsa Telkomsel**:\n\n"

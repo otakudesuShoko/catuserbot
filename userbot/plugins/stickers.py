@@ -199,9 +199,7 @@ async def add_to_pack(
             pack = 1
         packname = pack_name(userid, pack, is_anim)
         packnick = pack_nick(username, pack, is_anim)
-        await catevent.edit(
-            f"`Memilih ke {str(pack)} ah mantap`"
-        )
+        await catevent.edit(f"`Memilih ke {str(pack)} ah mantap`")
         await conv.send_message(packname)
         x = await conv.get_response()
         if x.text == "Pack tidak bisa.":

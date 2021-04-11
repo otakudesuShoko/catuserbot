@@ -9,7 +9,9 @@ from . import StartTime, catdef, catversion, hmention, mention, reply_id
 
 
 CAT_IMG = Config.ALIVE_PIC
-CUSTOM_ALIVE_TEXT = Config.CUSTOM_ALIVE_TEXT or "Tobat jangan ngocok mulu, kasian tititmu"
+CUSTOM_ALIVE_TEXT = (
+    Config.CUSTOM_ALIVE_TEXT or "Tobat jangan ngocok mulu, kasian tititmu"
+)
 EMOJI = Config.CUSTOM_ALIVE_EMOJI or "✧✧"
 
 
@@ -25,15 +27,11 @@ async def amireallyalive(alive):
         cat_caption = f"<b>{CUSTOM_ALIVE_TEXT}</b>\n\n"
         cat_caption += f"<b>👤 Master : {hmention}</b>\n"
         cat_caption += f"<b>⏱ Uptime :</b> <code>{uptime}</code>\n"
-        cat_caption += (
-            f"<b>🐍 Python Version :</b> <code>{python_version()}</code>\n"
-        )
+        cat_caption += f"<b>🐍 Python Version :</b> <code>{python_version()}</code>\n"
         cat_caption += (
             f"<b>⚒ Telethon version :</b> <code>{version.__version__}</code>\n"
         )
-        cat_caption += (
-            f"<b>🛠 Prindapanbot Version :</b> <code>{catversion}</code>\n"
-        )
+        cat_caption += f"<b>🛠 Prindapanbot Version :</b> <code>{catversion}</code>\n"
         cat_caption += f"<b>📚 Database :</b> <code>{check_sgnirts}</code>\n\n"
         cat_caption += "    <a href = https://github.com/sandy1709/catuserbot><b>GoodBoy</b></a> | <a href = https://github.com/Jisan09/catuserbot><b>BadBoy</b></a> | <a href = https://t.me/Hyoneechan><b>SadBoy</b></a>"
         await alive.client.send_file(
