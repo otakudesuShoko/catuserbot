@@ -150,15 +150,15 @@ async def show_welcome(event):
 
 CMD_HELP.update(
     {
-        "welcome": "__**PLUGIN NAME :** Welcome__\
-\n\n📌** CMD ➥** `.savewelcome` <welcome message> or reply to a message with `.savewelcome`\
-\n**USAGE   ➥  **Saves the message as a welcome note in the chat.\
-\n\nAvailable variables for formatting welcome messages :\
-\n`{mention}`, `{title}`, `{count}`, `{first}`, `{last}`, `{fullname}`, `{userid}`, `{username}`, `{my_first}`, `{my_fullname}`, `{my_last}`, `{my_mention}`, `{my_username}`\
-\n\n📌** CMD ➥** `.listwelcome`\
-\n**USAGE   ➥  **Check whether you have a welcome note in the chat.\
-\n\n📌** CMD ➥** `.clearwelcome`\
-\n**USAGE   ➥  **Deletes the welcome note for the current chat.\
-\n\n***Note:** Type text in html format"
+        "welcome": "**Plugin :** `welcome`\
+\n\n  •  **Syntax :** `.savewelcome` <welcome message> or reply to a message with .savewelcome\
+\n  •  **Function :** Saves the message as a welcome note in the chat.\
+\n\n  •  Available variables for formatting welcome messages :\
+\n`{mention}, {title}, {count}, {first}, {last}, {fullname}, {userid}, {username}, {my_first}, {my_fullname}, {my_last}, {my_mention}, {my_username}`\
+\n\n  •  **Syntax :** `.listwelcome`\
+\n  •  **Function :** Check whether you have a welcome note in the chat.\
+\n\n  •  **Syntax :** `.clearwelcome`\
+\n  •  **Function :** Deletes the welcome note for the current chat.\
+"
     }
 )

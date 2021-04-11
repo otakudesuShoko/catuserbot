@@ -1,53 +1,5 @@
 import random
 
-LOVESTR = [
-    "The best and most beautiful things in this world cannot be seen or even heard, but must be felt with the heart.",
-    "You know you're in love when you can't fall asleep because reality is finally better than your dreams.",
-    "Love recognizes no barriers. It jumps hurdles, leaps fences, penetrates walls to arrive at its destination full of hope.",
-    "Being deeply loved by someone gives you strength, while loving someone deeply gives you courage.",
-    "The real lover is the man who can thrill you by kissing your forehead or smiling into your eyes or just staring into space.",
-    "I swear I couldn't love you more than I do right now, and yet I know I will tomorrow.",
-    "When I saw you I fell in love, and you smiled because you knew it.",
-    "In all the world, there is no heart for me like yours. / In all the world, there is no love for you like mine.",
-    "To love or have loved, that is enough. Ask nothing further. There is no other pearl to be found in the dark folds of life.",
-    "If you live to be a hundred, I want to live to be a hundred minus one day, so I never have to live without you.",
-    "Some love stories aren't epic novels. Some are short stories. But that doesn't make them any less filled with love.",
-    "As he read, I fell in love the way you fall asleep: slowly, and then all at once.",
-    "I've never had a moment's doubt. I love you. I believe in you completely. You are my dearest one. My reason for life.",
-    "Do I love you? My god, if your love were a grain of sand, mine would be a universe of beaches.",
-    "I am who I am because of you.",
-    "I just want you to know that you're very special... and the only reason I'm telling you is that I don't know if anyone else ever has.",
-    "Remember, we're madly in love, so it's all right to kiss me any time you feel like it.",
-    "I love you. I knew it the minute I met you.",
-    "I loved her against reason, against promise, against peace, against hope, against happiness, against all discouragement that could be.",
-    "I love you not because of who you are, but because of who I am when I am with you.",
-]
-
-DHOKA = [
-    "Humne Unse Wafa Ki, Aur Dil Bhi Gya Toot, Wo Bhi Chinaal Nikli, Uski Maa ki Chut.",
-    "Dabbe Me Dabba, Dabbe Me Cake ..Tu Chutiya Hai Zara Seesha To Dekh.",
-    "Kaam Se Kaam Rakhoge Toh Naam Hoga, Randi Log Ke Chakkkar Me Padoge to Naam Badnaam Hoga.",
-    "Usne Kaha- Mah Lyf maH Rule, Maine Kaha Bhag BSDK , Tujhy Paida Karna hi Teri Baap ki Sabse Badi Vul.",
-    "Humse Ulajhna Mat, BSDK Teri Hasi Mita Dunga, Muh Me Land Daal Ke..Sari Hosiyaari Gand Se Nikal Dunga.",
-    "Aur Sunau Bhosdiwalo ..Kya Haal Hai?..Tumhare Sakal Se Zayda Toh Tumhare Gand Laal Hai!!",
-    "Pata Nhi Kya Kashish Hai Tumhare Mohabbat Me,Jab Bhi Tumhe Yaad Karta Hu Mera Land Khada Ho Jata Hai.",
-    "Konsa Mohabbat Kounsi Story, Gand Faad Dunga Agr Bolne Aayi Sorry!",
-    "Naam Banta Hai Risk Se, Chutiya Banta Hai IshQ Se.",
-    "Sun Be, Ab Tujhy Mere Zindegi Me Ane ka Koi Haq Nhi,,Aur Tu 1 Number Ki Randi Hai Isme KOi Saq Nhi.",
-    "Beta Tu Chugli Karna Chor De , Hum Ungli Karna Chor Dengy.",
-]
-
-METOOSTR = [
-    "Me too thanks",
-    "Haha yes, me too",
-    "Same lol",
-    "Me irl",
-    "Same here",
-    "Haha yes",
-    "Me rn",
-]
-
-
 GDNOON = [
     "`My wishes will always be with you, Morning wish to make you feel fresh, Afternoon wish to accompany you, Evening wish to refresh you, Night wish to comfort you with sleep, Good Afternoon Dear!`",
     "`With a deep blue sky over my head and a relaxing wind around me, the only thing I am missing right now is the company of you. I wish you a refreshing afternoon!`",
@@ -94,30 +46,6 @@ GDNOON = [
     "`My love, I hope you are doing well at work and that you remember that I will be waiting for you at home with my arms open to pamper you and give you all my love. I wish you a good afternoon!`",
     "`Afternoons like this makes me think about you more. I desire so deeply to be with you in one of these afternoons just to tell you how much I love you. Good afternoon my love!`",
     "`My heart craves for your company all the time. A beautiful afternoon like this can be made more enjoyable if you just decide to spend it with me. Good afternoon!`",
-]
-
-CONGRATULATION = [
-    "`Congratulations and BRAVO!`",
-    "`You did it! So proud of you!`",
-    "`This calls for celebrating! Congratulations!`",
-    "`I knew it was only a matter of time. Well done!`",
-    "`Congratulations on your well-deserved success.`",
-    "`Heartfelt congratulations to you.`",
-    "`Warmest congratulations on your achievement.`",
-    "`Congratulations and best wishes for your next adventure!”`",
-    "`So pleased to see you accomplishing great things.`",
-    "`Feeling so much joy for you today. What an impressive achievement!`",
-]
-
-BYESTR = [
-    "`Nice talking with you`",
-    "`I've gotta go!`",
-    "`I've gotta run!`",
-    "`I've gotta split`",
-    "`I'm off!`",
-    "`Great to see you,bye`",
-    "`See you soon`",
-    "`Farewell!`",
 ]
 
 GDNIGHT = [
@@ -223,6 +151,18 @@ NOOBSTR = [
     "`Zikr Jinka hota hai galiyo meh woh bhosdika ajj paya gya naliyo me`",
 ]
 
+CONGOREACTS = [
+    "`Congratulations and BRAVO!`",
+    "`You did it! So proud of you!`",
+    "`This calls for celebrating! Congratulations!`",
+    "`I knew it was only a matter of time. Well done!`",
+    "`Congratulations on your well-deserved success.`",
+    "`Heartfelt congratulations to you.`",
+    "`Warmest congratulations on your achievement.`",
+    "`Congratulations and best wishes for your next adventure!”`",
+    "`So pleased to see you accomplishing great things.`",
+    "`Feeling so much joy for you today. What an impressive achievement!`",
+]
 
 INSULT_STRINGS = [
     "Active Volcano is the best swimming pool for you.",

@@ -69,11 +69,11 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "cricket": "__**PLUGIN NAME :** Cricket__\
-      \n\n📌** CMD ➥** `.score`\
-      \n**USAGE   ➥  **To see score of ongoing matches.\
-      \n\n📌** CMD ➥** `.cric` <commnd>\
-      \n**USAGE   ➥**  That will send details like scoreboard or commentary.\
-      \n\n**Example :-** `.cric /scorecard_30....`"
+        "cricket": "**Plugin :** `cricket`\
+      \n\n**  • Syntax : **`.score` \
+      \n**  • Function : **__To see score of ongoing matches.__\
+      \n\n**  • Syntax : **`.cric <commnd>`\
+      \n**  • Function : **__That will send details like scoreboard or commentary.__\
+      \n\n**  • Example :-** `.cric /scorecard_30....`"
     }
 )

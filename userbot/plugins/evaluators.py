@@ -14,7 +14,7 @@ from . import *
 async def _(event):
     if event.fwd_from:
         return
-    cmd = "".join(event.text.split(maxsplit=1)[1:])
+    cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
         return await edit_delete(event, "`What should i execute?..`")
     catevent = await edit_or_reply(event, "`Executing.....`")
@@ -24,10 +24,7 @@ async def _(event):
     stdout, stderr = await process.communicate()
     result = str(stdout.decode().strip()) + str(stderr.decode().strip())
     catuser = await event.client.get_me()
-    if catuser.username:
-        curruser = catuser.username
-    else:
-        curruser = "catuserbot"
+    curruser = catuser.username or "catuserbot"
     uid = os.geteuid()
     if uid == 0:
         cresult = f"`{curruser}:~#` `{cmd}`\n`{result}`"
@@ -51,7 +48,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    cmd = "".join(event.text.split(maxsplit=1)[1:])
+    cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
         return await edit_delete(event, "`What should i run ?..`")
     catevent = await edit_or_reply(event, "`Running ...`")
@@ -93,7 +90,7 @@ async def _(event):
 
 async def aexec(code, smessatatus):
     message = event = smessatatus
-    p = lambda _x: print(yaml_format(_x))
+    p = lambda _x: print(_format.yaml_format(_x))
     reply = await event.get_reply_message()
     exec(
         f"async def __aexec(message, event , reply, client, p, chat): "
@@ -106,13 +103,11 @@ async def aexec(code, smessatatus):
 
 CMD_HELP.update(
     {
-        "evaluators": "__**PLUGIN NAME :** Evaluators__\
-     \n\n📌** CMD ➥** `.eval` <expr>\
-     \n**USAGE   ➥  **Execute Python script.\
-     \n\n📌** CMD ➥** `.exec` <command>\
-     \n**USAGE   ➥  **Execute a bash command on catuserbot server and shows details.\
-     \n\n📌** CMD ➥** `.bash` <command>\
-     \n**USAGE   ➥  **Execute a bash command on catuserbot server and  easy to copy output\
+        "evaluators": "**Plugin : **`evaluators`\
+        \n\n  •  **Synatax : **`.eval <expr>`:\
+        \n  •  **Function : **__Execute Python script.__\
+        \n\n  •  **Synatax : **`.exec <command>`:\
+        \n  •  **Function : **__Execute a Terminal command on catuserbot server and shows details.__\
      "
     }
 )

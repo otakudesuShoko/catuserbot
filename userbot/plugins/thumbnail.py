@@ -7,8 +7,6 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from PIL import Image
 
-from . import take_screen_shot
-
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
@@ -28,7 +26,7 @@ async def _(event):
             metadata = extractMetadata(createParser(downloaded_file_name))
             if metadata and metadata.has("duration"):
                 duration = metadata.get("duration").seconds
-            downloaded_file_name = await take_screen_shot(
+            downloaded_file_name = await _cattools.take_screen_shot(
                 downloaded_file_name, duration
             )
         # https://stackoverflow.com/a/21669827/4723940
@@ -50,7 +48,7 @@ async def _(event):
     if os.path.exists(thumb_image_path):
         os.remove(thumb_image_path)
     else:
-        await edit_or_reply(event, "No thumbnail is setted to clear")
+        await edit_or_reply(event, "No thumbnail is set to clear")
     await edit_or_reply(event, "✅ Custom thumbnail cleared succesfully.")
 
 
@@ -95,13 +93,13 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "thumbnail": "__**PLUGIN NAME :** Thumbnail__\
-    \n\n📌** CMD ➥** `.savethumb`\
-    \n**USAGE   ➥  **Reply to file or video to save it as temporary thumbimage\
-    \n\n📌** CMD ➥** `.clearthumb`\
-    \n**USAGE   ➥  **To clear Thumbnail no longer you uploads uses custom thumbanail\
-    \n\n📌** CMD ➥** `.getthumb`\
-    \n**USAGE   ➥  **To get thumbnail of given video or gives your present thumbnail\
+        "thumbnail": "**Plugin :** `thumbnail`\
+    \n\n**Syntax :** `.savethumb`\
+    \n**Usage : **Reply to file or video to save it as temporary thumbimage\
+    \n\n**Syntax : **`.clearthumb`\
+    \n**Usage : **To clear Thumbnail no longer you uploads uses custom thumbanail\
+    \n\n**Syntax : **`.getthumb`\
+    \n**Usage : **To get thumbnail of given video or gives your present thumbnail\
     "
     }
 )

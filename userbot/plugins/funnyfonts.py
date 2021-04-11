@@ -5,8 +5,8 @@ import re
 from . import fonts
 
 
-@bot.on(admin_cmd(pattern="str(.*)", command="str (.*)"))
-@bot.on(sudo_cmd(pattern="str(.*)", command="str (.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="str(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="str(?: |$)(.*)", allow_sudo=True))
 async def stretch(stret):
     textx = await stret.get_reply_message()
     message = stret.text
@@ -24,8 +24,8 @@ async def stretch(stret):
     await edit_or_reply(stret, reply_text)
 
 
-@bot.on(admin_cmd(pattern="zal(.*)", command="zal (.*)"))
-@bot.on(sudo_cmd(pattern="zal(.*)", command="zal (.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="zal(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="zal(?: |$)(.*)", allow_sudo=True))
 async def zal(zgfy):
     reply_text = list()
     textx = await zgfy.get_reply_message()
@@ -60,8 +60,8 @@ async def zal(zgfy):
     await edit_or_reply(zgfy, "".join(reply_text))
 
 
-@bot.on(admin_cmd(pattern="cp(.*)", command="cp (.*)"))
-@bot.on(sudo_cmd(pattern="cp(.*)", command="cp (.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="cp(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="cp(?: |$)(.*)", allow_sudo=True))
 async def copypasta(cp_e):
     textx = await cp_e.get_reply_message()
     message = cp_e.pattern_match.group(1)
@@ -94,8 +94,8 @@ async def copypasta(cp_e):
     await edit_or_reply(cp_e, reply_text)
 
 
-@bot.on(admin_cmd(pattern="weeb(.*)", command="weeb (.*)"))
-@bot.on(sudo_cmd(pattern="weeb(.*)", command="weeb (.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="weeb(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="weeb(?: |$)(.*)", allow_sudo=True))
 async def weebify(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -112,8 +112,8 @@ async def weebify(event):
     await edit_or_reply(event, string)
 
 
-@bot.on(admin_cmd(pattern="downside(.*)", command="downside (.*)"))
-@bot.on(sudo_cmd(pattern="downside(.*)", command="downside (.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="downside(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="downside(?: |$)(.*)", allow_sudo=True))
 async def stylish_generator(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -132,8 +132,8 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@bot.on(admin_cmd(pattern="subscript(.*)", command="subscript (.*)"))
-@bot.on(sudo_cmd(pattern="subscript(.*)", command="subscript (.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="subscript(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="subscript(?: |$)(.*)", allow_sudo=True))
 async def stylish_generator(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -152,10 +152,8 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@bot.on(admin_cmd(pattern="superscript(.*)", command="superscript (.*)"))
-@bot.on(
-    sudo_cmd(pattern="superscript(.*)", command="superscript (.*)", allow_sudo=True)
-)
+@bot.on(admin_cmd(pattern="superscript(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="superscript(?: |$)(.*)", allow_sudo=True))
 async def stylish_generator(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -176,9 +174,17 @@ async def stylish_generator(event):
 
 CMD_HELP.update(
     {
-        "funnyfonts": "__**PLUGIN NAME :** Funnyfonts__\
-        \n\n📌** CMD ➥** `.str` | `.zal` | `.cp` | `.weeb` | `.downside` | `.subscript` | `.superscript` \
-        \n\n**USAGE   ➥  **Use cmd <text> , it will change your text to that font.\
-        \n\n**Example :** `.weeb hello there`"
+        "funnyfonts": """**Plugin : **`funnyfonts`
+        
+**Commands found in funnyfonts are**
+  •  `.str`
+  •  `.zal`
+  •  `.cp`
+  •  `.weeb`
+  •  `.downside`
+  •  `.subscript`
+  •  `.superscript`
+  
+**Function : **__Reply the command to the text message or give input along with command to convert that text to given font style__"""
     }
 )

@@ -1,7 +1,7 @@
-"""
-by  @sandy1709 ( https://t.me/mrconfused  )
-"""
+# by  @sandy1709 ( https://t.me/mrconfused  )
+
 # songs finder for catuserbot
+# reverse search by  @Lal_bakthan
 
 import asyncio
 import base64
@@ -12,17 +12,15 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from validators.url import url
 
-from . import hmention, name_dl, runcmd, song_dl, video_dl
-from . import yt_search as yt_search_no
-from . import yt_search_api
+from . import name_dl, song_dl, video_dl, yt_search
 
 # =========================================================== #
 #                           STRINGS                           #
 # =========================================================== #
-SONG_SEARCH_STRING = "<code>Sedang mencari lagu yang anda request..</code>"
-SONG_NOT_FOUND = "<code>Maaf! Konten lagu tidak ditemukan</code>"
-SONG_SENDING_STRING = "<code>Yeah! Lagu sudah ditemukan..</code>"
-SONGBOT_BLOCKED_STRING = "<code>Mohon unblok @songdl_bot lalu coba lagi</code>"
+SONG_SEARCH_STRING = "<code>wi8..! I am finding your song....</code>"
+SONG_NOT_FOUND = "<code>Sorry !I am unable to find any song like that</code>"
+SONG_SENDING_STRING = "<code>yeah..! i found something wi8..🥰...</code>"
+SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
 # =========================================================== #
 #                                                             #
 # =========================================================== #
@@ -41,13 +39,15 @@ async def _(event):
         if reply.message:
             query = reply.message
     else:
-        await edit_or_reply(event, "`Apa yang harus saya cari `")
+        await edit_or_reply(event, "`What I am Supposed to find `")
         return
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catevent = await edit_or_reply(event, "`Sedang mencari lagu yang anda minta...`")
+    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
     video_link = await yt_search(str(query))
     if not url(video_link):
-        return await catevent.edit(f"Mohon maaf konten tidak dapat ditemukan `{query}`")
+        return await catevent.edit(
+            f"Sorry!. I can't find any related video/audio for `{query}`"
+        )
     cmd = event.pattern_match.group(1)
     if cmd == "song":
         q = "128k"
@@ -61,10 +61,10 @@ async def _(event):
         await event.client(cat)
     except BaseException:
         pass
-    stderr = (await runcmd(song_cmd))[1]
+    stderr = (await _catutils.runcmd(song_cmd))[1]
     if stderr:
         return await catevent.edit(f"**Error :** `{stderr}`")
-    catname, stderr = (await runcmd(name_cmd))[:2]
+    catname, stderr = (await _catutils.runcmd(name_cmd))[:2]
     if stderr:
         return await catevent.edit(f"**Error :** `{stderr}`")
     # stderr = (await runcmd(thumb_cmd))[1]
@@ -73,8 +73,10 @@ async def _(event):
     #    return await catevent.edit(f"**Error :** `{stderr}`")
     song_file = Path(f"{catname}.mp3")
     if not os.path.exists(song_file):
-        return await catevent.edit(f"Mohon maaf konten tidsk ada `{query}`")
-    await catevent.edit("`Yeah! Lagu sudah ditemukan..`")
+        return await catevent.edit(
+            f"Sorry!. I can't find any related video/audio for `{query}`"
+        )
+    await catevent.edit("`yeah..! i found something wi8..🥰`")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
         catthumb = Path(f"{catname}.webp")
@@ -85,10 +87,9 @@ async def _(event):
         event.chat_id,
         song_file,
         force_document=False,
-        caption=f"<b><i>➥ Lagu :- {query}</i></b>\n<b><i>➥ Hak Cipta :- {hmention}</i></b>",
+        caption=query,
         thumb=catthumb,
         supports_streaming=True,
-        parse_mode="html",
         reply_to=reply_to_id,
     )
     await catevent.delete()
@@ -119,20 +120,22 @@ async def _(event):
         if reply.message:
             query = reply.messag
     else:
-        event = await edit_or_reply(event, "Apa yang seharusnya saya cari")
+        event = await edit_or_reply(event, "What I am Supposed to find")
         return
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catevent = await edit_or_reply(event, "`Sedang mencari lagu yang anda request..`")
+    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
     video_link = await yt_search(str(query))
     if not url(video_link):
-        return await catevent.edit(f"Mohon maaf konten tidak ditemukan`{query}`")
+        return await catevent.edit(
+            f"Sorry!. I can't find any related video/audio for `{query}`"
+        )
     # thumb_cmd = thumb_dl.format(video_link=video_link)
     name_cmd = name_dl.format(video_link=video_link)
     video_cmd = video_dl.format(video_link=video_link)
-    stderr = (await runcmd(video_cmd))[1]
+    stderr = (await _catutils.runcmd(video_cmd))[1]
     if stderr:
         return await catevent.edit(f"**Error :** `{stderr}`")
-    catname, stderr = (await runcmd(name_cmd))[:2]
+    catname, stderr = (await _catutils.runcmd(name_cmd))[:2]
     if stderr:
         return await catevent.edit(f"**Error :** `{stderr}`")
     # stderr = (await runcmd(thumb_cmd))[1]
@@ -148,8 +151,10 @@ async def _(event):
     if not os.path.exists(vsong_file):
         vsong_file = Path(f"{catname}.mkv")
     elif not os.path.exists(vsong_file):
-        return await catevent.edit(f"Mohon maaf konten tidak ditemukan `{query}`")
-    await catevent.edit("`yeah..! i Yeah! Lagu sudah ditemukan..🥰`")
+        return await catevent.edit(
+            f"Sorry!. I can't find any related video/audio for `{query}`"
+        )
+    await catevent.edit("`yeah..! i found something wi8..🥰`")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
         catthumb = Path(f"{catname}.webp")
@@ -159,30 +164,15 @@ async def _(event):
         event.chat_id,
         vsong_file,
         force_document=False,
-        caption=f"<b><i>➥ Lagu :- {query}</i></b>\n<b><i>➥ Hak Cipta :- {hmention}</i></b>",
+        caption=query,
         thumb=catthumb,
         supports_streaming=True,
-        parse_mode="html",
         reply_to=reply_to_id,
     )
     await catevent.delete()
     for files in (catthumb, vsong_file):
         if files and os.path.exists(files):
             os.remove(files)
-
-
-async def yt_search(cat):
-    videol = None
-    try:
-        if Config.YOUTUBE_API_KEY:
-            vi = await yt_search_api(cat)
-            video = f"https://youtu.be/{vi[0]['id']['videoId']}"
-    except:
-        pass
-    if videol is None:
-        vi = await yt_search_no(cat)
-        video = vi[0]
-    return video
 
 
 @bot.on(admin_cmd(pattern="song2 (.*)"))
@@ -213,6 +203,8 @@ async def cat_song_fetcer(event):
                 )
             await catevent.edit(SONG_SENDING_STRING, parse_mode="html")
             await baka[0].click(0)
+            await conv.get_response()
+            await conv.get_response()
             music = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
@@ -221,7 +213,7 @@ async def cat_song_fetcer(event):
         await event.client.send_file(
             event.chat_id,
             music,
-            caption=f"<b><i>➥ Lagu :-</i></b> <code>{song}</code>\n<b><i>➥ Hak Cipt :- {hmention}</i></b>",
+            caption=f"<b>➥ Song :- <code>{song}</code></b>",
             parse_mode="html",
             reply_to=reply_id_,
         )
@@ -229,87 +221,51 @@ async def cat_song_fetcer(event):
         await delete_messages(event, chat, purgeflag)
 
 
-@bot.on(admin_cmd(pattern="music (.*)"))
-@bot.on(sudo_cmd(pattern="music (.*)", allow_sudo=True))
-async def kakashi(event):
+@bot.on(admin_cmd(pattern="szm$", outgoing=True))
+@bot.on(sudo_cmd(pattern="szm$", allow_sudo=True))
+async def _(event):
     if event.fwd_from:
         return
-    song = event.pattern_match.group(1)
-    chat = "@SongsForYouBot"
-    link = f"/song {song}"
-    catevent = await edit_or_reply(event, "`Sedang mencari lagu yang anda request...`")
-    async with event.client.conversation(chat) as conv:
-        try:
-            msg_start = await conv.send_message("/start")
-            response = await conv.get_response()
-            msg = await conv.send_message(link)
-            baka = await conv.get_response()
-            music = await conv.get_response()
-            await event.client.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await catevent.edit("```Please unblock @SongsForYouBot and try again```")
-            return
-        await catevent.edit("`Mengirim Lagu kamu...`")
-        await asyncio.sleep(1.5)
-        await catevent.delete()
-        await event.client.send_file(
-            event.chat_id,
-            music,
-            caption=f"<b><i>➥ Lagu :- {song}</i></b>\n<b><i>➥ Hak Cipta :- {hmention}</i></b>",
-            parse_mode="html",
-        )
-    await event.client.delete_messages(
-        conv.chat_id, [msg_start.id, response.id, msg.id, baka.id, music.id]
-    )
-
-
-@bot.on(admin_cmd(outgoing=True, pattern="dzd (.*)"))
-@bot.on(sudo_cmd(outgoing=True, pattern="dzd (.*)", allow_sudo=True))
-async def kakashi(event):
-    if event.fwd_from:
+    if not event.reply_to_msg_id:
+        await edit_delete(event, "```Reply to an audio message.```")
         return
-    link = event.pattern_match.group(1)
-    if ".com" not in link:
-        catevent = await edit_or_reply(
-            event, "` Saya butuh link untuj mencari lagu.`**(._.)**"
-        )
-    else:
-        catevent = await edit_or_reply(event, "**Sedang download!**")
-    chat = "@DeezLoadBot"
+    reply_message = await event.get_reply_message()
+    chat = "@auddbot"
+    catevent = await edit_or_reply(event, "```Identifying the song```")
     async with event.client.conversation(chat) as conv:
         try:
-            msg_start = await conv.send_message("/start")
-            response = await conv.get_response()
-            r = await conv.get_response()
-            msg = await conv.send_message(link)
-            details = await conv.get_response()
-            song = await conv.get_response()
-            """ - don't spam notif - """
+            await conv.send_message("/start")
+            await conv.get_response()
+            await conv.send_message(reply_message)
+            check = await conv.get_response()
+            if not check.text.startswith("Audio received"):
+                return await catevent.edit(
+                    "An error while identifying the song. Try to use a 5-10s long audio message."
+                )
+            await catevent.edit("Wait just a sec...")
+            result = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await catevent.edit("**Error:** `unblock` @DeezLoadBot `and retry!`")
+            await catevent.edit("```Please unblock (@auddbot) and try again```")
             return
-        await catevent.delete()
-        await event.client.send_file(event.chat_id, song, caption=details.text)
-        await event.client.delete_messages(
-            conv.chat_id, [msg_start.id, response.id, r.id, msg.id, details.id, song.id]
-        )
+    namem = f"**Song Name : **`{result.text.splitlines()[0]}`\
+        \n\n**Details : **__{result.text.splitlines()[2]}__"
+    await catevent.edit(namem)
 
 
 CMD_HELP.update(
     {
-        "songs": "__**PLUGIN NAME :** Songs__\
-        \n\n📌** CMD ➥** `.song` <query>  or `.song reply to song name`\
-        \n**USAGE   ➥  **Searches the song you entered in query and sends it,quality of it is 128k\
-        \n\n📌** CMD ➥** `.song320` <query> or `.song320 reply to song name`\
-        \n**USAGE   ➥  **Searches the song you entered in query and sends it,quality of it is 320k\
-        \n\n📌** CMD ➥** `.vsong` <query> or `.vsong reply to song name`\
-        \n**USAGE   ➥  **Searches the video song you entered in query and sends it\
-        \n\n📌** CMD ➥** `.song2` <query>\
-        \n**USAGE   ➥  **Searches the song you entered in query and sends it.\
-        \n\n📌** CMD ➥** `.music` <Artist - Song Title>\
-        \n**USAGE   ➥  **Download your music by just name.\
-        \n\n📌** CMD ➥** `.dzd` <Spotify/Deezer Link>\
-        \n**USAGE   ➥  **Download music from Spotify or Deezer."
+        "songs": "**Plugin : **`songs`\
+        \n\n•  **Syntax : **`.song <query/reply>`\
+        \n•  **Function : **__searches the song you entered in query from youtube and sends it, quality of it is 128k__\
+        \n\n•  **Syntax : **`.song320 <query/reply>`\
+        \n•  **Function : **__searches the song you entered in query from youtube and sends it quality of it is 320k__\
+        \n\n•  **Syntax : **`.vsong <query/reply>`\
+        \n•  **Function : **__Searches the video song you entered in query and sends it__\
+        \n\n•  **Syntax : **`.song2 query`\
+        \n•  **Function : **__searches the song you entered in query and sends it quality of it is 320k__\
+        \n\n**•  Syntax : **`.szm` reply to an audio file\
+        \n**•  Function :**Reverse searchs of song/music\
+        "
     }
 )

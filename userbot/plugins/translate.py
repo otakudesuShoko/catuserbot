@@ -3,8 +3,7 @@ from asyncio import sleep
 from googletrans import LANGUAGES, Translator
 
 from . import BOTLOG, BOTLOG_CHATID, deEmojify
-
-TRT_LANG = "en"
+from .sql_helper.globals import addgvar, gvarstatus
 
 
 @bot.on(admin_cmd(pattern="tl (.*)"))
@@ -13,7 +12,6 @@ async def _(event):
     if event.fwd_from:
         return
     if "trim" in event.raw_text:
-        # https://t.me/c/1220993104/192075
         return
     input_str = event.pattern_match.group(1)
     if event.reply_to_msg_id:
@@ -31,7 +29,7 @@ async def _(event):
     try:
         translated = await getTranslate(text, dest=lan)
         after_tr_text = translated.text
-        output_str = f"**Menerjemahkan dari {LANGUAGES[translated.src].title()} ke {LANGUAGES[lan].title()}**\
+        output_str = f"**TRANSLATED from {LANGUAGES[translated.src].title()} to {LANGUAGES[lan].title()}**\
                 \n`{after_tr_text}`"
         await edit_or_reply(event, output_str)
     except Exception as exc:
@@ -41,8 +39,8 @@ async def _(event):
 @bot.on(admin_cmd(outgoing=True, pattern=r"trt(?: |$)([\s\S]*)"))
 @bot.on(sudo_cmd(allow_sudo=True, pattern=r"trt(?: |$)([\s\S]*)"))
 async def translateme(trans):
-    """ For .trt command, translate the given text using Google Translate. """
-    Translator()
+    if trans.fwd_from:
+        return
     textx = await trans.get_reply_message()
     message = trans.pattern_match.group(1)
     if message:
@@ -50,16 +48,17 @@ async def translateme(trans):
     elif textx:
         message = textx.text
     else:
-        await edit_or_reply(trans, "`Beri saya teks atau reply pesan anak haram!`")
+        await edit_or_reply(trans, "`Give a text or reply to a message to translate!`")
         return
+    TRT_LANG = gvarstatus("TRT_LANG") or "en"
     try:
         reply_text = await getTranslate(deEmojify(message), dest=TRT_LANG)
     except ValueError:
-        await edit_delete(trans, "`Mohon maaf kode bahasa salah.`", time=5)
+        await edit_delete(trans, "`Invalid destination language.`", time=5)
         return
     source_lan = LANGUAGES[f"{reply_text.src.lower()}"]
     transl_lan = LANGUAGES[f"{reply_text.dest.lower()}"]
-    reply_text = f"**Dari {source_lan.title()}({reply_text.src.lower()}) ke {transl_lan.title()}({reply_text.dest.lower()}) :**\n`{reply_text.text}`"
+    reply_text = f"**From {source_lan.title()}({reply_text.src.lower()}) to {transl_lan.title()}({reply_text.dest.lower()}) :**\n`{reply_text.text}`"
 
     await edit_or_reply(trans, reply_text)
     if BOTLOG:
@@ -72,23 +71,22 @@ async def translateme(trans):
 @bot.on(admin_cmd(pattern="lang trt (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="lang trt (.*)", allow_sudo=True))
 async def lang(value):
-    # For .lang command, change the default langauge of userbot scrapers.
-    scraper = "Translator"
-    global TRT_LANG
+    if value.fwd_from:
+        return
     arg = value.pattern_match.group(1).lower()
     if arg in LANGUAGES:
-        TRT_LANG = arg
+        addgvar("TRT_LANG", arg)
         LANG = LANGUAGES[arg]
     else:
         await edit_or_reply(
             value,
-            f"`Kode bahasa Salah !!`\n`Kode bahasa yang tersedia`:\n\n`{LANGUAGES}`",
+            f"`Invalid Language code !!`\n`Available language codes for TRT`:\n\n`{LANGUAGES}`",
         )
         return
-    await edit_or_reply(value, f"`Language for {scraper} changed to {LANG.title()}.`")
+    await edit_or_reply(value, f"`Language for Translator changed to {LANG.title()}.`")
     if BOTLOG:
         await value.client.send_message(
-            BOTLOG_CHATID, f"`Language for {scraper} changed to {LANG.title()}.`"
+            BOTLOG_CHATID, f"`Language for Translator changed to {LANG.title()}.`"
         )
 
 
@@ -107,14 +105,14 @@ async def getTranslate(text, **kwargs):
 
 CMD_HELP.update(
     {
-        "translate": "__**PLUGIN NAME :** Translate__\
-         \n\n📌** CMD ➥** `.tl` < [LanguageCode](https://telegra.ph/Jisan-10-13-6) > as reply to a message\
-         \n**USAGE   ➥  **.tl LangaugeCode | text to translate\
-         \n**Example :** `.tl hi`\
-         \n\n📌** CMD ➥** `.trt` Reply to a message\
-         \n**USAGE   ➥  **It will translate your messege\
-         \n\n📌** CMD ➥** `.lang trt` < [LanguageCode](https://telegra.ph/Jisan-10-13-6) >\
-         \n**USAGE   ➥  **It will set default langaugeCode for **trt**\
+        "translate": "**Plugin :** `translate`\
+         \n\n**•  Syntax : **`.tl LanguageCode <text/reply>`\
+         \n**•  Function : **__Translates given language to destination language. For <text> use .tl LanguageCode ; <text>__\
+         \n\n**•  Syntax : **`.trt <Reply/text>`\
+         \n**•  Function : **__It will translate your messege__\
+         \n\n**•  Syntax : **`.lang trt LanguageCode`\
+         \n**•  Function : **__It will set default langaugeCode for __**trt**__ command__\
+         \n\n**•  Check here ** [Language codes](https://telegra.ph/Language-codes-11-01)\
         "
     }
 )

@@ -16,9 +16,7 @@ async def _(event):
         return
     if event.reply_to_msg_id:
         reply_message = await event.get_reply_message()
-        replied_user = await event.client(GetFullUserRequest(reply_message.sender_id))
-        replied_user.user.first_name
-        replied_user.user.username
+        await event.client(GetFullUserRequest(reply_message.sender_id))
         idd = reply_message.sender_id
         if idd == 1035034432:
             await edit_or_reply(
@@ -106,13 +104,13 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "hack": "__**PLUGIN NAME :** Hack__\
-    \n\n📌** CMD ➥** `.hack` reply to a person\
-    \n**USAGE   ➥  **Shows a animation of hacking progess bar\
-    \n\n📌** CMD ➥** `.thack` reply to a person\
-    \n**USAGE   ➥  **Shows aanimation of hacking replied person telegram account\
-    \n\n📌** CMD ➥** `.wahack` reply to a person\
-    \n**USAGE   ➥  **Hows aanimation of hacking replied person whatsapp account\
-    \n\n\n **Don't use this animation commands in group i am not responsible for your ban.**"
+        "hack": "**Plugin : **`hack`\
+        \n\n**Syntax : **`.hack reply to a person`\
+        \n**Function : **__shows an animation of hacking progess bar__\
+        \n\n**Syntax : **`.thack reply to a person`\
+        \n**Function : **__shows an animation of Telegram account hacking to a replied person__\
+        \n\n**Syntax : **`.wahack reply to a person`\
+        \n**Function : **__shows an animation of whatsapp account hacking to a replied person__\
+    "
     }
 )

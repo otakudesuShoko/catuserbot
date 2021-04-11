@@ -1,6 +1,3 @@
-"""Invite the user(s) to the current chat
-Syntax: .invite <User(s)>"""
-
 from telethon import functions
 
 
@@ -12,7 +9,7 @@ async def _(event):
     to_add_users = event.pattern_match.group(1)
     if event.is_private:
         await edit_delete(
-            event, "`.Mengundang user ke group`batal karena privasi pengguna", 5
+            event, "`.invite` users to a chat, not to a Private Message", 5
         )
     else:
         if not event.is_channel and event.is_group:
@@ -38,13 +35,15 @@ async def _(event):
                 except Exception as e:
                     await edit_delete(event, f"`{str(e)}`", 5)
 
-        await edit_or_reply(event, f"`{to_add_users} anak haram berhasil ditambahkan`")
+        await edit_or_reply(event, f"`{to_add_users} is/are Invited Successfully`")
 
 
 CMD_HELP.update(
     {
-        "invite": "__**PLUGIN NAME :**Invite__\
-        \n\n📌** CMD ➥** `.invite` <username/useid>\
-        \n**USAGE   ➥  **To invite specified user in certain chat."
+        "invite": """**Plugin : **`invite`
+
+  •  **Syntax : **`.invite username(s)/userid(s)`
+  •  **Function : **__Add the given user/users to the group where u used the command__
+"""
     }
 )

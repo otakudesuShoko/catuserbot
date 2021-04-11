@@ -366,29 +366,29 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "execmod": "__**PLUGIN NAME :** Execmod__\
-    \n\n📌** CMD ➥** `.pips` <query>\
-    \n**USAGE   ➥  **Searches your pip modules\
-    \n\n📌** CMD ➥** `.sucide`\
-    \n**USAGE   ➥  **Deletes all your folders and files in the bot\
-    \n\n📌** CMD ➥** `.plugins`\
-    \n**USAGE   ➥  **Shows you the list of modules that are in bot\
-    \n\n📌** CMD ➥** `.date`\
-    \n**USAGE   ➥  **Shows you the date of today\
-    \n\n📌** CMD ➥** `.env`\
-    \n**USAGE   ➥  **Shows you the list of all your heroku vars\
-    \n\n📌** CMD ➥** `.fast`\
-    \n**USAGE   ➥  **speed calculator\
-    \n\n📌** CMD ➥** `.fortune`\
-    \n**USAGE   ➥  **Fortune teller\
-    \n\n📌** CMD ➥** `.qquote`\
-    \n**USAGE   ➥  **Random quote generator\
-    \n\n📌** CMD ➥** `.fakeid`\
-    \n**USAGE   ➥  **Random fakeid generator\
-    \n\n📌** CMD ➥** `.kwot`\
-    \n**USAGE   ➥  **An awesome random quote generator.\
-    \n\n📌** CMD ➥** `.qpro`\
-    \n**USAGE   ➥  **Programming Quotes\
+        "execmod": "**Plugin : **`execmod`\
+    \n\n**Syntax :** `.pips query`\
+    \n**Usage : **Searches your pip modules\
+    \n\n**Syntax : **`.sucide`\
+    \n**Usage : **Deletes all your folders and files in the bot\
+    \n\n**Syntax : **`.plugins`\
+    \n**Usage : **Shows you the list of modules that are in bot\
+    \n\n**Syntax : **`.date`\
+    \n**Usage : **Shows you the date of today\
+    \n\n**Syntax : **`.env`\
+    \n**Usage : **Shows you the list of all your heroku vars\
+    \n\n**Syntax : **`.fast`\
+    \n**Usage : **speed calculator\
+    \n\n**Syntax : **`.fortune`\
+    \n**Usage : **Fortune teller\
+    \n\n**Syntax : **`.qquote`\
+    \n**Usage : **Random quote generator\
+    \n\n**Syntax : **`.fakeid`\
+    \n**Usage : **Random fakeid generator\
+    \n\n**Syntax : **`.kwot`\
+    \n**Usage : **An awesome random quote generator.\
+    \n\n**Syntax : **`.qpro`\
+    \n**Usage : **Programming Quotes\
     "
     }
 )

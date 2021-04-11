@@ -4,7 +4,7 @@ import time
 
 from prettytable import PrettyTable
 
-from . import htmlmentionuser, humanbytes, media_type
+from . import humanbytes, media_type
 
 TYPES = [
     "Photo",
@@ -169,7 +169,7 @@ async def _(event):
         link = f"<a href='tg://user?id={chatdata.id}'>{chatdata.first_name}</a>"
     catevent = await edit_or_reply(
         event,
-        f"<code>Counting files and file size by </code>{htmlmentionuser(userdata.first_name,userdata.id)}<code> in Group </code><b>{link}</b>\n<code>This may take some time also depends on number of user messages</code>",
+        f"<code>Counting files and file size by </code>{_format.htmlmentionuser(userdata.first_name,userdata.id)}<code> in Group </code><b>{link}</b>\n<code>This may take some time also depends on number of user messages</code>",
         parse_mode="HTML",
     )
 
@@ -225,7 +225,7 @@ async def _(event):
                     \nRuntime per file :   | {avgruntime}\
                     \n</code>"
     line = "<code>+--------------------+-----------+</code>\n"
-    result = f"<b>Group : {link}\nUser : {htmlmentionuser(userdata.first_name,userdata.id)}\n\n"
+    result = f"<b>Group : {link}\nUser : {_format.htmlmentionuser(userdata.first_name,userdata.id)}\n\n"
     result += f"<code>Total Messages: {msg_count}</code>\n"
     result += "<b>File Summary : </b>\n"
     result += f"<code>{str(x)}</code>\n"
@@ -236,10 +236,20 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "filesummary": "__**PLUGIN NAME :** Filesummary__\
-\n\n📌** CMD ➥** `.chatfs` <or> `.chatfs username/id`\
-\n**USAGE   ➥  **__Shows you the complete media/file summary of the that group__\
-\n\n📌** CMD ➥** `.userfs` <or> `.userfs chat username/id`\
-\n**USAGE   ➥  **__Shows you the complete media/file summary of the that User in the group where you want__"
+        "filesummary": """**Plugin : **`filesummary`
+
+**Syntax : **
+  •  `.chatfs`
+  •  `.chatfs username/id`
+**Function : **
+  •  __Shows you the complete media/file summary of the that group__
+
+**Syntax : **
+  •  `.userfs reply`
+  •  `.userfs chat username/id`
+  •  `.userfs user username/id`
+**Function : **
+  •  __Shows you the complete media/file summary of the that User in the group where you want__
+"""
     }
 )

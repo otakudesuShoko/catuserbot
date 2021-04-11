@@ -145,11 +145,13 @@ async def imdb(e):
 
 CMD_HELP.update(
     {
-        "scrapers": """__**PLUGIN NAME :** Scrapers__\
-\n\n📌** CMD ➥** `.wiki` <query>
-\n**USAGE   ➥  **__Fetches given query in wikipedia and shows you__
-\n\n📌** CMD ➥** `.imdb` <query>
-\n**USAGE   ➥  **__Fetches Given movie details from imdb__
+        "scrapers": """**Plugin : **`scrapers`
+
+  •  **Syntax : ** `.wiki query`
+  •  **Function : **__Fetches given query in wikipedia and shows you__
+
+  •  **Syntax : ** `.imdb query`
+  •  **Function : **__Fetches Given movie details from imdb__
 """
     }
 )

@@ -100,7 +100,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    pwd = "./"
+    pwd = os.getcwd()
     input_str = event.pattern_match.group(1)
     if not input_str:
         return await edit_delete(
@@ -150,10 +150,10 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "download": "__**PLUGIN NAME :** Download__\
-\n\n📌** CMD ➥** `.download` <link|filename> or reply to media\
-\n**USAGE   ➥  **__Downloads the file to the server.__\
-\n\n📌** CMD ➥** `.dlto` foldername (reply this to file)\
-\n**USAGE   ➥  **__Downloads the file to the given folder in server.__"
+        "download": "**Plugin : **`.download`\
+        \n\n  •  **Syntax : **`.download <link|filename> or reply to media`\
+        \n  •  **Function : **__Downloads the file to the server.__\
+        \n\n  •  **Syntax : **`.dlto foldername (reply this to file)`\
+        \n  •  **Function : **__Downloads the file to the given folder in server.__"
     }
 )

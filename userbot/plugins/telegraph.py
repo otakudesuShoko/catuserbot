@@ -6,7 +6,7 @@ from datetime import datetime
 from PIL import Image
 from telegraph import Telegraph, exceptions, upload_file
 
-from . import BOTLOG, BOTLOG_CHATID, mention
+from . import BOTLOG, BOTLOG_CHATID
 
 telegraph = Telegraph()
 r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
@@ -20,7 +20,7 @@ auth_url = r["auth_url"]
 async def _(event):
     if event.fwd_from:
         return
-    catevent = await edit_or_reply(event, "`Memproses media........`")
+    catevent = await edit_or_reply(event, "`processing........`")
     if not os.path.isdir(Config.TEMP_DIR):
         os.makedirs(Config.TEMP_DIR)
     if BOTLOG:
@@ -42,7 +42,7 @@ async def _(event):
             end = datetime.now()
             ms = (end - start).seconds
             await catevent.edit(
-                f"`Mendownload ke {downloaded_file_name} dalam {ms} detik.`"
+                f"`Downloaded to {downloaded_file_name} in {ms} seconds.`"
             )
             if downloaded_file_name.endswith((".webp")):
                 resize_image(downloaded_file_name)
@@ -57,9 +57,9 @@ async def _(event):
                 ms_two = (end - start).seconds
                 os.remove(downloaded_file_name)
                 await catevent.edit(
-                    "**➥ Link media :-** [Telegraph](https://telegra.ph{})\
-                    \n**➥ Diupload {} detik yng lalu **.\n**➥ Pelaku :-** {}".format(
-                        media_urls[0], (ms + ms_two), (mention)
+                    "**link : **[telegraph](https://telegra.ph{})\
+                    \n**Time Taken : **`{} seconds.`".format(
+                        media_urls[0], (ms + ms_two)
                     ),
                     link_preview=True,
                 )
@@ -88,8 +88,8 @@ async def _(event):
             ms = (end - start).seconds
             cat = f"https://telegra.ph/{response['path']}"
             await catevent.edit(
-                f"**➥ Pasted to :-** [Telegraph]({cat})\
-                 \n**➥ Pasted in {ms} seconds .**",
+                f"**link : ** [telegraph]({cat})\
+                 \n**Time Taken : **`{ms} seconds.`",
                 link_preview=True,
             )
     else:
@@ -105,11 +105,11 @@ def resize_image(image):
 
 CMD_HELP.update(
     {
-        "telegraph": "__**PLUGIN NAME :** Telegraph__\
-     \n\n📌** CMD ➥** `.telegraph media` < or > `.tgm`\
-     \n**USAGE   ➥  **Reply to any image or video to upload it to telgraph(video must be less than 5mb)\
-     \n\n📌** CMD ➥** `.telegraph text` < or > `.tgt`\
-     \n**USAGE   ➥  **Reply to any text file or any message to paste it to telegraph\
+        "telegraph": "**Plugin :**`telegraph`\
+     \n\n  •  **Syntax :** `.telegraph media` `or` `tgm`\
+     \n  •  **Function :**__Reply to any image or video to upload it to telegraph (video must be less than 5mb)__\
+     \n\n  •  **Syntax :** `.telegraph text` `or` `.tgt`\
+     \n  •  **Function :** __reply to any text file or any message to paste it to telegraph__\
     "
     }
 )

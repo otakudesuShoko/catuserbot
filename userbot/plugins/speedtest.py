@@ -46,6 +46,7 @@ async def _(event):
         if as_text:
             await catevent.edit(
                 """`SpeedTest completed in {} seconds`
+
 `Download: {}`
 `Upload: {}`
 `Ping: {}`
@@ -75,6 +76,7 @@ async def _(event):
 Download: {}
 Upload: {}
 Ping: {}
+
 __With the Following ERRORs__
 {}""".format(
                 ms,
@@ -98,8 +100,9 @@ def convert_from_bytes(size):
 
 CMD_HELP.update(
     {
-        "speedtest": "__**PLUGIN NAME :** Speedtest__\
-      \n\n📌** CMD ➥** `.speedtest` <text/image/file>\
-      \n**USAGE   ➥  **__Shows your server speed in the given format if nothing is given then shows as image__"
+        "speedtest": """**Plugin : **`speedtest`
+
+  •  **Syntax : **`.speedtest text/image/file`
+  •  **function : **__Shows your server speed in the given format if nothing is given then shows as image__"""
     }
 )

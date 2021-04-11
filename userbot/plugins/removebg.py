@@ -4,7 +4,7 @@ import os
 
 import requests
 
-from . import convert_toimage, convert_tosticker, reply_id
+from . import convert_toimage, convert_tosticker
 
 
 @bot.on(admin_cmd(pattern="(rmbg|srmbg) ?(.*)"))
@@ -103,10 +103,13 @@ def ReTrieveURL(input_url):
 
 CMD_HELP.update(
     {
-        "removebg": "__**PLUGIN NAME :** Removebg__\
-\n\n📌** CMD ➥** `.rmbg` <Link to Image> or reply to any image \
-\n**USAGE   ➥  **Removes the background of images and send as png format\
-\n\n📌** CMD ➥** `.srmbg` <reply to any image>\
-\n**USAGE   ➥  **Removes the background of images & send as a sticker format"
+        "removebg": """**Plugin : **`removebg`
+        
+  •  **Syntax : **`.rmbg <Link to Image> or reply to any image/sticker`
+  •  **Function : **__Removes the background of an image/sticker and send as png format__
+  
+  •  **Syntax : **`.srmbg <Link to Image> or reply to any image/sticker`
+  •  **Function : **__Removes the background an image/sticker and send as sticker format__
+"""
     }
 )

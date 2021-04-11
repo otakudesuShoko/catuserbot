@@ -1,10 +1,7 @@
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-"""Urban Dictionary
-Syntax: .ud Query"""
-import asyncurban
+# Urban Dictionary for catuserbot by @mrconfused
 from PyDictionary import PyDictionary
+
+from . import AioHttp
 
 
 @bot.on(admin_cmd(pattern="ud (.*)"))
@@ -13,17 +10,25 @@ async def _(event):
     if event.fwd_from:
         return
     word = event.pattern_match.group(1)
-    urban = asyncurban.UrbanDictionary()
     try:
-        mean = await urban.get_word(word)
-        await edit_or_reply(
-            event,
-            "Text: **{}**\n\nBerarti: **{}**\n\nContoh: __{}__".format(
-                mean.word, mean.definition, mean.example
-            ),
+        response = await AioHttp().get_json(
+            f"http://api.urbandictionary.com/v0/define?term={word}",
         )
-    except asyncurban.WordNotFoundError:
-        await edit_or_reply(event, "Tidak ada hasil untuk **" + word + "**")
+        word = response["list"][0]["word"]
+        definition = response["list"][0]["definition"]
+        example = response["list"][0]["example"]
+        result = "**Text: {}**\n**Meaning:**\n`{}`\n\n**Example:**\n`{}`".format(
+            _format.replacetext(word),
+            _format.replacetext(definition),
+            _format.replacetext(example),
+        )
+        await edit_or_reply(event, result)
+    except Exception as e:
+        await edit_delete(
+            event,
+            text="`The Unban Dictionary API could not be reached`",
+        )
+        print(e)
 
 
 @bot.on(admin_cmd(pattern="meaning (.*)"))
@@ -42,16 +47,16 @@ async def _(event):
                 output += f"☞__{i}__\n"
         await edit_or_reply(event, output)
     except Exception:
-        await edit_or_reply(event, f"Tidak dapat memahami arti dari {word}")
+        await edit_or_reply(event, f"Couldn't fetch meaning of {word}")
 
 
 CMD_HELP.update(
     {
-        "dictionary": "__**PLUGIN NAME :** Dictionary__\
-    \n\n📌** CMD ➥** `.ud` query\
-    \n**USAGE   ➥  **Fetches meaning from Urban dictionary\
-    \n\n📌** CMD ➥** `.meaning` query\
-    \n**USAGE   ➥  **Fetches meaning of the given word\
+        "dictionary": "**Plugin :** `dictionary`\
+    \n\n  •  **Syntax :** `.ud query`\
+    \n  •  **Function : **fetches meaning from Urban dictionary\
+    \n\n  •  **Syntax : **`.meaning query`\
+    \n  •  **Function : **Fetches meaning of the given word\
     "
     }
 )

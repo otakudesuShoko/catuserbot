@@ -61,7 +61,7 @@ async def _(event):
             message_id = event.reply_to_msg_id
         end = datetime.now()
         ms = (end - start).seconds
-        hmm = f"** ➥ URL : **{input_str} \n**➥ Time :** `{ms} seconds`"
+        hmm = f"**url : **{input_str} \n**Time :** `{ms} seconds`"
         await catevent.delete()
         with io.BytesIO(im_png) as out_file:
             out_file.name = input_str + ".PNG"
@@ -110,7 +110,7 @@ async def _(event):
     contentType = response_api.headers["content-type"]
     end = datetime.now()
     ms = (end - start).seconds
-    hmm = f"**➥ URL : **{input_str} \n**➥ Time :** `{ms} seconds`"
+    hmm = f"**url : **{input_str} \n**Time :** `{ms} seconds`"
     if "image" in contentType:
         with io.BytesIO(response_api.content) as screenshot_image:
             screenshot_image.name = "screencapture.png"
@@ -131,11 +131,10 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "screenshot": "__**PLUGIN NAME :** Screenshot__\
-    \n\n📌** CMD ➥** `.ss` <url>\
-    \n**USAGE   ➥  **Takes a screenshot of a website and sends the screenshot.\
-    \n\n📌** CMD ➥** `.scapture` <url>\
-    \n**USAGE   ➥  **Takes a screenshot of a website and sends the screenshot need to set config var for this.\
-    \n\n**Example of a valid URL :** `www.google.com`"
+        "screenshot": "**Plugin : **`screenshot`\
+        \n\n**Syntax : **`.ss <url>`\
+        \n**Function : **__Takes a screenshot of a website and sends the screenshot.__\
+        \n\n**Syntax : **`.scapture <url>`\
+        \n**Function : **__Takes a screenshot of a website and sends the screenshot need to set config var for this.__"
     }
 )

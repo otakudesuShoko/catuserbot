@@ -12,16 +12,16 @@ from validators.url import url
 from .. import *
 from ..Config import Config
 from ..helpers import *
-from ..helpers import functions as catdef
+from ..helpers import _cattools, _catutils, _format
 
 # =================== CONSTANT ===================
 
-USERID = Config.OWNER_ID or bot.uid
+USERID = bot.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
 ALIVE_NAME = Config.ALIVE_NAME
 AUTONAME = Config.AUTONAME
 DEFAULT_BIO = Config.DEFAULT_BIO
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
-BOT_USERNAME = Config.TG_BOT_USER_NAME_BF_HER
+BOT_USERNAME = Config.TG_BOT_USERNAME
 # mention user
 mention = f"[{DEFAULTUSER}](tg://user?id={USERID})"
 hmention = f"<a href = tg://user?id={USERID}>{DEFAULTUSER}</a>"
@@ -38,7 +38,7 @@ PM_START = []
 PMMESSAGE_CACHE = {}
 PMMENU = "pmpermit_menu" not in Config.NO_LOAD
 
-if Config.PRIVATE_GROUP_BOT_API_ID is None:
+if Config.PRIVATE_GROUP_BOT_API_ID == 0:
     BOTLOG = False
     BOTLOG_CHATID = "me"
 else:
@@ -78,8 +78,8 @@ if Config.THUMB_IMAGE is not None:
         try:
             with open(thumb_image_path, "wb") as f:
                 f.write(requests.get(Config.THUMB_IMAGE).content)
-        except:
-            pass
+        except Exception as e:
+            LOGS.info(str(e))
 
 
 def check(cat):
@@ -87,7 +87,7 @@ def check(cat):
         return True
     try:
         hi = re.search(cat.lower(), "(a|b|c|d)", flags=re.IGNORECASE)
-    except:
+    except Exception:
         hi = False
     return bool(hi)
 
@@ -176,11 +176,11 @@ async def catalive():
         dyno = f"{AppHours}h {AppMinutes}m/{hours}h {minutes}m"
     except Exception as e:
         dyno = e
-    return f"🖤༄ Catuserbot Stats ༄🖤\
-                 \n\nღ Database : {check_sgnirts}\
-                  \nღ Sudo : {sudo}\
-                  \nღ Uptime : {uptime}\
-                  \nღ Dyno : {dyno}\
+    return f"Catuserbot Stats\
+                 \n\nDatabase : {check_sgnirts}\
+                  \nSudo : {sudo}\
+                  \nUptime : {uptime}\
+                  \nDyno : {dyno}\
                   "
 
 
@@ -190,5 +190,7 @@ async def make_gif(event, reply, quality=None, fps=None):
     result_p = os.path.join("temp", "animation.gif")
     animation = lottie.parsers.tgs.parse_tgs(reply)
     with open(result_p, "wb") as result:
-        await run_sync(lottie.exporters.gif.export_gif, animation, result, quality, fps)
+        await _catutils.run_sync(
+            lottie.exporters.gif.export_gif, animation, result, quality, fps
+        )
     return result_p

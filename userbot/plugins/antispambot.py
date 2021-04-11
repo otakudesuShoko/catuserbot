@@ -42,7 +42,7 @@ if Config.ANTISPAMBOT_BAN:
             catgban = get_gbanuser(user.id)
             if catgban.reason:
                 hmm = await event.reply(
-                    f"[{user.first_name}](tg://user?id={user.id}) was gbanned by you For the reason `{catgban.reason}`"
+                    f"[{user.first_name}](tg://user?id={user.id}) was gbanned by you for the reason `{catgban.reason}`"
                 )
             else:
                 hmm = await event.reply(
@@ -57,7 +57,7 @@ if Config.ANTISPAMBOT_BAN:
             ban = spamwatch.get_ban(user.id)
             if ban:
                 hmm = await event.reply(
-                    f"[{user.first_name}](tg://user?id={user.id}) was banned by spamwatch For the reason `{ban.reason}`"
+                    f"[{user.first_name}](tg://user?id={user.id}) was banned by spamwatch for the reason `{ban.reason}`"
                 )
                 try:
                     await bot.edit_permissions(chat, user.id, view_messages=False)
@@ -76,7 +76,7 @@ if Config.ANTISPAMBOT_BAN:
                     f"[Banned by Combot Anti Spam](https://cas.chat/query?u={user.id})"
                 )
                 hmm = await event.reply(
-                    f"[{user.first_name}](tg://user?id={user.id}) was banned by Combat anti-spam service(CAS) For the reason check {reason}"
+                    f"[{user.first_name}](tg://user?id={user.id}) was banned by Combat anti-spam service(CAS) for the reason check {reason}"
                 )
                 try:
                     await bot.edit_permissions(chat, user.id, view_messages=False)
@@ -98,7 +98,7 @@ if Config.ANTISPAMBOT_BAN:
 async def caschecker(cas):
     catevent = await edit_or_reply(
         cas,
-        "`checking any cas(combot antispam service) banned users here, this may takes minutes too......`",
+        "`checking any cas(combot antispam service) banned users here, this may take several minutes too......`",
     )
     text = ""
     chat = cas.chat_id
@@ -118,16 +118,16 @@ async def caschecker(cas):
                 else:
                     banned_users += f"Deleted Account `{user.id}`\n"
             members_count += 1
-        text = "Warning! Found `{}` of `{}` users are CAS Banned:\n".format(
+        text = "**Warning!** Found `{}` of `{}` users are CAS Banned:\n".format(
             cas_count, members_count
         )
         text += banned_users
         if not cas_count:
             text = "No CAS Banned users found!"
-    except ChatAdminRequiredError:
+    except ChatAdminRequiredError as carerr:
         await catevent.edit("`CAS check failed: Admin privileges are required`")
         return
-    except BaseException:
+    except BaseException as be:
         await catevent.edit("`CAS check failed`")
         return
     await catevent.edit(text)
@@ -140,7 +140,7 @@ async def caschecker(cas):
     chat = cas.chat_id
     catevent = await edit_or_reply(
         cas,
-        "`checking any spamwatch banned users here, this may takes minutes too......`",
+        "`checking any spamwatch banned users here, this may take several minutes too......`",
     )
     try:
         info = await cas.client.get_entity(chat)
@@ -158,16 +158,16 @@ async def caschecker(cas):
                 else:
                     banned_users += f"Deleted Account `{user.id}`\n"
             members_count += 1
-        text = "Warning! Found `{}` of `{}` users are spamwatch Banned:\n".format(
+        text = "**Warning! **Found `{}` of `{}` users are spamwatch Banned:\n".format(
             cas_count, members_count
         )
         text += banned_users
         if not cas_count:
             text = "No spamwatch Banned users found!"
-    except ChatAdminRequiredError:
+    except ChatAdminRequiredError as carerr:
         await catevent.edit("`spamwatch check failed: Admin privileges are required`")
         return
-    except BaseException:
+    except BaseException as be:
         await catevent.edit("`spamwatch check failed`")
         return
     await catevent.edit(text)
@@ -192,10 +192,10 @@ def spamchecker(user_id):
 
 CMD_HELP.update(
     {
-        "antispambot": "__**PLUGIN NAME :** Aantispambot__\
-        \n\n📌** CMD ➥** `.cascheck`\
-        \n**USAGE   ➥  **Searches for cas(combot antispam service) banned users in group and shows you the list\
-        \n\n📌** CMD ➥** `.spamcheck`\
-        \n**USAGE   ➥  **Searches for spamwatch banned users in group and shows you the list"
+        "antispambot": "**Plugin : **`antispambot`\
+        \n\n**Syntax : **`.cascheck`\
+        \n**Function : **__Searches for cas(combot antispam service) banned users in group and shows you the list__\
+        \n\n**Syntax : **`.spamcheck`\
+        \n**Function : **__Searches for spamwatch banned users in group and shows you the list__"
     }
 )

@@ -13,7 +13,10 @@ from .sql_helper.filter_sql import (
 @bot.on(admin_cmd(incoming=True))
 async def filter_incoming_handler(handler):
     try:
-        if not (await handler.get_sender()).bot:
+        if (
+            not (await handler.get_sender()).bot
+            and (handler.sender_id) != handler.client.uid
+        ):
             name = handler.raw_text
             filters = get_filters(handler.chat_id)
             if not filters:
@@ -60,13 +63,13 @@ async def add_new_filter(new_handler):
         else:
             await edit_or_reply(
                 new_handler,
-                "`Saving media as reply to the filter requires the BOTLOG_CHATID to be set.`",
+                "`Saving media as reply to the filter requires the PRIVATE_GROUP_BOT_API_ID to be set.`",
             )
             return
     elif new_handler.reply_to_msg_id and not string:
         rep_msg = await new_handler.get_reply_message()
         string = rep_msg.text
-    success = "`Filter` **{}** `{} Berhasil ditambahkan`"
+    success = "`Filter` **{}** `{} successfully`"
     if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
         return await edit_or_reply(new_handler, success.format(keyword, "added"))
     remove_filter(str(new_handler.chat_id), keyword)
@@ -80,16 +83,16 @@ async def add_new_filter(new_handler):
 async def on_snip_list(event):
     if event.fwd_from:
         return
-    OUT_STR = "Tidak ada filter dalam obrolan ini."
+    OUT_STR = "There are no filters in this chat."
     filters = get_filters(event.chat_id)
     for filt in filters:
-        if OUT_STR == "Tidak ada filter dalam obrolan ini.":
-            OUT_STR = "Filter aktif dalam obrolan ini:\n"
+        if OUT_STR == "There are no filters in this chat.":
+            OUT_STR = "Active filters in this chat:\n"
         OUT_STR += "👉 `{}`\n".format(filt.keyword)
     await edit_or_reply(
         event,
         OUT_STR,
-        caption="Filter yang Tersedia di Obrolan Saat Ini",
+        caption="Available Filters in the Current Chat",
         file_name="filters.text",
     )
 
@@ -101,9 +104,9 @@ async def remove_a_filter(r_handler):
         return
     filt = r_handler.pattern_match.group(1)
     if not remove_filter(r_handler.chat_id, filt):
-        await r_handler.edit("Filter` {} `tidak ada.".format(filt))
+        await r_handler.edit("Filter` {} `doesn't exist.".format(filt))
     else:
-        await r_handler.edit("Filter `{} `berhasil dihapus".format(filt))
+        await r_handler.edit("Filter `{} `was deleted successfully".format(filt))
 
 
 @bot.on(admin_cmd(pattern="rmfilters$"))
@@ -114,23 +117,22 @@ async def on_all_snip_delete(event):
     filters = get_filters(event.chat_id)
     if filters:
         remove_all_filters(event.chat_id)
-        await edit_or_reply(event, f"filter dalam obrolan saat ini berhasil dihapus")
+        await edit_or_reply(event, f"filters in current chat deleted successfully")
     else:
-        await edit_or_reply(event, f"Tidak ada filter dalam obrolan ini")
+        await edit_or_reply(event, f"There are no filters in this group")
 
 
 CMD_HELP.update(
     {
-        "filters": "__**PLUGIN NAME :** Filters__\
-    \n\n📌** CMD ➥** `.filters`\
-    \n**USAGE   ➥  **Lists all active (of your userbot) filters in a chat.\
-    \n\n📌** CMD ➥** `.filter`  reply to a message with .filter <keyword>\
-    \n**USAGE   ➥  **Saves the replied message as a reply to the 'keyword'.\
-    \nThe bot will reply to the message whenever 'keyword' is mentioned.\
-    \nWorks with everything from files to stickers.\
-    \n\n📌** CMD ➥** `.stop <keyword>`\
-    \n**USAGE   ➥  **Stops the specified keyword.\
-    \n\n📌** CMD ➥** `.rmfilters` \
-    \n**USAGE   ➥  **Removes all filters of your userbot in the chat."
+        "filters": "**Plugin :**`filters`\
+    \n\n•  **Syntax :** `.filters`\
+    \n•  **Function : **Lists all active (of your userbot) filters in a chat.\
+    \n\n•  **Syntax :** `.filter`  reply to a message with .filter <keyword>\
+    \n•  **Function : **Saves the replied message as a reply to the 'keyword'.\
+    \nThe bot will reply to the message whenever 'keyword' is mentioned. Works with everything from files to stickers.\
+    \n\n•  **Syntax :** `.stop <keyword>`\
+    \n•  **Function : **Stops the specified keyword.\
+    \n\n•  **Syntax :** `.rmfilters` \
+    \n•  **Function : **Removes all filters of your userbot in the chat."
     }
 )

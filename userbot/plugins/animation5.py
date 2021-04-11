@@ -3,57 +3,6 @@
 import asyncio
 
 
-@bot.on(admin_cmd(pattern="thinking$"))
-@bot.on(sudo_cmd(pattern="thinking$", allow_sudo=True))
-async def _(event):
-    if event.fwd_from:
-        return
-    animation_interval = 0.05
-    animation_ttl = range(200)
-    event = await edit_or_reply(event, "thinking..")
-    animation_chars = [
-        "THINKING",
-        "THI&K#N₹",
-        "T+IN@I?G",
-        "¿H$NK∆NG",
-        "¶H×NK&N*",
-        "NGITHKIN",
-        "T+I#K@₹G",
-        "THINKING",
-        "THI&K#N₹",
-        "T+IN@I?G",
-        "¿H$NK∆NG",
-        "¶H×NK&N*",
-        "NGITHKIN",
-        "T+I#K@₹G",
-        "THINKING",
-        "THI&K#N₹",
-        "T+IN@I?G",
-        "¿H$NK∆NG",
-        "¶H×NK&N*",
-        "NGITHKIN",
-        "T+I#K@₹G",
-        "THINKING",
-        "THI&K#N₹",
-        "T+IN@I?G",
-        "¿H$NK∆NG",
-        "¶H×NK&N*",
-        "NGITHKIN",
-        "T+I#K@₹G",
-        "THINKING",
-        "THI&K#N₹",
-        "T+IN@I?G",
-        "¿H$NK∆NG",
-        "¶H×NK&N*",
-        "NGITHKIN",
-        "T+I#K@₹G",
-        "THINKING... 🤔",
-    ]
-    for i in animation_ttl:
-        await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 36])
-
-
 @bot.on(admin_cmd(pattern=f"loading$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"loading$", allow_sudo=True))
 async def _(event):
@@ -142,7 +91,7 @@ async def _(event):
         "😧",
         "😡",
         "😢",
-        "__**[Good to See you guys....]**__(github.com/Jisan09/catuserbot)",
+        "__**[Good to see you guys....]**__(github.com/sandy1709/catuserbot)",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
@@ -157,7 +106,7 @@ async def _(event):
     animation_interval = 2
     animation_ttl = range(6)
     event = await edit_or_reply(event, "Hey There....")
-    animation_chars = ["😁🏿", "😁🏾", "😁🏽", "😁🏼", "‎😁", "**Good to See you friend....**"]
+    animation_chars = ["😁🏿", "😁🏾", "😁🏽", "😁🏼", "‎😁", "**Good to see you friend....**"]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 6])
@@ -171,7 +120,7 @@ async def _(event):
     animation_interval = 2
     animation_ttl = range(12)
     event = await edit_or_reply(event, "Hey There....")
-    animation_chars = ["🐵", "🙉", "🙈", "🙊", "🖕‎🐵🖕", "**Good to See you friend....**"]
+    animation_chars = ["🐵", "🙉", "🙈", "🙊", "🖕‎🐵🖕", "**Good to see you friend....**"]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 6])
@@ -236,7 +185,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 1
-    animation_ttl = range(11)
+    animation_ttl = range(12)
     event = await edit_or_reply(event, "ContDown....")
     animation_chars = [
         "🔟",
@@ -254,7 +203,7 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 11])
+        await event.edit(animation_chars[i % 12])
 
 
 @bot.on(admin_cmd(pattern=r"theart$", outgoing=True))
@@ -292,9 +241,22 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "animation5": "__**PLUGIN NAME :** Animation5__\
-\n\n📌** CMD ➥** `.thinking` | `.loading` | `.square` | `.up` | `.round` | `.hart` | `.anim` | `.fnl` | `.monkey` | `.herber` | `.hand` | `.gsg` | `.theart`\
-\n\n**USAGE   ➥  **These are animation bruh..Try & check yourself\
-"
+        "animation5": """**Plugin : **`animation5`
+        
+**Commands in animation5 are **
+  •  `.loading`
+  •  `.square`
+  •  `.up`
+  •  `.round`
+  •  `.hart`
+  •  `.anim`
+  •  `.fnl`
+  •  `.monkey`
+  •  `.herber`
+  •  `.hand`
+  •  `.gsg`
+  •  `.theart`
+  
+**Function : **__Different kinds of animation commands check yourself for their animation .__"""
     }
 )

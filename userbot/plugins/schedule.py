@@ -11,17 +11,17 @@ async def _(event):
     ttl = int(cat[0])
     try:
         await event.delete()
-    except:
-        pass
+    except Exception as e:
+        LOGS.info(str(e))
     await sleep(ttl)
     await event.respond(message)
 
 
 CMD_HELP.update(
     {
-        "schedule": "__**PLUGIN NAME :** Schedule__\
-    \n\n📌** CMD ➥** `.schd` <time_in_seconds>  <message to send>\
-    \n**USAGE   ➥  **Send you the given message after that particular time\
+        "schedule": "**Plugin : **`schedule`\
+    \n\n**Syntax : **`.schd <time_in_seconds>  <message to send>`\
+    \n**Function : **Send you the given message after that particular time\
     "
     }
 )

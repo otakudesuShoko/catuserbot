@@ -98,9 +98,7 @@ async def ff_mpeg_trim_cmd(event):
     elif len(cmt) == 2:
         # output should be image
         cmd, start_time = cmt
-        o = await take_screen_shot(
-            FF_MPEG_DOWN_LOAD_MEDIA_PATH, Config.TMP_DOWNLOAD_DIRECTORY, start_time
-        )
+        o = await _cattools.take_screen_shot(FF_MPEG_DOWN_LOAD_MEDIA_PATH, start_time)
         if o is None:
             return await edit_delete(
                 catevent, f"**Error : **`Can't complete the process`"
@@ -203,33 +201,6 @@ async def ff_mpeg_trim_cmd(event):
         )
 
 
-async def take_screen_shot(video_file, output_directory, ttl):
-    # https://stackoverflow.com/a/13891070/4723940
-    out_put_file_name = os.path.join(output_directory, f"{str(time.time())}.jpg")
-    file_genertor_command = [
-        "ffmpeg",
-        "-ss",
-        str(ttl),
-        "-i",
-        video_file,
-        "-vframes",
-        "1",
-        out_put_file_name,
-    ]
-    # width = "90"
-    process = await asyncio.create_subprocess_exec(
-        *file_genertor_command,
-        # stdout must a pipe to be accessible as process.stdout
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-    )
-    # Wait for the subprocess to finish
-    await process.communicate()
-    if os.path.lexists(out_put_file_name):
-        return out_put_file_name
-    return None
-
-
 # https://github.com/Nekmo/telegram-upload/blob/master/telegram_upload/video.py#L26
 
 
@@ -269,17 +240,17 @@ async def cult_small_video(
 
 CMD_HELP.update(
     {
-        "ffmpeg": "__**PLUGIN NAME :** Ffmpeg__\
-\n\n📌** CMD ➥** `.ffmpegsave`\
-\n**USAGE   ➥  **__Saves the media file in bot to trim mutliple times__\
-\n\n📌** CMD ➥** `.vtrim time`\
-\n**USAGE   ➥  **__Sends you the screenshot of the video at the given specific time__\
-\n\n📌** CMD ➥** `.vtrim starttime endtime`\
-\n**USAGE   ➥  **__Trims the saved media with specific given time internval and outputs as video__\
-\n\n📌** CMD ➥** `.atrim starttime endtime`\
-\n**USAGE   ➥  **__Trims the saved media with specific given time internval and outputs as audio__\
-\n\n📌** CMD ➥** `.ffmpegclear`\
-\n**USAGE   ➥  **__Deletes the saved media so you can save new one__\
+        "ffmpeg": "**Plugin : **`ffmpeg`\
+    \n\n  •  **Syntax : **`.ffmpegsave`\
+    \n  •  **Function : **__Saves the media file in bot to trim mutliple times__\
+    \n\n  •  **Syntax : **`.vtrim time`\
+    \n  •  **Function : **__Sends you the screenshot of the video at the given specific time__\
+    \n\n  •  **Syntax : **`.vtrim starttime endtime`\
+    \n  •  **Function : **__Trims the saved media with specific given time internval and outputs as video__\
+    \n\n  •  **Syntax : **`.atrim starttime endtime`\
+    \n  •  **Function : **__Trims the saved media with specific given time internval and outputs as audio__\
+    \n\n  •  **Syntax : **`.ffmpegclear`\
+    \n  •  **Function : **__Deletes the saved media so you can save new one__\
     "
     }
 )

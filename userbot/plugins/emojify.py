@@ -1,11 +1,11 @@
 """
 Created by @Jisan7509
-Peru helper @mrconfused
+modified by  @mrconfused
 Userbot plugin for CatUserbot
 """
+import emoji
 
-
-from . import *
+from . import fonts as emojify
 
 
 @bot.on(admin_cmd(pattern="emoji(?: |$)(.*)"))
@@ -17,15 +17,18 @@ async def itachi(event):
         args = get.text
     if not args:
         await edit_or_reply(
-            event, "`What am I Supposed to do with this nibba/nibbi, Give me a text. `"
+            event, "`What am I Supposed to do with this stupid, Give me a text. `"
         )
         return
-    string = "  ".join(args).lower()
-    for chutiya in string:
-        if chutiya in emojify.kakashitext:
-            bsdk = emojify.kakashiemoji[emojify.kakashitext.index(chutiya)]
-            string = string.replace(chutiya, bsdk)
-    await edit_or_reply(event, string)
+    result = ""
+    for a in args:
+        a = a.lower()
+        if a in emojify.kakashitext:
+            char = emojify.kakashiemoji[emojify.kakashitext.index(a)]
+            result += char
+        else:
+            result += a
+    await edit_or_reply(event, result)
 
 
 @bot.on(admin_cmd(pattern="cmoji(?: |$)(.*)"))
@@ -37,29 +40,39 @@ async def itachi(event):
         args = get.text
     if not args:
         await edit_or_reply(
-            event, "`What am I Supposed to do with this nibba/nibbi, Give me a text. `"
+            event, "`What am I Supposed to do with this stupid, Give me a text. `"
         )
         return
-    emoji, args = args.split(" ", 1)
-    string = "  ".join(args).lower()
-    for chutiya in string:
-        if chutiya in emojify.kakashitext:
-            bsdk = emojify.itachiemoji[emojify.kakashitext.index(chutiya)].format(
-                cj=emoji
-            )
-            string = string.replace(chutiya, bsdk)
-    await edit_or_reply(event, string)
+    try:
+        emoji, arg = args.split(" ", 1)
+    except Exception:
+        arg = args
+        emoji = "😺"
+    if not char_is_emoji(emoji):
+        arg = args
+        emoji = "😺"
+    result = ""
+    for a in arg:
+        a = a.lower()
+        if a in emojify.kakashitext:
+            char = emojify.itachiemoji[emojify.kakashitext.index(a)].format(cj=emoji)
+            result += char
+        else:
+            result += a
+    await edit_or_reply(event, result)
+
+
+def char_is_emoji(character):
+    return character in emoji.UNICODE_EMOJI["en"]
 
 
 CMD_HELP.update(
     {
-        "emojify": "__**PLUGIN NAME :** Emojify__\
-      \n\n📌** CMD ➥** `.emoji` <text>\
-      \n**USAGE   ➥  **Converts your text to big emoji text, with default emoji. \
-      \n\n📌** CMD ➥** `.cmoji` <emoji> <text>\
-      \n**USAGE   ➥  **Converts your text to big emoji text, with your custom emoji.\
-      \n\n**☞ NOTE :** For giving sapce between two words use **@** symbol.\
-      \n**EXAMPLE :**  `.emoji Bad@cat`\
-      \n                    `.cmoji 😋 Good@cat`"
+        "emojify": "**Plugin :** `emojify`\
+      \n\n**Syntax :** `.emoji` <text>\
+      \n****Usage : **Converts your text to big emoji text, with default emoji. \
+      \n\n**Syntax :** `.cmoji` <emoji> <text>\
+      \n****Usage : **Converts your text to big emoji text, with your custom emoji.\
+      "
     }
 )

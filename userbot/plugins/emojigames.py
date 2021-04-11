@@ -182,17 +182,16 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "emojigames": "__**PLUGIN NAME :** Emojigames\
-    \n\n📌** CMD ➥** `.🎯` or `.dart` [1-6]\
-    \n**USAGE   ➥  **Each number shows different animation\
-    \n\n📌** CMD ➥** `.🎲` or `.dice` [1-6]\
-    \n**USAGE   ➥  **Each number shows different animation\
-    \n\n📌** CMD ➥** `.🏀` or `.bb` [1-5]\
-    \n**USAGE   ➥  **Each number shows different animation\
-    \n\n📌** CMD ➥** `.⚽️` or `.fb` [1-5]\
-    \n**USAGE   ➥  **Each number shows different animation\
-    \n\n📌** CMD ➥** `.🎰` [1-64] or `.jp` [1-64]\
-    \n**USAGE   ➥  **Each number shows different animation for slot machine(jackpot)\
+        "emojigames": "**Syntax :** `.🎯 [1-6]` or `.dart [1-6]`\
+    \n**Usage : **each number shows different animation for dart\
+    \n\n**Syntax : **`.🎲 [1-6]` or `.dice [1-6]`\
+    \n**Usage : **each number shows different animation for dice\
+    \n\n**Syntax : **`.🏀 [1-5]` or `.bb [1-5]`\
+    \n**Usage : **each number shows different animation for basket ball\
+    \n\n**Syntax : **`.⚽️ [1-5] `or `.fb [1-5]`\
+    \n**Usage : **each number shows different animation for football\
+    \n\n**Syntax : **`.🎰 [1-64] `or `.jp [1-64]`\
+    \n**Usage : **each number shows different animation for slot machine(jackpot)\
     "
     }
 )

@@ -1,4 +1,4 @@
-# speech to text module for catuserbot by uniborg(@spechide)
+# speech to text module for catuserbot by unievent.client(@spechide)
 import os
 from datetime import datetime
 
@@ -73,8 +73,8 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "stt": "__**PLUGIN NAME :** Stt\
-    \n\n📌** CMD ➥** `.stt en` reply this to voice message\
-    \n**USAGE   ➥  **speech to text module"
+        "stt": "**Plugin : **`stt`\
+    \n\n**Syntax :** `.stt en` reply this to voice message\
+    \n**Usage : **speech to text module"
     }
 )

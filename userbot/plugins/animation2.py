@@ -193,9 +193,21 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "animation2": "__**PLUGIN NAME :** Animation2__\
-\n\n**📌 CMD ➥** `.think` | `.lmao` | `.nothappy` | `.clock` | `.muah` | `.heart` | `.gym` | `.earth` | `.moon` | `.smoon` | `.tmoon` \
-\n\n**USAGE   ➥  **These are animation bruh..Try & check yourself\
-"
+        "animation2": """**Plugin : **`animation2`
+        
+**Commands in animation2 are **
+  •  `.think`
+  •  `.lmao`
+  •  `.nothappy`
+  •  `.clock`
+  •  `.muah`
+  •  `.heart`
+  •  `.gym`
+  •  `.earth`
+  •  `.moon`
+  •  `.smoon`
+  •  `.tmoon`
+  
+**Function : **__Different kinds of animation commands check yourself for their animation .__"""
     }
 )

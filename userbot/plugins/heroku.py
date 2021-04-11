@@ -1,3 +1,5 @@
+# Heroku manager for your catuserbot
+
 # CC- @refundisillegal\nSyntax:-\n.get var NAME\n.del var NAME\n.set var NAME
 
 # Copyright (C) 2020 Adek Maulana.
@@ -42,7 +44,7 @@ async def variable(var):
     exe = var.pattern_match.group(1)
     heroku_var = app.config()
     if exe == "get":
-        cat = await edit_or_reply(var, "`Mendapatkan informasi...`")
+        cat = await edit_or_reply(var, "`Getting information...`")
         await asyncio.sleep(1.0)
         try:
             variable = var.pattern_match.group(2).split()[0]
@@ -77,7 +79,7 @@ async def variable(var):
             return
     elif exe == "set":
         variable = "".join(var.text.split(maxsplit=2)[2:])
-        cat = await edit_or_reply(var, "`Mengganti isi vars...`")
+        cat = await edit_or_reply(var, "`Setting information...`")
         if not variable:
             return await cat.edit("`.set var <ConfigVars-name> <value>`")
         value = "".join(variable.split(maxsplit=1)[1:])
@@ -86,10 +88,10 @@ async def variable(var):
             return await cat.edit("`.set var <ConfigVars-name> <value>`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
-            await cat.edit(f"`{variable}` **Sukses mengganti ke  ->  **`{value}`")
+            await cat.edit(f"`{variable}` **successfully changed to  ->  **`{value}`")
         else:
             await cat.edit(
-                f"`{variable}`**  sukse menambahkan data vars`  ->  **{value}`"
+                f"`{variable}`**  successfully added with value`  ->  **{value}`"
             )
         heroku_var[variable] = value
     elif exe == "del":
@@ -122,7 +124,7 @@ async def dyno_usage(dyno):
             dyno,
             "Set the required var in heroku to function this normally `HEROKU_API_KEY`.",
         )
-    dyno = await edit_or_reply(dyno, "`Mendapatkan info pulsa...`")
+    dyno = await edit_or_reply(dyno, "`Processing...`")
     useragent = (
         "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -164,77 +166,14 @@ async def dyno_usage(dyno):
     AppMinutes = math.floor(AppQuotaUsed % 60)
     await asyncio.sleep(1.5)
     return await dyno.edit(
-        "**Info Pulsa Telkomsel**:\n\n"
-        f" -> `Penggunaan Pulsa Anda di`  **{Config.HEROKU_APP_NAME}**:\n"
-        f"     •  `{AppHours}` **h**  `{AppMinutes}` **m**  "
-        f"**|**  [`{AppPercentage}` **%**]"
+        "**Dyno Usage**:\n\n"
+        f" -> `Dyno usage for`  **{Config.HEROKU_APP_NAME}**:\n"
+        f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
+        f"**|**  [`{AppPercentage}`**%**]"
         "\n\n"
-        " -> `Sisa kuota Pulsa anda bulan ini`:\n"
-        f"     •  `{hours}` **h**  `{minutes}` **m**  "
-        f"**|**  [`{percentage}` **%**]"
-    )
-
-
-@bot.on(admin_cmd(pattern="usange$", outgoing=True))
-@bot.on(sudo_cmd(pattern="usange$", allow_sudo=True))
-async def dyno_usage(dyno):
-    """
-    Get your account Dyno Usage
-    """
-    if HEROKU_APP_NAME is None:
-        return await edit_delete(
-            dyno,
-            "Set the required var in heroku to function this normally `HEROKU_APP_NAME`.",
-        )
-    dyno = await edit_or_reply(dyno, "`Mendapatkan info pulsa...`")
-    useragent = (
-        "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/80.0.3987.149 Mobile Safari/537.36"
-    )
-    user_id = Heroku.account().id
-    headers = {
-        "User-Agent": useragent,
-        "Authorization": f"Bearer {Config.HEROKU_API_KEY}",
-        "Accept": "application/vnd.heroku+json; version=3.account-quotas",
-    }
-    path = "/accounts/" + user_id + "/actions/get-quota"
-    r = requests.get(heroku_api + path, headers=headers)
-    if r.status_code != 200:
-        return await dyno.edit(
-            "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
-        )
-    result = r.json()
-    quota = result["account_quota"]
-    quota_used = result["quota_used"]
-
-    # - Used -
-    remaining_quota = quota - quota_used
-    math.floor(remaining_quota / quota * 100)
-    minutes_remaining = remaining_quota / 60
-    math.floor(minutes_remaining / 60)
-    math.floor(minutes_remaining % 60)
-    # - Current -
-    App = result["apps"]
-    try:
-        App[0]["quota_used"]
-    except IndexError:
-        AppQuotaUsed = 0
-    else:
-        AppQuotaUsed = App[0]["quota_used"] / 60
-        math.floor(App[0]["quota_used"] * 100 / quota)
-    math.floor(AppQuotaUsed / 60)
-    math.floor(AppQuotaUsed % 60)
-    await asyncio.sleep(1.5)
-    return await dyno.edit(
-        "**Info Pulsa Telkomsel**:\n\n"
-        f" -> `Penggunaan Pulsa Anda di`  **{Config.HEROKU_APP_NAME}**:\n"
-        f"     •  `0` **h**  `0` **m**  "
-        f"**|**  [`100` **%**]"
-        "\n\n"
-        " -> `Sisa kuota Pulsa anda bulan ini`:\n"
-        f"     •  `999` **h**  `999` **m**  "
-        f"**|**  [`99` **%**]"
+        " -> `Dyno hours quota remaining this month`:\n"
+        f"     •  `{hours}`**h**  `{minutes}`**m**  "
+        f"**|**  [`{percentage}`**%**]"
     )
 
 
@@ -285,20 +224,6 @@ def prettyjson(obj, indent=2, maxlinelength=80):
 
 CMD_HELP.update(
     {
-        "heroku": "__**PLUGIN NAME :** Heroku__\
-  \n\n📌** CMD ➥** `.usage`\
-  \n**USAGE   ➥  **Check your heroku dyno hours status.\
-  \n\n📌** CMD ➥** `.usange`\
-  \n**USAGE   ➥  **Check your heroku dyno hours status.\
-  \n\n📌** CMD ➥** `.set var` <NEW VAR> <VALUE>\
-  \n**USAGE   ➥  **Add new variable or update existing value variable\
-  \n\n📌** CMD ➥** `.get var` or `.get var <VAR>`\
-  \n**USAGE   ➥  **Get your existing varibles & valus of that\
-  \n\n📌** CMD ➥** `.del var` <VAR>\
-  \n**USAGE   ➥  **Delete existing variable\
-  \n\n📌** CMD ➥** `.herokulogs`\
-  \n**USAGE   ➥  **Sends you recent 100 lines of logs in heroku\
-  \n\n\n**!!! WARNING !!!, After adding or deleting variable the bot will restarted**\
-  \n**Don't use .get var in public groups.This returns all of your private information, please be cautious...**"
+        "heroku": "Info for Module to Manage Heroku:**\n\n`.usage`\nUsage:__Check your heroku dyno hours status.__\n\n`.set var <NEW VAR> <VALUE>`\nUsage: __add new variable or update existing value variable__\n**!!! WARNING !!!, after setting a variable the bot will restart.**\n\n`.get var or .get var <VAR>`\nUsage: __get your existing varibles, use it only on your private group!__\n**This returns all of your private information, please be cautious...**\n\n`.del var <VAR>`\nUsage: __delete existing variable__\n**!!! WARNING !!!, after deleting variable the bot will restarted**\n\n`.herokulogs`\nUsage:sends you recent 100 lines of logs in heroku"
     }
 )

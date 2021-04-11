@@ -40,14 +40,15 @@ async def _(event):
             await cat.edit(msg)
         else:
             await cat.edit("sorry, I couldnt find it")
+
         await event.client.send_read_acknowledge(conv.chat_id)
 
 
 CMD_HELP.update(
     {
-        "recognize": "__**PLUGIN NAME :** Recognize__\
-    \n\n📌** CMD ➥** `.recognize` reply this to any media file\
-    \n**USAGE   ➥  **Get information about an image using AWS Rekognition.\
-    \nFind out information including detected labels, faces. text and moderation tags."
+        "recognize": "**Plugin : **`recognize`\
+        \n\n**Syntax : **`.recognize reply this to any image file`\
+    \n**Function : **__Get information about an image using AWS Rekognition.\
+    \nFind out information including detected labels, faces. text and moderation tags.__"
     }
 )

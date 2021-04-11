@@ -128,9 +128,9 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "watch": "__**PLUGIN NAME :** Watch__\
-    \n\n📌** CMD ➥** `.watch query`\
-    \n**USAGE   ➥  **Fetches the list of sites(standard) where you can watch that movie\
+        "watch": "**Plugin :** `watch`\
+    \n\n**Syntax :** `.watch query`\
+    \n**Usage : **Fetches the list of sites(standard) where you can watch that movie\
     "
     }
 )

@@ -10,9 +10,25 @@ from telethon import events, functions
 
 import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 
-from . import PM_START, PMMESSAGE_CACHE, mention, set_key
+from . import ALIVE_NAME, PM_START, PMMESSAGE_CACHE, set_key
 
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 PREV_REPLY_MESSAGE = {}
+PM = f"""Hello. You are accessing the availabe menu of my master, {DEFAULTUSER}.
+__Let's make this smooth and let me know why you are here.__
+**Choose one of the following reasons why you are here:**
+
+`a`. To chat with my master
+`b`. To spam my master's inbox.
+`c`. To enquire something
+`d`. To request something\n"""
+ONE = """__Okay. Your request has been registered. Do not spam my master's inbox.You can expect a reply within next few years. He/She is a busy man, unlike you probably.__
+
+**⚠️ You will be blocked and reported if you spam. ⚠️**\n\n"""
+TWO = " `███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ `\n\n**So uncool, this is not your home. Go bother someone else. You have been blocked and reported until further notice.**"
+THREE = "__Okay. My master has not seen your message yet.He/She usually responds to people,though idk about retarted ones.__\n __He'll respond when he/she comes back, if he/she wants to.There's already a lot of pending messages😶__\n **Please do not spam unless you wish to be blocked and reported.**"
+FOUR = "`Okay. please have the basic manners as to not bother my master too much. If he/she wishes to help you, he/she will respond to you soon.`\n**Do not ask repeatdly else you will be blocked and reported.**"
+LWARN = "**This is your last warning. DO NOT send another message else you will be blocked and reported. Keep patience. My master will respond you ASAP.**\n"
 
 
 @bot.on(events.NewMessage(pattern=r"\/start", incoming=True))
@@ -27,24 +43,6 @@ async def _(event):
         if not event.is_private:
             return
         set_key(PMMESSAGE_CACHE, event.chat_id, event.id)
-        PM = (
-            "Halo. Anda sedang mengakses menu yang tersedia dari tuan saya, "
-            f"{mention}.\n"
-            "__Mari kita perjelas dan beri tahu saya mengapa Anda ada di sini.__\n"
-            "**Pilih salah satu alasan berikut mengapa Anda berada di sini:**\n\n"
-            "`a`. Untuk mengobrol dengan tuanku\n"
-            "`b`. Untuk mengirim spam ke kotak masuk master saya..\n"
-            "`c`. Untuk menanyakan sesuatu\n"
-            "`d`. Untuk meminta sesuatu\n"
-        )
-        ONE = (
-            "__Baik, Permintaan Anda telah terdaftar. Jangan mengirim spam ke kotak masuk master saya. Anda dapat mengharapkan balasan dalam waktu 24 Jam.. Dia orang yang sibuk, tidak seperti Anda mungkin.__\n\n"
-            "**⚠️ Anda akan diblokir dan dilaporkan jika Anda melakukan spam.. ⚠️**\n\n"
-        )
-        TWO = " `███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ `\n\n**Anjing banget, ini bukan rumah Anda. Ganggu orang lain. Anda telah diblokir dan dilaporkan hingga lebih jauh memperhatikan.**"
-        THREE = "__Oke. Tuan saya hUntuk menanyakan sesuatu, belum melihat pesan Anda. Dia biasanya menanggapi orang, meskipun tidak tahu tentang yang diulang.__\n __Dia akan menjawab ketika dia kembali, jika dia mau. Sudah ada banyak pesan yang menunggu keputusan:😶__\n **Harap jangan mengirim spam kecuali Anda ingin diblokir dan dilaporkan..**"
-        FOUR = "`Oke, mohon sopan santun agar tidak terlalu mengganggu tuanku. Jika dia ingin membantu kamu, dia akan segera menanggapimu.`\n**Jangan meminta berulang kali karena kamu akan diblokir dan dilaporkan.**"
-        LWARN = "**Ini adalah peringatan terakhir Anda. JANGAN kirim pesan lagi karena Anda akan diblokir dan dilaporkan. Tetap sabar, Majikan saya akan membalas Anda secepat mungkin. **\n"
         try:
             async with event.client.conversation(chat) as conv:
                 if pmpermit_sql.is_approved(chat_id):
@@ -159,5 +157,5 @@ async def _(event):
                             set_key(PMMESSAGE_CACHE, event.chat_id, test14.id)
                             await asyncio.sleep(3)
                             await event.client(functions.contacts.BlockRequest(chat_id))
-        except:
-            pass
+        except Exception as e:
+            LOGS.info(str(e))

@@ -9,7 +9,7 @@ from telethon.tl import functions
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from . import ALIVE_NAME, AUTONAME, DEFAULT_BIO
+from . import ALIVE_NAME, AUTONAME, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO
 
 DEFAULTUSER = str(AUTONAME) if AUTONAME else str(ALIVE_NAME)
 DEFAULTUSERBIO = (
@@ -17,11 +17,6 @@ DEFAULTUSERBIO = (
     if DEFAULT_BIO
     else "sıɥʇ ǝpoɔǝp uǝɥʇ llıʇu∩ ˙ ǝɔɐds ǝʇɐʌıɹd ǝɯos ǝɯ ǝʌı⅁˙"
 )
-if Config.PRIVATE_GROUP_BOT_API_ID is None:
-    BOTLOG = False
-else:
-    BOTLOG = True
-    BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 
 
 @bot.on(admin_cmd(pattern="clone ?(.*)"))
@@ -63,7 +58,7 @@ async def _(event):
     await event.client(functions.photos.UploadProfilePhotoRequest(pfile))
     await event.delete()
     await event.client.send_message(
-        event.chat_id, "**Menjimplak identitas anak haram**", reply_to=reply_message
+        event.chat_id, "**LET US BE AS ONE**", reply_to=reply_message
     )
     if BOTLOG:
         await event.client.send_message(
@@ -88,7 +83,7 @@ async def _(event):
     await event.client(functions.account.UpdateProfileRequest(about=bio))
     await event.client(functions.account.UpdateProfileRequest(first_name=name))
     await event.client(functions.account.UpdateProfileRequest(last_name=blank))
-    await event.edit("Sukses kembali sedia kala")
+    await event.edit("succesfully reverted to your account back")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID, f"#REVERT\nSuccesfully reverted back to your profile"
@@ -147,11 +142,11 @@ async def get_full_user(event):
 
 CMD_HELP.update(
     {
-        "clone": "__**PLUGIN NAME :** Clone__\
-    \n\n📌** CMD ➥** `.clone`<reply to user who you want to clone\
-    \n**USAGE   ➥  **Clone the replied user account\
-    \n\n📌** CMD ➥** `.revert`\
-    \n**USAGE   ➥  **Reverts back to your profile which you have set in heroku for  AUTONAME,DEFAULT_BIO\
+        "clone": "**Plugin : **`clone`\
+        \n\n  •  **Syntax :** `.clone`<reply to user whom you want to clone\
+        \n  •  **Function : **clone the replied user account\
+        \n\n  •  **Syntax : **`.revert`\
+        \n  •  **Function : **Reverts back to your profile which you have set in heroku for  AUTONAME, DEFAULT_BIO\
     "
     }
 )

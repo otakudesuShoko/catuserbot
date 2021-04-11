@@ -150,10 +150,10 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "time": "__**PLUGIN NAME :** Time__\
-    \n\n📌** CMD ➥** `.ctime` <[country names](https://telegra.ph/country-names-10-24)/code> <timezone number> \
-    \n**USAGE   ➥  **Get the time of a country. If a country has multiple timezones, it will list all of them and let you select one.\
-    \n\n📌** CMD ➥** `.time` \
-    \n**USAGE   ➥  **Shows current default time you can change by changing TZ in heroku vars"
+        "time": "**Plugin : **`time`\
+        \n\n**Syntax : **`.ctime <country name/code> <timezone number>` \
+    \n**Function : **__Get the time of a country. If a country has multiple timezones, it will list all of them and let you select one. here are [country names](https://telegra.ph/country-names-10-24)__\
+    \n\n**Syntax : **`.time` \
+    \n**Function : **__shows current default time you can change by changing TZ in heroku vars__"
     }
 )

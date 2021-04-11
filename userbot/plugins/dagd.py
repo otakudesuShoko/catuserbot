@@ -122,15 +122,15 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "dagd": "__**PLUGIN NAME :** Dagd__\
-    \n\n📌** CMD ➥** `.dns` <link>\
-    \n**USAGE   ➥  **Shows you Domain Name System(dns) of the given link . example `.dns google.com` or `.dns github.cm`\
-    \n\n📌** CMD ➥** `.url` <link>\
-    \n**USAGE   ➥  **Shortens the given link\
-    \n\n📌** CMD ➥** `.unshort` <link>\
-    \n**USAGE   ➥  **Unshortens the given short link\
-    \n\n📌** CMD ➥** `.hl` <link>\
-    \n**USAGE   ➥  **Hide the given link\
+        "dagd": "**Plugin : **`dagd`\
+        \n\n**Syntax :** `.dns link`\
+        \n**Function : **__Shows you Domain Name System(dns) of the given link. Ex: `.dns google.com` or `.dns github.com`__\
+        \n\n**Syntax : **`.url link`\
+        \n**Function : **__shortens the given link__\
+        \n\n**Syntax : **`.unshort link`\
+        \n**Function : **__unshortens the given short link__\
+        \n\n**Syntax : **`.hl` <link>\
+        \n**Function : **__Hide the given link__\
     "
     }
 )

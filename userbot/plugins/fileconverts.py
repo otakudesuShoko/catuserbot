@@ -26,7 +26,7 @@ async def _(cat):
     reply_to_id = cat.message.id
     if cat.reply_to_msg_id:
         reply_to_id = cat.reply_to_msg_id
-    event = await edit_or_reply(cat, "Mengonversi.....")
+    event = await edit_or_reply(cat, "Converting.....")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -48,7 +48,7 @@ async def _(cat):
             os.remove(downloaded_file_name)
             await event.delete()
         else:
-            await event.edit("Tidak Dapat Mengonversi")
+            await event.edit("Can't Convert")
     else:
         await event.edit("Syntax : `.stoi` reply to a Telegram normal sticker")
 
@@ -61,7 +61,7 @@ async def _(cat):
     reply_to_id = cat.message.id
     if cat.reply_to_msg_id:
         reply_to_id = cat.reply_to_msg_id
-    event = await edit_or_reply(cat, "mengubah file.....")
+    event = await edit_or_reply(cat, "Converting.....")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -117,7 +117,7 @@ async def get(event):
 @bot.on(sudo_cmd(pattern="ftoi$", allow_sudo=True))
 async def on_file_to_photo(event):
     target = await event.get_reply_message()
-    catt = await edit_or_reply(event, "mengubah file.....")
+    catt = await edit_or_reply(event, "Converting.....")
     try:
         image = target.media.document
     except AttributeError:
@@ -163,7 +163,7 @@ async def _(event):
                 event,
                 "wrong syntax . syntax is `.gif quality ; fps(frames per second)`",
             )
-        elif len(loc) == 2:
+        if len(loc) == 2:
             if 0 < loc[0] < 721:
                 quality = loc[0].strip()
             else:
@@ -172,7 +172,7 @@ async def _(event):
                 quality = loc[1].strip()
             else:
                 return await edit_delete(event, "Use quality of range 0 to 20")
-        elif len(loc) == 1:
+        if len(loc) == 1:
             if 0 < loc[0] < 721:
                 quality = loc[0].strip()
             else:
@@ -225,18 +225,18 @@ async def _(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        await edit_or_reply(event, "```Balas ke suatu media.```")
+        await edit_or_reply(event, "```Reply to any media file.```")
         return
     reply_message = await event.get_reply_message()
     if not reply_message.media:
-        await edit_or_reply(event, "Balas ke file media")
+        await edit_or_reply(event, "reply to media file")
         return
     input_str = event.pattern_match.group(1)
     if input_str is None:
         await edit_or_reply(event, "try `.nfc voice` or`.nfc mp3`")
         return
     if input_str in ["mp3", "voice"]:
-        event = await edit_or_reply(event, "Mengubah file...")
+        event = await edit_or_reply(event, "converting...")
     else:
         await edit_or_reply(event, "try `.nfc voice` or`.nfc mp3`")
         return
@@ -332,19 +332,19 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "fileconverts": "__**PLUGIN NAME :** File Converts__\
-    \n\n📌** CMD ➥** `.stoi` reply to sticker\
-    \n**USAGE   ➥  **Converts sticker to image\
-    \n\n📌** CMD ➥** `.itos` reply to image\
-    \n**USAGE   ➥  **Converts image to sticker\
-    \n\n📌** CMD ➥** `.ftoi` reply to image file\
-    \n**USAGE   ➥  **Converts Given image file to straemable form\
-    \n\n📌** CMD ➥** `.gif` reply to animated sticker\
-    \n**USAGE   ➥  **Converts Given animated sticker to gif\
-    \n\n📌** CMD ➥** `.ttf` <file name> reply to text message\
-    \n**USAGE   ➥  **Converts Given text message to required file(given file name)\
-    \n\n📌** CMD ➥** `.nfc voice` or `.nfc mp3` reply to required media to extract voice/mp3 :\
-    \n**USAGE   ➥  **Converts the required media file to voice or mp3 file.\
+        "fileconverts": "**Plugin : **`fileconverts`\
+    \n\n**Syntax : **`.stoi` reply to sticker\
+    \n**Usage :**Converts sticker to image\
+    \n\n**Syntax : **`.itos` reply to image\
+    \n**Usage :**Converts image to sticker\
+    \n\n**Syntax :** `.ftoi` reply to image file\
+    \n**Usage :** Converts Given image file to straemable form\
+    \n\n**Syntax :** `.gif` reply to animated sticker\
+    \n**Usage :** Converts Given animated sticker to gif\
+    \n\n**Syntax :** `.ttf file name` reply to text message\
+    \n**Usage :** Converts Given text message to required file(given file name)\
+    \n\n**Syntax :**`.nfc voice` or `.nfc mp3` reply to required media to extract voice/mp3 :\
+    \n**Usage :**Converts the required media file to voice or mp3 file.\
     "
     }
 )

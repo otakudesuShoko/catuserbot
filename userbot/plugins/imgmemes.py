@@ -222,19 +222,25 @@ async def nekobot(cat):
 
 CMD_HELP.update(
     {
-        "imgmemes": """__**PLUGIN NAME :** Imgmemes__
-      \n\n📌** CMD ➥** `.fakegs search query ; what you mean text`
-      \n**USAGE   ➥  **__Shows you image meme for your google search query__ 
-      \n\n📌** CMD ➥** `.trump` <reply/text>
-      \n**USAGE   ➥  **__Sends you the trump tweet sticker with given custom text__
-      \n\n📌** CMD ➥** `.modi` <reply/text>
-      \n**USAGE   ➥  **__Sends you the modi tweet sticker with given custom text__ 
-      \n\n📌** CMD ➥** `.cmm` <reply/text>
-      \n**USAGE   ➥  **__Sends you the  Change my mind banner with given custom text__ 
-      \n\n📌** CMD ➥** `.kanna` <reply/text>
-      \n**USAGE   ➥  **__Sends you the kanna chan sticker with given custom text__
-      \n\n📌** CMD ➥** `.tweet reply/<username> ; <text>`
-      \n**USAGE   ➥  **__Sends you the desired person tweet sticker with given custom text__ 
+        "imgmemes": """**Plugin : **`imgmemes`
+
+  •  **Syntax : **`.fakegs search query ; what you mean text`
+  •  **Function : **__Shows you image meme for your google search query__  
+
+  •  **Syntax : **`.trump reply/text`
+  •  **Function : **__sends you the trump tweet sticker with given custom text__
+
+  •  **Syntax : **`.modi reply/text`
+  •  **Function : **__sends you the modi tweet sticker with given custom text__ 
+
+  •  **Syntax : **`.cmm reply/text`
+  •  **Function : **__sends you the  Change my mind banner with given custom text__ 
+
+  •  **Syntax : **`.kanna reply/text`
+  •  **Function : **__sends you the kanna chan sticker with given custom text__  
+
+  •  **Syntax : **`.tweet reply/<username> ; <text>`
+  •  **Function : **__sends you the desired person tweet sticker with given custom text__ 
   """
     }
 )

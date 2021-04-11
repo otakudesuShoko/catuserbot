@@ -19,7 +19,6 @@ async def catbroadcast_send(event):
         )
     reply = await event.get_reply_message()
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catchat = await event.get_chat()
     if not reply:
         return await edit_delete(
             event, "what should i send to to this category ?", parse_mode=parse_pre
@@ -46,12 +45,12 @@ async def catbroadcast_send(event):
     i = 0
     for chat in chats:
         try:
-            if int(catchat.id) == int(chat):
+            if int(event.chat_id) == int(chat):
                 continue
             await event.client.send_message(int(chat), reply)
             i += 1
-        except:
-            pass
+        except Exception as e:
+            LOGS.info(str(e))
         await sleep(0.5)
     resultext = f"`The message was sent to {i} chats out of {no_of_chats} chats in category {keyword}.`"
     await catevent.edit(resultext)
@@ -75,7 +74,6 @@ async def catbroadcast_send(event):
         )
     reply = await event.get_reply_message()
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catchat = await event.get_chat()
     if not reply:
         return await edit_delete(
             event, "what should i send to to this category ?", parse_mode=parse_pre
@@ -102,12 +100,12 @@ async def catbroadcast_send(event):
     i = 0
     for chat in chats:
         try:
-            if int(catchat.id) == int(chat):
+            if int(event.chat_id) == int(chat):
                 continue
             await event.client.forward_messages(int(chat), reply)
             i += 1
-        except:
-            pass
+        except Exception as e:
+            LOGS.info(str(e))
         await sleep(0.5)
     resultext = f"`The message was sent to {i} chats out of {no_of_chats} chats in category {keyword}.`"
     await catevent.edit(resultext)
@@ -130,15 +128,14 @@ async def catbroadcast_add(event):
             event, "In which category should i add this chat", parse_mode=parse_pre
         )
     keyword = catinput_str.lower()
-    chat = await event.get_chat()
-    check = sql.is_in_broadcastlist(keyword, chat.id)
+    check = sql.is_in_broadcastlist(keyword, event.chat_id)
     if check:
         return await edit_delete(
             event,
             f"This chat is already in this category {keyword}",
             parse_mode=parse_pre,
         )
-    sql.add_to_broadcastlist(keyword, chat.id)
+    sql.add_to_broadcastlist(keyword, event.chat_id)
     await edit_delete(
         event, f"This chat is Now added to category {keyword}", parse_mode=parse_pre
     )
@@ -150,7 +147,7 @@ async def catbroadcast_add(event):
                 f"The Chat {chat.title} is added to category {keyword}",
                 parse_mode=parse_pre,
             )
-        except:
+        except Exception:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 f"The user {chat.first_name} is added to category {keyword}",
@@ -169,13 +166,12 @@ async def catbroadcast_remove(event):
             event, "From which category should i remove this chat", parse_mode=parse_pre
         )
     keyword = catinput_str.lower()
-    chat = await event.get_chat()
-    check = sql.is_in_broadcastlist(keyword, chat.id)
+    check = sql.is_in_broadcastlist(keyword, event.chat_id)
     if not check:
         return await edit_delete(
             event, f"This chat is not in the category {keyword}", parse_mode=parse_pre
         )
-    sql.rm_from_broadcastlist(keyword, chat.id)
+    sql.rm_from_broadcastlist(keyword, event.chat_id)
     await edit_delete(
         event,
         f"This chat is Now removed from the category {keyword}",
@@ -189,7 +185,7 @@ async def catbroadcast_remove(event):
                 f"The Chat {chat.title} is removed from category {keyword}",
                 parse_mode=parse_pre,
             )
-        except:
+        except Exception:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 f"The user {chat.first_name} is removed from category {keyword}",
@@ -233,7 +229,7 @@ async def catbroadcast_list(event):
                     resultlist += f" 👉 👥 **Group** \n  •  **Name : **{chatinfo.title} \n  •  **id : **`{int(chat)}`\n\n"
             except AttributeError:
                 resultlist += f" 👉 👤 **User** \n  •  **Name : **{chatinfo.first_name} \n  •  **id : **`{int(chat)}`\n\n"
-        except:
+        except Exception:
             errorlist += f" 👉 __This id {int(chat)} in database probably you may left the chat/channel or may be invalid id.\
                             \nRemove this id from the database by using this command__ `.frmfrom {keyword} {int(chat)}` \n\n"
     finaloutput = resultlist + errorlist
@@ -275,18 +271,19 @@ async def catbroadcast_remove(event):
             "Use proper syntax as shown .frmfrom category_name groupid",
             parse_mode=parse_pre,
         )
-    if args[0].isnumeric():
-        groupid = args[0]
+    try:
+        groupid = int(args[0])
         keyword = args[1].lower()
-    elif args[1].isnumeric():
-        groupid = args[1]
-        keyword = args[0].lower()
-    else:
-        return await edit_delete(
-            event,
-            "Use proper syntax as shown .frmfrom category_name groupid",
-            parse_mode=parse_pre,
-        )
+    except ValueError:
+        try:
+            groupid = int(args[1])
+            keyword = args[0].lower()
+        except ValueError:
+            return await edit_delete(
+                event,
+                "Use proper syntax as shown .frmfrom category_name groupid",
+                parse_mode=parse_pre,
+            )
     keyword = keyword.lower()
     check = sql.is_in_broadcastlist(keyword, int(groupid))
     if not check:
@@ -309,7 +306,7 @@ async def catbroadcast_remove(event):
                 f"The Chat {chat.title} is removed from category {keyword}",
                 parse_mode=parse_pre,
             )
-        except:
+        except Exception:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 f"The user {chat.first_name} is removed from category {keyword}",
@@ -347,22 +344,31 @@ async def catbroadcast_delete(event):
 
 CMD_HELP.update(
     {
-        "broadcast": "__**PLUGIN NAME :** Broadcast__\
-\n\n📌** CMD ➥** `.sendto category_name`\
-\n**USAGE   ➥  **__Will send the replied message to all the chats in give category__\
-\n\n📌** CMD ➥** `.fwdto category_name`\
-\n**USAGE   ➥  **__Will forward the replied message to all the chats in give category__\
-\n\n📌** CMD ➥** `.addto category_name`\
-\n**USAGE   ➥  **__It will add this chat/user/channel to the category of the given name__\
-\n\n📌** CMD ➥** `.rmfrom category_name`\
-\n**USAGE   ➥  **__To remove the Chat/user/channel from the given category name__\
-\n\n📌** CMD ➥** `.list category_name`\
-\n**USAGE   ➥  **__Will show the list of all chats in the given category__\
-\n\n📌** CMD ➥** `.listall`\
-\n**USAGE   ➥  **__Will show the list of all category names__\
-\n\n📌** CMD ➥** `.frmfrom category_name chat_id`\
-\n**USAGE   ➥  **__To force remove the given chat_id from the given category name usefull when you left that chat or banned you there__\
-\n\n📌** CMD ➥** `.delc` <category_name>\
-\n**USAGE   ➥  **__Deletes the category completely in database__"
+        "broadcast": """**Plugin : ** `broadcast`
+
+  •  **Syntax : **`.sendto category_name`
+  •  **Function : **__will send the replied message to all the chats in give category__
+
+  •  **Syntax : **`.fwdto category_name`
+  •  **Function : **__will forward the replied message to all the chats in give category__
+
+  •  **Syntax : **`.addto category_name`
+  •  **Function : **__It will add this chat/user/channel to the category of the given name__
+
+  •  **Syntax : **`.rmfrom category_name`
+  •  **Function : **__To remove the Chat/user/channel from the given category name__
+
+  •  **Syntax : **`.list category_name`
+  •  **Function : **__Will show the list of all chats in the given category__
+
+  •  **Syntax : **`.listall`
+  •  **Function : **__Will show the list of all category names__
+
+  •  **Syntax : **`.frmfrom category_name chat_id`
+  •  **Function : **__To force remove the given chat_id from the given category name usefull when you left that chat or banned you there__
+
+  •  **Syntax : **`delc category_name`
+  •  **Function : **__Deletes the category completely in database__
+"""
     }
 )

@@ -9,8 +9,8 @@ async def selfdestruct(destroy):
     ttl = int(cat[0])
     try:
         await destroy.delete()
-    except:
-        pass
+    except Exception as e:
+        LOGS.info(str(e))
     smsg = await destroy.client.send_message(destroy.chat_id, message)
     await sleep(ttl)
     await smsg.delete()
@@ -27,8 +27,8 @@ async def selfdestruct(destroy):
     )
     try:
         await destroy.delete()
-    except:
-        pass
+    except Exception as e:
+        LOGS.info(str(e))
     smsg = await destroy.client.send_message(destroy.chat_id, text)
     await sleep(ttl)
     await smsg.delete()
@@ -36,11 +36,11 @@ async def selfdestruct(destroy):
 
 CMD_HELP.update(
     {
-        "selfdestruct": "__**PLUGIN NAME :** Selfdestruct__\
-\n\n📌** CMD ➥** `.sdm` [number] [text]\
-\n**USAGE   ➥  **Self destruct this message in number seconds \
-\n\n📌** CMD ➥** `.selfd` [number] [text]\
-\n**USAGE   ➥  **Self destruct this message in number seconds with showing that it will destruct. \
+        "selfdestruct": "**Plugin : **`selfdestruct`\
+        \n\n**Syntax : **`.sdm [number] [text]`\
+        \n**Function : **__self destruct this message in number seconds__\
+        \n\n**Syntax : **`.selfdm [number] [text]`\
+        \n**Function : **__self destruct this message in number seconds with showing that it will destruct. __\
 "
     }
 )

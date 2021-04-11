@@ -25,21 +25,19 @@ USERNAME_TAKEN = "```This username is already taken.```"
 # ===============================================================
 
 
-@bot.on(admin_cmd(pattern="pbio (.*)"))  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="pbio (.*)"))
 async def _(event):
     if event.fwd_from:
         return
     bio = event.pattern_match.group(1)
     try:
-        await event.client(
-            functions.account.UpdateProfileRequest(about=bio)  # pylint:disable=E0602
-        )
+        await event.client(functions.account.UpdateProfileRequest(about=bio))
         await event.edit("Succesfully changed my profile bio")
-    except Exception as e:  # pylint:disable=C0103,W0703
+    except Exception as e:
         await event.edit(str(e))
 
 
-@bot.on(admin_cmd(pattern="pname ((.|\n)*)"))  # pylint:disable=E0602,W0703
+@bot.on(admin_cmd(pattern="pname ((.|\n)*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -50,29 +48,29 @@ async def _(event):
         first_name, last_name = names.split("|", 1)
     try:
         await event.client(
-            functions.account.UpdateProfileRequest(  # pylint:disable=E0602
+            functions.account.UpdateProfileRequest(
                 first_name=first_name, last_name=last_name
             )
         )
         await event.edit("My name was changed successfully")
-    except Exception as e:  # pylint:disable=C0103,W0703
+    except Exception as e:
         await event.edit(str(e))
 
 
-@bot.on(admin_cmd(pattern="ppic"))  # pylint:disable=E0602
+@bot.on(admin_cmd(pattern="ppic"))
 async def _(event):
     if event.fwd_from:
         return
     reply_message = await event.get_reply_message()
     await event.edit("Downloading Profile Picture to my local ...")
-    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):  # pylint:disable=E0602
-        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)  # pylint:disable=E0602
+    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
+        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     photo = None
     try:
-        photo = await event.client.download_media(  # pylint:disable=E0602
-            reply_message, Config.TMP_DOWNLOAD_DIRECTORY  # pylint:disable=E0602
+        photo = await event.client.download_media(
+            reply_message, Config.TMP_DOWNLOAD_DIRECTORY
         )
-    except Exception as e:  # pylint:disable=C0103,W0703
+    except Exception as e:
         await event.edit(str(e))
     else:
         if photo:
@@ -87,7 +85,7 @@ async def _(event):
                 catpic = None
                 catvideo = await event.client.upload_file(photo)
             else:
-                catpic = await event.client.upload_file(photo)  # pylint:disable=E0602
+                catpic = await event.client.upload_file(photo)
                 catvideo = None
             try:
                 await event.client(
@@ -95,14 +93,14 @@ async def _(event):
                         file=catpic, video=catvideo, video_start_ts=0.01
                     )
                 )
-            except Exception as e:  # pylint:disable=C0103,W0703
+            except Exception as e:
                 await event.edit(str(e))
             else:
                 await event.edit("My profile picture was succesfully changed")
     try:
         os.remove(photo)
-    except Exception as e:  # pylint:disable=C0103,W0703
-        logger.warn(str(e))  # pylint:
+    except Exception as e:
+        print(str(e))
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="username (.*)"))
@@ -126,7 +124,7 @@ async def count(event):
     b = 0
     result = ""
     await event.edit("`Processing..`")
-    dialogs = await bot.get_dialogs(limit=None, ignore_migrated=True)
+    dialogs = await event.client.get_dialogs(limit=None, ignore_migrated=True)
     for d in dialogs:
         currrent_entity = d.entity
         if isinstance(currrent_entity, User):
@@ -182,29 +180,31 @@ async def remove_profilepic(delpfp):
 async def _(event):
     if event.fwd_from:
         return
-    result = await bot(GetAdminedPublicChannelsRequest())
-    output_str = ""
-    for channel_obj in result.chats:
-        output_str += f"- {channel_obj.title} @{channel_obj.username} \n"
+    result = await event.client(GetAdminedPublicChannelsRequest())
+    output_str = "".join(
+        f"- {channel_obj.title} @{channel_obj.username} \n"
+        for channel_obj in result.chats
+    )
+
     await event.edit(output_str)
 
 
 CMD_HELP.update(
     {
-        "profile": "__**PLUGIN NAME :** Profile__\
-\n\n📌** CMD ➥** `.username` <new_username>\
-\n**USAGE   ➥  **Changes your Telegram username.\
-\n\n📌** CMD ➥** `.pname` <firstname> or `.pname <firstname> <lastname>`\
-\n**USAGE   ➥  **Changes your Telegram name.(First and last name will get split by the first space)\
-\n\n📌** CMD ➥** `.setpfp` or `.ppic`\
-\n**USAGE   ➥  **Reply with .setpfp or .ppic to an image to change your Telegram profie picture.\
-\n\n📌** CMD ➥** `.pbio` <new_bio>\
-\n**USAGE   ➥  **Changes your Telegram bio.\
-\n\n📌** CMD ➥** `.delpfp` or `.delpfp <number>/<all>`\
-\n**USAGE   ➥  **Deletes your Telegram profile picture(s).\
-\n\n📌** CMD ➥** `.myusernames`\
-\n**USAGE   ➥  **Shows usernames reserved by you.that is created by you channels or groups\
-\n\n📌** CMD ➥** `.count`\
-\n**USAGE   ➥  **Counts your groups, chats, bots etc..."
+        "profile": "**Plugin : **`profile`\
+        \n\n•  **Syntax : **`.username <new_username>`\
+        \n•  **Function : **__ Changes your Telegram username.__\
+        \n\n•  **Syntax : **`.pname <name>`\
+        \n•  **Function : **__ Changes your Telegram name.(First and last name will get split by the first space)__\
+        \n\n•  **Syntax : **`.ppic`\
+        \n•  **Function : **__ Reply with .setpfp or .ppic to an image to change your Telegram profie picture.__\
+        \n\n•  **Syntax : **`.pbio <new_bio>`\
+        \n•  **Function : **__ Changes your Telegram bio.__\
+        \n\n•  **Syntax : **`.delpfp or .delpfp <number>/<all>`\
+        \n•  **Function : **__ Deletes your Telegram profile picture(s).__\
+        \n\n•  **Syntax : **`.myusernames`\
+        \n•  **Function : **__ Shows usernames of your created channels and groups __\
+        \n\n•  **Syntax : **`.count`\
+        \n•  **Function : **__ Counts your groups, chats, bots etc...__"
     }
 )

@@ -73,7 +73,7 @@ async def _(event):
     except (Exception) as exc:
         await edit_or_reply(event, str(exc))
     else:
-        await edit_or_reply(event, "User telah menjadi admin")
+        await edit_or_reply(event, "Successfully Promoted")
 
 
 @bot.on(admin_cmd(pattern=f"padmin$", outgoing=True))
@@ -83,28 +83,28 @@ async def _(event):
         return
     animation_interval = 1
     animation_ttl = range(20)
-    event = await edit_or_reply(event, "Promot menjadi admin.......")
+    event = await edit_or_reply(event, "promoting.......")
     animation_chars = [
         "**Promoting User As Admin...**",
         "**Enabling All Permissions To User...**",
-        "**(1) Kirim Pesan: ☑️**",
-        "**(1) Kirim Pesan: ✅**",
-        "**(2) Kirim Media: ☑️**",
-        "**(2) Kirim Media: ✅**",
-        "**(3) Kirim Stiker & GIFs: ☑️**",
-        "**(3) Kirim Stiker & GIFs: ✅**",
-        "**(4) Kirim Polls: ☑️**",
-        "**(4) Kirim Polls: ✅**",
-        "**(5) Kirim Link: ☑️**",
-        "**(5) Kirim Link: ✅**",
-        "**(6) Tambahkan anggota: ☑️**",
-        "**(6) Tambahkan anggota: ✅**",
-        "**(7) Sematkan Pesan: ☑️**",
-        "**(7) Sematkan Pesan: ✅**",
-        "**(8) Ubah info group: ☑️**",
-        "**(8) Ubah info group: ✅**",
-        "**Izin Berhasil Diberikan**",
-        f"**Promot admin berhasil: {DEFAULTUSER}**",
+        "**(1) Send Messages: ☑️**",
+        "**(1) Send Messages: ✅**",
+        "**(2) Send Media: ☑️**",
+        "**(2) Send Media: ✅**",
+        "**(3) Send Stickers & GIFs: ☑️**",
+        "**(3) Send Stickers & GIFs: ✅**",
+        "**(4) Send Polls: ☑️**",
+        "**(4) Send Polls: ✅**",
+        "**(5) Embed Links: ☑️**",
+        "**(5) Embed Links: ✅**",
+        "**(6) Add Users: ☑️**",
+        "**(6) Add Users: ✅**",
+        "**(7) Pin Messages: ☑️**",
+        "**(7) Pin Messages: ✅**",
+        "**(8) Change Chat Info: ☑️**",
+        "**(8) Change Chat Info: ✅**",
+        "**Permission Granted Successfully**",
+        f"**pRoMooTeD SuCcEsSfUlLy bY: {DEFAULTUSER}**",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
@@ -113,14 +113,13 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "fake": "__**PLUGIN NAME :** Fake__\
-    \n\n📌** CMD ➥** `.scam` <action> <time>\
-    \n**USAGE   ➥  **Type .scam (action name) this shows the fake action in the group  the actions are typing ,contact ,game, location, voice, round, video,photo,document, cancel.\
-    \n***NOTE :-** Time use sec, __Example :__ `.scam game 120`  , will do scam for 120s.\
-    \n\n📌** CMD ➥** `.prankpromote` reply to user to who you want to prank promote\
-    \n**USAGE   ➥  **It promotes him to admin but he will not have any permission to take action that is he can see rection actions but cant take any admin action\
-    \n\n📌** CMD ➥** `.padmin`\
-    \n**USAGE   ➥  **An animation that shows enableing all permissions to him that he is admin(fake promotion)\
+        "fake": "**fake**\
+    \n\n**Syntax :** `.scam <action> <time>` \
+    \n**Usage : **Type .scam (action name) This shows the fake action in the group, The actions are typing ,contact ,game, location, voice, round, video,photo,document, cancel.\
+    \n\n**Syntax :** `.prankpromote` reply to user to whom you want to prank promote\
+    \n**Usage : **it promotes him to admin but he will not have any permission to take action that is he can see rection actions but cant take any admin action\
+    \n\n**Syntax :** `.padmin`\
+    \n**Usage : ** An animation that shows enabling all permissions to him that he is admin(fake promotion)\
     "
     }
 )

@@ -1,7 +1,7 @@
 import re
 import bs4
 import requests
-
+from userbot.utils import admin_cmd
 
 @bot.on(admin_cmd(pattern="giz ?(.*)"))
 async def gizoogle(event):
@@ -13,7 +13,7 @@ async def gizoogle(event):
         return await event.edit("I can't gizoogle nothing.")
     try:
         result = text(input_str)
-    except:
+    except Exception as e:
         result = "Failed to gizoogle the text."
     finally:
         return await event.edit(result)

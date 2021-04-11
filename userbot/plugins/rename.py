@@ -186,13 +186,13 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "rename": "__**PLUGIN NAME :** Rename__\
-    \n\n📌** CMD ➥** `.rename` <filename>\
-    \n**USAGE   ➥  **__Reply to media with above command to save in your server with that given filename__\
-    \n\n📌** CMD ➥** `.rnup` <filename>\
-    \n**USAGE   ➥  **__Reply to media with above command to rename and upload the file with given name__\
-    \n\n📌** CMD ➥** `.rnupf` <filename>\
-    \n**USAGE   ➥  **__Reply to media with above command to rename and upload the file with given name as file__\
-    "
+        "rename": "**Plugin : **`rename`\
+        \n\n  •  **Syntax : **`.rename filename`\
+        \n  •  **Function : **__Reply to media with above command to save in your server with that given filename__\
+        \n\n  •  **Syntax : **`.rnup filename`\
+        \n  •  **Function : **__Reply to media with above command to rename and upload the file with given name as steam__\
+        \n\n  •  **Syntax : **`.rnupf filename`\
+        \n  •  **Function : **__Reply to media with above command to rename and upload the file with given name as file__\
+        "
     }
 )

@@ -2,38 +2,6 @@ from asyncio import sleep
 
 import requests
 
-from . import BOTLOG, BOTLOG_CHATID
-
-
-@bot.on(admin_cmd(pattern="lfy ?(.*)"))
-@bot.on(sudo_cmd(pattern="lfy ?(.*)", allow_sudo=True))
-async def _(event):
-    if event.fwd_from:
-        return
-    input_str = event.pattern_match.group(1)
-    reply = await event.get_reply_message()
-    if not input_str and reply:
-        input_str = reply.text
-    if not input_str:
-        return await edit_delete(
-            event, "`either reply to text message or give input to search`", 5
-        )
-    sample_url = f"https://da.gd/s?url=https://lmgtfy.com/?q={input_str.replace(' ', '+')}%26iie=1"
-    response_api = requests.get(sample_url).text
-    if response_api:
-        await edit_or_reply(
-            event, f"[{input_str}]({response_api.rstrip()})\n`Thank me Later 🙃` "
-        )
-    else:
-        return await edit_delete(
-            event, "`something is wrong. please try again later.`", 5
-        )
-    if BOTLOG:
-        await event.client.send_message(
-            BOTLOG_CHATID,
-            f"LMGTFY query `{input_str}` was executed successfully",
-        )
-
 
 @bot.on(admin_cmd(pattern="lmg (.*)"))
 @bot.on(sudo_cmd(pattern="lmg (.*)", allow_sudo=True))
@@ -263,29 +231,24 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "letmesearch": "__**PLUGIN NAME :** Letmesearch__\
-\n\n**Functions : **__Searches the given query and shows you the link of that query .\
-\n\n📌** CMD ➥** `.lfy` <query>\
-\n**USAGE   ➥  **let me LMGTFY(lfy)\
-\n\n📌** CMD ➥** `.lmg` <query>\
-\n**USAGE   ➥  **let me google(lmg)\
-\n\n📌** CMD ➥** `.lmy` <query>\
-\n**USAGE   ➥  **let me youtube(lmy)\
-\n\n📌** CMD ➥** `.ddg` <query>\
-\n**USAGE   ➥  **Duck buck go (ddg)\
-\n\n📌** CMD ➥** `.lmalt` <query>\
-\n**USAGE   ➥  **let me altnews(lmalt)\
-\n\n📌** CMD ➥** `.lmvar` <heroku app name>\
-\n**USAGE   ➥  **let me var(lmvar) var from heroku\
-\n\n📌** CMD ➥** `.lmlog` <heroku app name>\
-\n**USAGE   ➥  **let me log(lmlog) logs link for heroku\
-\n\n📌** CMD ➥** `.dyno` <heroku app name>\
-\n**USAGE   ➥  **heroku dyno link (dyno)\
-\n\n📌** CMD ➥** `.lmkp` <query>\
-\n**USAGE   ➥  **indian kanoon (lmkp)\
-\n\n📌** CMD ➥** `.gem` <query>\
-\n**USAGE   ➥  **Government e marketplace(gem)\
-\n\n📌** CMD ➥** `.archive` <query>\
-\n**USAGE   ➥  **web archive (archive)"
+        "letmesearch": """**Plugin : **`letmesearch`
+
+**Syntax : **
+  •  `.lmg query`
+  •  `.lmy query`
+  •  `.ddg query`
+  •  `.lmalt query`
+  •  `.lmvar heroku app name`
+  •  `.lmlog heroku app name`
+  •  `.dyno heroku app name`
+  •  `.lmkp query`
+  •  `.gem query`
+  •  `.archive query`
+
+**Functions : **__searches the given query and shows you the link of that query . here are there sites \
+let me google(lmg),let me youtube(lmy),Duck buck go (ddg) , let me altnews(lmalt), \
+let me var(lmvar) var from heroku ,let me log(lmlog) logs link for heroku , heroku dyno link (dyno) \
+indian kanoon (lmkp) , Government e marketplace(gem) , web archive (archive)__\
+"""
     }
 )

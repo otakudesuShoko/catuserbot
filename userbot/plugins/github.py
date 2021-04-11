@@ -56,11 +56,11 @@ async def download(event):
     if event.fwd_from:
         return
     if Config.GITHUB_ACCESS_TOKEN is None:
-        await edit_or_reply(event, "`Please ADD Proper Access Token from github.com`")
+        await edit_delete(event, "`Please ADD Proper Access Token from github.com`", 5)
         return
     if Config.GIT_REPO_NAME is None:
-        await edit_or_reply(
-            event, "`Please ADD Proper Github Repo Name of your userbot`"
+        await edit_delete(
+            event, "`Please ADD Proper Github Repo Name of your userbot`", 5
         )
         return
     mone = await edit_or_reply(event, "Processing ...")
@@ -69,15 +69,12 @@ async def download(event):
     start = datetime.now()
     reply_message = await event.get_reply_message()
     try:
-        downloaded_file_name = await event.client.download_media(
-            reply_message.media, GIT_TEMP_DIR
-        )
+        downloaded_file_name = await event.client.download_media(reply_message.media)
     except Exception as e:
         await mone.edit(str(e))
     else:
         end = datetime.now()
         ms = (end - start).seconds
-        await event.delete()
         await mone.edit(
             "Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms)
         )
@@ -104,7 +101,6 @@ async def git_commit(file_name, mone):
             return await mone.edit("`File Already Exists`")
     file_name = "userbot/plugins/" + file_name
     if create_file:
-        file_name = file_name.replace("./userbot/temp/", "")
         print(file_name)
         try:
             repo.create_file(
@@ -125,11 +121,12 @@ async def git_commit(file_name, mone):
 
 CMD_HELP.update(
     {
-        "github": "__**PLUGIN NAME :** Github__\
-    \n\n📌** CMD ➥** `.github` USERNAME\
-    \n**USAGE   ➥  **Shows you the github information about the username you given\
-    \n\n📌** CMD ➥** `.commit` reply to python file to upload to github\
-    \n**USAGE   ➥  **It uploads the given file to your github repo(to userbot/plugins folder)\
-    \n\nTo work commit plugin set `GITHUB_ACCESS_TOKEN` and `GIT_REPO_NAME` Variables in Heroku vars First"
+        "github": "**Plugin : **`github`\
+        \n\n**Syntax : **`.github USERNAME`\
+        \n**Function : ** __Get information about an user on GitHub of given username__\
+        \n\n**Syntax : **`.commit reply to python file to upload to github`\
+        \n**Function : **__It uploads the given file to your github repo in **userbot/plugins** folder\
+        \nTo work commit plugin set `GITHUB_ACCESS_TOKEN` and `GIT_REPO_NAME` Variables in Heroku vars First__\
+    "
     }
 )

@@ -28,19 +28,21 @@ EMOJI_SEN = [
     "Можно отправить несколько смайлов в одном сообщении, однако мы рекомендуем использовать не больше одного или двух на каждый стикер.",
     "You can list several emoji in one message, but I recommend using no more than two per sticker",
     "Du kannst auch mehrere Emoji eingeben, ich empfehle dir aber nicht mehr als zwei pro Sticker zu benutzen.",
+    "Você pode listar vários emojis em uma mensagem, mas recomendo não usar mais do que dois por cada sticker.",
+    "Puoi elencare diverse emoji in un singolo messaggio, ma ti consiglio di non usarne più di due per sticker.",
 ]
 
 KANGING_STR = [
-    "Eh beban keluarga stiker lu gua colong ya😈...",
-    "Anjay, stiker lu leh ugha gua simpen ya😝...",
-    "Mumpung rame nih nyolong stiker Ah...",
-    "Stiker anak haram dicolong moga ae berkah🙏...",
-    "Eh ajg nih stiker punya siapa, sini balikin!..",
-    "Jahaha Mampus stiker lu gua colong😅.",
-    "Punten nih stiker punya siapa?\nBodo Amatlah colong ae...",
-    "Tobat bro jangan maling stiker tross",
-    "Cih stiker burik najis!!\nColong ah😅...",
-    "Odading mang oleh ... ",
+    "Using Witchery to kang this sticker...",
+    "Plagiarising hehe...",
+    "Inviting this sticker over to my pack...",
+    "Kanging this sticker...",
+    "Hey that's a nice sticker!\nMind if I kang?!..",
+    "hehe me stel ur stikér\nhehe.",
+    "Ay look over there (☉｡☉)!→\nWhile I kang this...",
+    "Roses are red violets are blue, kanging this sticker so my pacc looks cool",
+    "Imprisoning this sticker...",
+    "Mr.Steal Your Sticker is stealing this sticker... ",
 ]
 
 
@@ -50,12 +52,12 @@ def verify_cond(catarray, text):
 
 def pack_name(userid, pack, is_anim):
     if is_anim:
-        return f"Prindapanbot_{userid}_{pack}_anim"
-    return f"prindapanbot_{userid}_{pack}"
+        return f"catuserbot_{userid}_{pack}_anim"
+    return f"catuserbot_{userid}_{pack}"
 
 
 def char_is_emoji(character):
-    return character in catemoji.UNICODE_EMOJI
+    return character in catemoji.UNICODE_EMOJI["en"]
 
 
 def pack_nick(username, pack, is_anim):
@@ -66,9 +68,9 @@ def pack_nick(username, pack, is_anim):
             packnick = f"{Config.CUSTOM_STICKER_PACKNAME} Vol.{pack}"
     else:
         if is_anim:
-            packnick = f"@{username} Eps.{pack} (Animated)"
+            packnick = f"@{username} Vol.{pack} (Animated)"
         else:
-            packnick = f"@{username} Eps.{pack}"
+            packnick = f"@{username} Vol.{pack}"
     return packnick
 
 
@@ -151,24 +153,8 @@ async def newpacksticker(
     await conv.get_response()
     await args.client.send_read_acknowledge(conv.chat_id)
     if not pkang:
-        if otherpack:
-            await edit_delete(
-                catevent,
-                f"`Stiker ditambahkan ke pack berbeda !\
-                \nBerhasil Menambahkan stiker klik` [INI](t.me/addstickers/{packname}) `Dengan emoji {emoji}`",
-                parse_mode="md",
-                time=10,
-            )
-        else:
-            await edit_delete(
-                catevent,
-                f"`Stiker berhasil ditambahkan!\
-                \nKe koleksi klik` [INI](t.me/addstickers/{packname}) `Dengan emoji {emoji}`",
-                parse_mode="md",
-                time=10,
-            )
-    else:
-        return pack, packname
+        return otherpack, packname, emoji
+    return pack, packname
 
 
 async def add_to_pack(
@@ -188,7 +174,6 @@ async def add_to_pack(
     await conv.send_message("/addsticker")
     await conv.get_response()
     await args.client.send_read_acknowledge(conv.chat_id)
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     await conv.send_message(packname)
     x = await conv.get_response()
     while ("50" in x.text) or ("120" in x.text):
@@ -199,10 +184,12 @@ async def add_to_pack(
             pack = 1
         packname = pack_name(userid, pack, is_anim)
         packnick = pack_nick(username, pack, is_anim)
-        await catevent.edit(f"`Memilih ke {str(pack)} ah mantap`")
+        await catevent.edit(
+            f"`Switching to Pack {str(pack)} due to insufficient space`"
+        )
         await conv.send_message(packname)
         x = await conv.get_response()
-        if x.text == "Pack tidak bisa.":
+        if x.text == "Invalid pack selected.":
             return await newpacksticker(
                 catevent,
                 conv,
@@ -232,24 +219,12 @@ async def add_to_pack(
     await conv.send_message(emoji)
     await args.client.send_read_acknowledge(conv.chat_id)
     await conv.get_response()
-    try:
-        cat = Get(cat)
-        await catevent.client(cat)
-    except BaseException:
-        pass
     await conv.send_message("/done")
     await conv.get_response()
     await args.client.send_read_acknowledge(conv.chat_id)
     if not pkang:
-        await edit_delete(
-            catevent,
-            f"`Stiker berhasil ditambahkan!\
-             \nPack kamu` [INI](t.me/addstickers/{packname}) `emot {emoji}`",
-            parse_mode="md",
-            time=10,
-        )
-    else:
-        return pack, packname
+        return packname, emoji
+    return pack, packname
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="kang ?(.*)"))
@@ -270,7 +245,6 @@ async def kang(args):
     else:
         username = user.username
     userid = user.id
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if message and message.media:
         if isinstance(message.media, MessageMediaPhoto):
             catevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
@@ -325,11 +299,6 @@ async def kang(args):
                 emoji = splat[0]
             else:
                 pack = splat[0]
-        try:
-            cat = Get(cat)
-            await args.client(cat)
-        except BaseException:
-            pass
         packnick = pack_nick(username, pack, is_anim)
         packname = pack_name(userid, pack, is_anim)
         cmd = "/newpack"
@@ -349,7 +318,7 @@ async def kang(args):
             not in htmlstr
         ):
             async with args.client.conversation("Stickers") as conv:
-                await add_to_pack(
+                packname, emoji = await add_to_pack(
                     catevent,
                     conv,
                     args,
@@ -362,10 +331,17 @@ async def kang(args):
                     emoji,
                     cmd,
                 )
+            await edit_delete(
+                catevent,
+                f"`Sticker kanged successfully!\
+                    \nYour Pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
+                parse_mode="md",
+                time=10,
+            )
         else:
-            await catevent.edit("`membuat pack baru...`")
+            await catevent.edit("`Brewing a new Pack...`")
             async with args.client.conversation("Stickers") as conv:
-                await newpacksticker(
+                otherpack, packname, emoji = await newpacksticker(
                     catevent,
                     conv,
                     cmd,
@@ -376,6 +352,22 @@ async def kang(args):
                     emoji,
                     packname,
                     is_anim,
+                )
+            if otherpack:
+                await edit_delete(
+                    catevent,
+                    f"`Sticker kanged to a Different Pack !\
+                    \nAnd Newly created pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
+                    parse_mode="md",
+                    time=10,
+                )
+            else:
+                await edit_delete(
+                    catevent,
+                    f"`Sticker kanged successfully!\
+                    \nYour Pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
+                    parse_mode="md",
+                    time=10,
                 )
 
 
@@ -421,7 +413,7 @@ async def pack_kang(event):
                 )
             )
         )
-    except:
+    except Exception:
         return await edit_delete(
             catevent,
             "`I guess this sticker is not part of any pack. So, i cant kang this sticker pack try kang for this sticker`",
@@ -537,7 +529,7 @@ async def pack_kang(event):
         kangst += 1
         await asyncio.sleep(2)
     result = "`This sticker pack is kanged into the following your sticker pack(s):`\n"
-    for i in range(len(blablapacks)):
+    for i in enumerate(blablapacks):
         result += f"  •  [pack {blablapacknames[i]}](t.me/addstickers/{blablapacks[i]})"
     await catevent.edit(result)
 
@@ -612,20 +604,14 @@ async def cb_sticker(event):
 
 CMD_HELP.update(
     {
-        "stickers": "__**PLUGIN NAME :** Stickers__\
-\n\n📌** CMD ➥** `.kang`\
-\n**USAGE   ➥  **Reply .kang to a sticker or an image to kang it to your userbot pack.\
-\n\n📌** CMD ➥** `.kang [emoji('s)]`\
-\n**USAGE   ➥  **Works just like .kang but uses the emoji('s) you picked.\
-\n\n📌** CMD ➥** `.kang [number]`\
-\n**USAGE   ➥  **Kang's the sticker/image to the specified pack but uses 🤔 as emoji.\
-\n\n📌** CMD ➥** `.kang [emoji('s)] [number]`\
-\n**USAGE   ➥  **Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
-\n\n📌** CMD ➥** `.pkang [number]`\
-\n**USAGE   ➥  **Kang's the entire sticker pack of replied sticker to the specified pack \
-\n\n📌** CMD ➥** `.stickers name`\
-\n**USAGE   ➥  **Shows you the list of non-animated sticker packs with that name.\
-\n\n📌** CMD ➥** `.stkrinfo`\
-\n**USAGE   ➥  **Gets info about the sticker pack."
+        "stickers": "**Plugins : **`stickers`\
+\n\n**  •  Syntax : **`.kang [emoji('s)] [number]`\
+\n**  •  Function : **__Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.__\
+\n\n**  •  Syntax : **`.pkang [number]`\
+\n**  •  Function : **__Kang's the entire sticker pack of replied sticker to the specified pack __\
+\n\n**  •  Syntax : **`.stickers name`\
+\n**  •  Function : **__shows you the list of non-animated sticker packs with that name.__\
+\n\n**  •  Syntax : **`.stkrinfo`\
+\n**  •  Function : **__Gets info about the sticker pack.__"
     }
 )

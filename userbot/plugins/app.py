@@ -6,7 +6,9 @@
 import bs4
 import requests
 
-from . import hmention
+from . import ALIVE_NAME
+
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 
 
 @bot.on(admin_cmd(pattern="app (.*)"))
@@ -71,7 +73,7 @@ async def apk(event):
             + app_link
             + "'>View in Play Store</a>"
         )
-        app_details += f"\n\n===> {hmention} <==="
+        app_details += f"\n\n===> {DEFAULTUSER} <==="
         await event.edit(app_details, link_preview=True, parse_mode="HTML")
     except IndexError:
         await event.edit("No result found in search. Please enter **Valid app name**")
@@ -141,7 +143,8 @@ async def apkr(event):
             + app_link
             + "'>View in Play Store</a>"
         )
-        app_details += "\n\n===> @kakashi_robot <==="
+        app_details += "\n\n<b>Download : </b> <a href='https://t.me/joinchat/JCu-H1NikiYDgNjpjPYd4A'>Request_Here</a>"
+        app_details += "\n\n===> @Xpl0iter <==="
         await event.edit(app_details, link_preview=True, parse_mode="HTML")
     except IndexError:
         await event.edit("No result found in search. Please enter **Valid app name**")
@@ -151,11 +154,11 @@ async def apkr(event):
 
 CMD_HELP.update(
     {
-        "app": "__**PLUGIN NAME :** App__\
-\n\n📌** CMD ➥** `.app` [app name]\
-\nUSAGE   ➥  **Searches the app in the playstore and provides the link to the app in playstore and fetchs app details \
-\n\n📌** CMD ➥** `.appr` [app name]\
-\nUSAGE   ➥  **Searches the app in the playstore and provides the link to the app in playstore and fetchs app details with Xpl0iter request link. \
-"
+        "app": "**Plugin :** `app`\
+        \n**Syntax : **`.app [app name]`\
+        \n**Usage: **searches the app in the playstore and provides the link to the app in playstore and fetchs app details \
+        \n\n**Syntax : **`.appr [app name]`\
+        \n**Usage: **searches the app in the playstore and provides the link to the app in playstore and fetchs app details with Xpl0iter request link. \
+        "
     }
 )

@@ -7,7 +7,7 @@
 
 import os
 
-from . import make_gif, runcmd
+from . import make_gif
 
 
 @bot.on(admin_cmd(pattern="collage(?: |$)(.*)", outgoing=True))
@@ -55,7 +55,7 @@ async def collage(cat):
         collagefile = catsticker
     endfile = "./temp/collage.png"
     catcmd = f"vcsi -g {catinput}x{catinput} '{collagefile}' -o {endfile}"
-    stdout, stderr = (await runcmd(catcmd))[:2]
+    stdout, stderr = (await _catutils.runcmd(catcmd))[:2]
     if not os.path.exists(endfile):
         for files in (catsticker, collagefile):
             if files and os.path.exists(files):
@@ -76,8 +76,8 @@ async def collage(cat):
 
 CMD_HELP.update(
     {
-        "collage": "__**PLUGIN NAME :** Collage__\
-        \n\n📌** CMD ➥** `.collage` <grid size>\
-        \n**USAGE   ➥  **__Shows you the grid image of images extracted from video \n\nGrid size must be between 1 to 9 by default it is 3__"
+        "collage": "**Plugin : **`collage`\
+        \n\n  •  **Syntax : **`.collage <grid size>`\
+        \n  •  **Function : **__Shows you the grid image of images extracted from video \n Grid size must be between 1 to 9 by default it is 3__"
     }
 )

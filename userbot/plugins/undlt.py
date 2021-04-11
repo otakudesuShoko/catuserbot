@@ -10,7 +10,7 @@ async def _(event):
         try:
             cat = int(event.pattern_match.group(1))
             input_str = cat
-        except:
+        except Exception:
             input_str = 5
     else:
         input_str = 5
@@ -31,9 +31,9 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "undlt": "__**PLUGIN NAME :** Undlt__\
-        \n\n📌** CMD ➥** `.undlt` <count>\
-        \n**USAGE   ➥  ***Fetches last <count> number of deleted messages and sends you(you must be admin in that group)  \
+        "undlt": "**Plugin :** `undlt`\
+        \n**Syntax : **`.undlt <count>`\
+        \n**Usage: **Fetches last <count> number of deleted messages and sends you(you must be admin in that group)  \
 "
     }
 )

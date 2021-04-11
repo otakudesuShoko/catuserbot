@@ -11,15 +11,15 @@ import requests
 from barcode.writer import ImageWriter
 from bs4 import BeautifulSoup
 from PIL import Image, ImageColor
-from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 
-@bot.on(admin_cmd(pattern="scan ?(.*)"))
-@bot.on(sudo_cmd(pattern="scan ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="(scan|scani)$"))
+@bot.on(sudo_cmd(pattern="(scan|scani)$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
+    input_str = event.pattern_match.group(1)
     if not event.reply_to_msg_id:
         await edit_or_reply(event, "```Reply to any user message.```")
         return
@@ -27,34 +27,36 @@ async def _(event):
     if not reply_message.media:
         await edit_or_reply(event, "```reply to a media message```")
         return
-    chat = "@DrWebBot"
+    chat = "@VS_Robot"
     if reply_message.sender.bot:
         await edit_or_reply(event, "```Reply to actual users message.```")
         return
     catevent = await edit_or_reply(event, " `Sliding my tip, of fingers over it`")
     async with event.client.conversation(chat) as conv:
         try:
-            response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=161163358)
-            )
+            await conv.send_message("/start")
+            await conv.get_response()
             await event.client.forward_messages(chat, reply_message)
-            response = await response
+            response1 = await conv.get_response()
+            if response1.text:
+                await event.client.send_read_acknowledge(conv.chat_id)
+                return await catevent.edit(response1.text, parse_mode=parse_pre)
+            await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+            response3 = await conv.get_response()
+            response4 = await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await catevent.edit("`Please unblock `@DrWebBot `and try again`")
-            return
-        if response.text.startswith("Forward"):
-            await catevent.edit(
-                "```can you kindly disable your forward privacy settings for good?```"
+            return await catevent.edit(
+                "`You blocked `@VS_Robot` Unblock it and give a try`"
             )
+        if input_str == "scan":
+            await edit_or_reply(catevent, response4.text)
         else:
-            if response.text.startswith("Select"):
-                await catevent.edit(
-                    "`Please go to` @DrWebBot `and select your language.`"
-                )
-            else:
-                await catevent.edit(
-                    f"**Antivirus scan was completed. I got dem final results.**\n {response.message.message}"
-                )
+            await catevent.delete()
+            await event.client.send_file(
+                event.chat_id, response3.media, reply_to=(await reply_id(event))
+            )
 
 
 @bot.on(admin_cmd(pattern=r"decode$", outgoing=True))
@@ -117,9 +119,7 @@ async def _(event):
             m_list = None
             with open(downloaded_file_name, "rb") as fd:
                 m_list = fd.readlines()
-            message = ""
-            for m in m_list:
-                message += m.decode("UTF-8") + "\r\n"
+            message = "".join(m.decode("UTF-8") + "\r\n" for m in m_list)
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
@@ -163,9 +163,7 @@ async def make_qr(makeqr):
             m_list = None
             with open(downloaded_file_name, "rb") as file:
                 m_list = file.readlines()
-            message = ""
-            for media in m_list:
-                message += media.decode("UTF-8") + "\r\n"
+            message = "".join(media.decode("UTF-8") + "\r\n" for media in m_list)
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
@@ -197,8 +195,8 @@ async def _(event):
         yyyy = input_sgra[0]
         mm = input_sgra[1]
         try:
-            input = calendar.month(int(yyyy.strip()), int(mm.strip()))
-            await edit_or_reply(event, f"```{input}```")
+            output_result = calendar.month(int(yyyy.strip()), int(mm.strip()))
+            await edit_or_reply(event, f"```{output_result}```")
         except Exception as e:
             await edit_delete(event, f"`{e}`", 5)
     else:
@@ -238,7 +236,7 @@ async def _(event):
     else:
         await edit_or_reply(
             event,
-            "**Syntax:**\n.currency amount from to\n**Example:**\n`.currency 10 usd inr`",
+            "**Syntax:**\n.currency amount from to\n•  **Example:**\n`.currency 10 usd inr`",
         )
 
 
@@ -250,9 +248,10 @@ async def currencylist(ups):
     request_url = "https://api.exchangeratesapi.io/latest?base=USD"
     current_response = requests.get(request_url).json()
     dil_wale_puch_de_na_chaaa = current_response["rates"]
-    hmm = ""
-    for key, value in dil_wale_puch_de_na_chaaa.items():
-        hmm += f"`{key}`" + "\t\t\t"
+    hmm = "".join(
+        f"`{key}`" + "\t\t\t" for key, value in dil_wale_puch_de_na_chaaa.items()
+    )
+
     await edit_or_reply(ups, f"**List of some currencies:**\n{hmm}\n")
 
 
@@ -358,28 +357,28 @@ Year: {}""".format(
 
 CMD_HELP.update(
     {
-        "tools": "__**PLUGIN NAME :** Tools__\
-\n\n📌** CMD ➥** `.scan` reply to media or file\
-\n**USAGE   ➥  **It scans the media or file and checks either any virus is in the file or media\
-\n\n📌** CMD ➥** `.makeqr` <content>\
-\n**USAGE   ➥  **Make a QR Code from the given content.\
-\n**Example:** `.makeqr www.google.com`\
-\n\n📌** CMD ➥** `.barcode `<content>\
-\n**USAGE   ➥  **Make a BarCode from the given content.\
-\n**Example:** `.barcode www.google.com`\
-\n\n📌** CMD ➥** `.decode` <reply to barcode/qrcode> \
-\n**USAGE   ➥  **To get decoded content of those codes.\
-\n\n📌** CMD ➥** `.currency` amount (from currency) (to currency)\
-\n**USAGE   ➥  **Currency converter for userbot **Example :** `.currency 10 usd inr`\
-\n\n📌** CMD ➥** `cal year ; month`\
-\n**USAGE   ➥  **Shows you the calendar of given month and year.\
-\n\n📌** CMD ➥** `.currencies`\
-\n**USAGE   ➥  **Shows you the some list of currencies\
-\n\n📌** CMD ➥** `.ifsc` <IFSC code>\
-\n**USAGE   ➥  **To get details of the relevant bank or branch **Example :** `.ifsc SBIN0016086`\
-\n\n📌** CMD ➥** `.color` <color_code> \
-\n**USAGE   ➥  **Sends you a plain image of the color example :`.color #ff0000`\
-\n\n📌** CMD ➥** `.xkcd` <query>\
-\n**USAGE   ➥  **Searches for the query for the relevant XKCD comic "
+        "tools": "**Plugin : **`tools`\
+        \n\n•  **Syntax : **`.scan` reply to media or file\
+        \n•  **Function : **__it scans the media or file and checks either any virus is in the file or media__\
+        \n\n•  **Syntax : **`.makeqr` <content>\
+        \n•  **Function : **__Make a QR Code from the given content.__\
+        \nExample: .makeqr www.google.com\
+        \n\n•  **Syntax : **`.barcode `<content>\
+        \n•  **Function : **__Make a BarCode from the given content.__\
+        \nExample: `.barcode` www.google.com\
+        \n\n•  **Syntax : **`.decode` <reply to barcode/qrcode> \
+        \n•  **Function : **__to get decoded content of those codes.__\
+        \n\n•  **Syntax : **`cal year ; month`\
+        \n•  **Function : **__Shows you the calendar of given month and year__\
+        \n\n•  **Syntax : **`.currency` amount (from currency) (to currency)\
+        \n•  **Function : **__Currency converter for userbot __**Example :** `.currency 10 usd inr`\
+        \n\n•  **Syntax : **`.currencies`\
+        \n•  **Function : **__Shows you the some list of currencies__\
+        \n\n•  **Syntax : **`.ifsc` <IFSC code>\
+        \n•  **Function : **__to get details of the relevant bank or branch__**Example :** `.ifsc SBIN0016086`\
+        \n\n•  **Syntax : **`.color` <color_code> \
+        \n•  **Function : **__sends you a plain image of the color example :__`.color #ff0000`\
+        \n\n•  **Syntax : **`.xkcd` <query>\
+        \n•  **Function : **__Searches for the query for the relevant XKCD comic __"
     }
 )

@@ -59,9 +59,8 @@ async def _(event):
     if event.reply_to_msg_id:
         reply_msg = await event.get_reply_message()
         u = reply_msg.sender_id
-        str = input_str
     else:
-        user, str = input_str.split(" ", 1)
+        user, input_str = input_str.split(" ", 1)
         try:
             u = int(user)
         except ValueError:
@@ -71,13 +70,13 @@ async def _(event):
                 await event.delete()
                 return
             u = int(u.id)
-        except:
+        except Exception:
             await event.delete()
             return
     await event.delete()
     await event.client.send_message(
         event.chat_id,
-        f"<a href='tg://user?id={u}'>{str}</a>",
+        f"<a href='tg://user?id={u}'>{input_str}</a>",
         parse_mode="HTML",
         reply_to=reply_to_id,
     )
@@ -85,16 +84,20 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "mention": """__**PLUGIN NAME :** Mention__
-\n\n📌** CMD ➥** `.all`
-\n**USAGE   ➥  **__Tags recent 100 persons in the group may not work for all__  
-\n\n📌** CMD ➥** `.tagall`
-\n**USAGE   ➥  **__Tags recent 100 persons in the group may not work for all__ 
-\n\n📌** CMD ➥** `.report`
-\n**USAGE   ➥  **__Tags admins in group__  
-\n\n📌** CMD ➥** `.men` <username/userid text>
-\n**USAGE   ➥  **__Tags that person with the given custom text other way for this is __
-\n\n📌** CMD ➥** `Hi @username[custom text]`
+        "mention": """**Plugin : **`mention`
+
+  •  **Syntax : **`.all`
+  •  **Function : **__tags recent 100 persons in the group may not work for all__  
+
+  •  **Syntax : **`.tagall`
+  •  **Function : **__tags recent 100 persons in the group may not work for all__ 
+
+  •  **Syntax : **`.report`
+  •  **Function : **__tags admins in group__  
+
+  •  **Syntax : **`.men username/userid text`
+  •  **Function : **__tags that person with the given custom text other way for this is __
+  •  **syntax : **`Hi username[custom text]`
 """
     }
 )
