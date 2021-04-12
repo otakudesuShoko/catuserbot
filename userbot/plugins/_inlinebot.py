@@ -25,7 +25,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             buttons = [
                 (
                     custom.Button.inline("Stats", data="stats"),
-                    Button.url("Prindapan-Bot", "https://github.com/otakudesuShoko/catuserbot"),
+                    Button.url("Repo Custom", "https://github.com/otakudesuShoko/catuserbot"),
                 )
             ]
             if CAT_IMG and CAT_IMG.endswith((".jpg", ".png")):
@@ -53,8 +53,8 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             rev_text = query[::-1]
             buttons = paginate_help(0, CMD_LIST, "helpme")
             result = builder.article(
-                "© Bantuan prindapan-bot",
-                text="{}\nPlugin yang saat ini dimuat: {}".format(query, len(CMD_LIST)),
+                "© P",
+                text="{}\nCurrently Loaded Plugins: {}".format(query, len(CMD_LIST)),
                 buttons=buttons,
                 link_preview=False,
             )
@@ -135,11 +135,11 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             newsecret = {str(timestamp): {"userid": u, "text": txct}}
 
             buttons = [
-                custom.Button.inline("Lihat pesan 🔐", data=f"secret_{timestamp}")
+                custom.Button.inline("show message 🔐", data=f"secret_{timestamp}")
             ]
             result = builder.article(
-                title="Pesan Rahasia",
-                text=f"🔒 Sebuah pesan rahasia dari {Hyoneechan}, Hanya dia yang dapat melihatnya",
+                title="secret message",
+                text=f"🔒 A whisper message to {sandy}, Only he/she can open it.",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -161,7 +161,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Silahkan gunakan userbot anda sendiri, dan jangan gunakan saya!  Hubungi @Hyoneechan untuk info lanjut"
+            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(
@@ -178,7 +178,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Silahkan gunakan userbot anda sendiri, dan jangan gunakan saya!  Hubungi @Hyoneechan untuk info lanjut "
+            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"secret_(.*)")))
@@ -194,11 +194,11 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                     encrypted_tcxt = message["text"]
                     reply_pop_up_alert = encrypted_tcxt
                 else:
-                    reply_pop_up_alert = "Mengapa anda ingin melihat ini pergi sana kerjakan pekerjaanmu sendiri, Anak haram!"
+                    reply_pop_up_alert = "why were you looking at this shit go away and do your own work, idiot"
             except KeyError:
-                reply_pop_up_alert = "Pesan ini tidak ada lagi di server bot"
+                reply_pop_up_alert = "This message no longer exists in bot server"
         else:
-            reply_pop_up_alert = "Pesan ini tidak ada lagi "
+            reply_pop_up_alert = "This message no longer exists "
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(
@@ -217,11 +217,11 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             except BaseException:
                 pass
             if help_string == "":
-                reply_pop_up_alert = "{} untuk kamu".format(plugin_name)
+                reply_pop_up_alert = "{} is useless".format(plugin_name)
             else:
                 reply_pop_up_alert = help_string
             reply_pop_up_alert += (
-                "Gunakan .unload {} Untuk hapus plugin ©catuserbot".format(plugin_name)
+                "Use .unload {} to remove this plugin ©catuserbot".format(plugin_name)
             )
             try:
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
@@ -237,15 +237,15 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                         caption=plugin_name,
                     )
         else:
-            reply_pop_up_alert = "Silahkan gunakan userbot anda sendiri, dan jangan gunakan saya!  Hubungi @Hyoneechan untuk info lanjut "
+            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
-            await event.edit("menu ditutup")
+            await event.edit("menu closed")
         else:
-            reply_pop_up_alert = "Silahkan gunakan userbot anda sendiri, dan jangan gunakan saya!  Hubungi @Hyoneechan untuk info lanjut "
+            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats")))
@@ -295,13 +295,12 @@ def paginate_help(page_number, loaded_plugins, prefix):
                 custom.Button.inline(
                     "⌫", data="{}_prev({})".format(prefix, modulo_page)
                 ),
-                custom.Button.inline("Tutup", data="close"),
+                custom.Button.inline("Close", data="close"),
                 custom.Button.inline(
                     "⌦", data="{}_next({})".format(prefix, modulo_page)
                 ),
             )
         ]
-           
     return pairs
 
 
