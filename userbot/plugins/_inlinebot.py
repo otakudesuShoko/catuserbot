@@ -25,13 +25,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             buttons = [
                 (
                     custom.Button.inline("Stats", data="stats"),
-<<<<<<< HEAD
-                    Button.url("Repo Custom", "https://github.com/otakudesuShoko/catuserbot"),
-=======
-                    Button.url(
-                        "Prindapan-Bot", "https://github.com/otakudesuShoko/catuserbot"
-                    ),
->>>>>>> 2d9baa41308d6f400c5d8c93807c5e06cf341698
+                    Button.url("Repo", "https://github.com/sandy1709/catuserbot"),
                 )
             ]
             if CAT_IMG and CAT_IMG.endswith((".jpg", ".png")):
@@ -59,7 +53,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             rev_text = query[::-1]
             buttons = paginate_help(0, CMD_LIST, "helpme")
             result = builder.article(
-                "© P",
+                "© Userbot Help",
                 text="{}\nCurrently Loaded Plugins: {}".format(query, len(CMD_LIST)),
                 buttons=buttons,
                 link_preview=False,
@@ -307,10 +301,6 @@ def paginate_help(page_number, loaded_plugins, prefix):
                 ),
             )
         ]
-<<<<<<< HEAD
-=======
-
->>>>>>> 2d9baa41308d6f400c5d8c93807c5e06cf341698
     return pairs
 
 
