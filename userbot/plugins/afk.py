@@ -107,13 +107,9 @@ async def on_afk(event):
         msg = None
         if AFK_.afk_type == "text":
             if AFK_.msg_link and AFK_.reason:
-<<<<<<< HEAD
                 message_to_reply = (
                     f"**I am AFK .\n\nAFK Since {endtime}\nReason : **{AFK_.reason}"
                 )
-=======
-                message_to_reply = f"**Sappo AFK.\n\nOffline sejak  {endtime}\nAlasan : **{AFK_.reason}"
->>>>>>> 0aa16e6b18b5550ad329e7d1885122315d67ade4
             elif AFK_.reason:
                 message_to_reply = (
                     f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
@@ -189,13 +185,9 @@ async def _(event):
             AFK_.afk_time = datetime.now()
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
-<<<<<<< HEAD
             await edit_delete(
                 event, f"`I shall be Going afk! because ~` {AFK_.reason}", 5
             )
-=======
-            await edit_delete(event, f"`Offline dulu sappo! Karena ~` {AFK_.reason}", 5)
->>>>>>> 0aa16e6b18b5550ad329e7d1885122315d67ade4
         else:
             await edit_delete(event, f"`I shall be Going afk! `", 5)
         if BOTLOG:
@@ -223,12 +215,7 @@ async def _(event):
         )
     if not BOTLOG:
         return await edit_or_reply(
-<<<<<<< HEAD
             event, "`To use media afk you need to set PRIVATE_GROUP_BOT_API_ID config`"
-=======
-            event,
-            "`Untuk menggunakan AFK media mohon set PRIVATE_GROUP_BOT_API_ID config`",
->>>>>>> 0aa16e6b18b5550ad329e7d1885122315d67ade4
         )
     AFK_.USERAFK_ON = {}
     AFK_.afk_time = None
@@ -248,13 +235,9 @@ async def _(event):
             AFK_.afk_time = datetime.now()
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
-<<<<<<< HEAD
             await edit_delete(
                 event, f"`I shall be Going afk! because ~` {AFK_.reason}", 5
             )
-=======
-            await edit_delete(event, f"`Offline dulu sappo! karena ~` {AFK_.reason}", 5)
->>>>>>> 0aa16e6b18b5550ad329e7d1885122315d67ade4
         else:
             await edit_delete(event, f"`I shall be Going afk! `", 5)
         AFK_.media_afk = await reply.forward_to(BOTLOG_CHATID)
