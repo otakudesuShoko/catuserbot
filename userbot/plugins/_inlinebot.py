@@ -25,7 +25,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             buttons = [
                 (
                     custom.Button.inline("Stats", data="stats"),
-                    Button.url("Repo", "https://github.com/sandy1709/catuserbot"),
+                    Button.url("Repo", "https://github.com/ot/catuserbot"),
                 )
             ]
             if CAT_IMG and CAT_IMG.endswith((".jpg", ".png")):
@@ -54,7 +54,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             buttons = paginate_help(0, CMD_LIST, "helpme")
             result = builder.article(
                 "© Userbot Help",
-                text="{}\nCurrently Loaded Plugins: {}".format(query, len(CMD_LIST)),
+                text="{}\nJumlah plugin yang ada : {}".format(query, len(CMD_LIST)),
                 buttons=buttons,
                 link_preview=False,
             )
@@ -135,11 +135,11 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             newsecret = {str(timestamp): {"userid": u, "text": txct}}
 
             buttons = [
-                custom.Button.inline("show message 🔐", data=f"secret_{timestamp}")
+                custom.Button.inline("Lihat Pesan 🔐", data=f"secret_{timestamp}")
             ]
             result = builder.article(
                 title="secret message",
-                text=f"🔒 A whisper message to {sandy}, Only he/she can open it.",
+                text=f"🔒 Sebuah pesan rahasia untuk {sandy}, Hanya dia yang dapat membuka ini",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -161,7 +161,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help"
+            reply_pop_up_alert = "Mohon gunakan ubot anda sendiri, dan jangan gunakan saya ! Hub @Hyoneechan untuk info lengkap"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(
@@ -178,7 +178,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help "
+            reply_pop_up_alert = "Mohon gunakan ubot anda sendiri, dan jangan gunakan saya ! Hub @Hyoneechan untuk info lengkap "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"secret_(.*)")))
@@ -194,11 +194,11 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                     encrypted_tcxt = message["text"]
                     reply_pop_up_alert = encrypted_tcxt
                 else:
-                    reply_pop_up_alert = "why were you looking at this shit go away and do your own work, idiot"
+                    reply_pop_up_alert = "Kenapa kamu sangat kepo, dasar anak haram"
             except KeyError:
-                reply_pop_up_alert = "This message no longer exists in bot server"
+                reply_pop_up_alert = "pesan ini sudah tidak ada di server bot"
         else:
-            reply_pop_up_alert = "This message no longer exists "
+            reply_pop_up_alert = "Pesan ini sudah tidak ada "
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(
@@ -221,7 +221,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             else:
                 reply_pop_up_alert = help_string
             reply_pop_up_alert += (
-                "Use .unload {} to remove this plugin ©catuserbot".format(plugin_name)
+                "Gunakan .unload {} untuk menghapus plugin ©catuserbot".format(plugin_name)
             )
             try:
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
@@ -237,7 +237,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                         caption=plugin_name,
                     )
         else:
-            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help "
+            reply_pop_up_alert = "Mohon gunakan ubot anda sendiri, dan jangan gunakan saya ! Hub @Hyoneechan untuk info lengkap "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
@@ -245,7 +245,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         if event.query.user_id == bot.uid:
             await event.edit("menu closed")
         else:
-            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help "
+            reply_pop_up_alert = "Mohon gunakan ubot anda sendiri, dan jangan gunakan saya ! Hub @Hyoneechan untuk info lengkap "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats")))
@@ -295,7 +295,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
                 custom.Button.inline(
                     "⌫", data="{}_prev({})".format(prefix, modulo_page)
                 ),
-                custom.Button.inline("Close", data="close"),
+                custom.Button.inline("Close", data="tutup"),
                 custom.Button.inline(
                     "⌦", data="{}_next({})".format(prefix, modulo_page)
                 ),
