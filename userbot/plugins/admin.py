@@ -322,7 +322,9 @@ async def startmute(event):
         if not user:
             return
         if user.id == bot.uid:
-            return await edit_or_reply(event, "`Maaf bosku, anda tidak bisa membisukan diri sendiri`")
+            return await edit_or_reply(
+                event, "`Maaf bosku, anda tidak bisa membisukan diri sendiri`"
+            )
         if is_muted(user.id, event.chat_id):
             return await edit_or_reply(
                 event, "`Anak haram ini sudah di bisukan ~~Sampah Telegram~~~~`"
@@ -484,7 +486,9 @@ async def kick(usr):
             f"`Menendang anak haram` [{user.first_name}](tg://user?id={user.id})`!`\nAlasan: {reason}"
         )
     else:
-        await catevent.edit(f"`Menendang` [{user.first_name}](tg://user?id={user.id})`!`")
+        await catevent.edit(
+            f"`Menendang` [{user.first_name}](tg://user?id={user.id})`!`"
+        )
     if BOTLOG:
         await usr.client.send_message(
             BOTLOG_CHATID,
@@ -541,7 +545,11 @@ async def pin(msg):
     to_unpin = msg.reply_to_msg_id
     options = (msg.pattern_match.group(1)).strip()
     if not to_unpin and options != "all":
-        await edit_delete(msg, "Reply pesan untuk  membuka pesan sematan group atau gunakan .unpin all`", 5)
+        await edit_delete(
+            msg,
+            "Reply pesan untuk  membuka pesan sematan group atau gunakan .unpin all`",
+            5,
+        )
         return
     if to_unpin and not options:
         try:
