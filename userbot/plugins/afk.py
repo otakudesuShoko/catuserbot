@@ -3,7 +3,7 @@ import asyncio
 from datetime import datetime
 
 from telethon import events
-from telethon.tl import Fungsis, types
+from telethon.tl import functions, types
 
 from . import BOTLOG, BOTLOG_CHATID, bot
 
@@ -54,7 +54,7 @@ async def set_not_afk(event):
     ):
         shite = await event.client.send_message(
             event.chat_id,
-            "`Sappo! Kembali online.\n Setelah Offline selama " + endtime + "`",
+            "`Back alive! No Longer afk.\nWas afk for " + endtime + "`",
         )
         AFK_.USERAFK_ON = {}
         AFK_.afk_time = None
@@ -108,20 +108,20 @@ async def on_afk(event):
         if AFK_.afk_type == "text":
             if AFK_.msg_link and AFK_.reason:
                 message_to_reply = (
-                    f"**Sappo AFK.\n\nOffline sejak  {endtime}\nAlasan : **{AFK_.reason}"
+                    f"**I am AFK .\n\nAFK Since {endtime}\nReason : **{AFK_.reason}"
                 )
             elif AFK_.reason:
                 message_to_reply = (
-                    f"`Sappo AFK .\n\nOffline sejak {endtime}\nAlasan : {AFK_.reason}`"
+                    f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
                 )
             else:
-                message_to_reply = f"`Sappo afk.\n\nOffline sejak {endtime}"
+                message_to_reply = f"`I am AFK .\n\nAFK Since {endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
             if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
                 msg = await event.reply(message_to_reply)
         elif AFK_.afk_type == "media":
             if AFK_.reason:
                 message_to_reply = (
-                    f"`Sappo AFK.\n\nOffline sejak {endtime}\nReason : {AFK_.reason}`"
+                    f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
                 )
             else:
                 message_to_reply = f"`I am AFK .\n\nAFK Since {endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
@@ -143,12 +143,12 @@ async def on_afk(event):
         messaget = media_type(event)
         resalt = f"#AFK_TAGS \n<b>Group : </b><code>{hmm.title}</code>"
         if full is not None:
-            resalt += f"\n<b>Dari : </b> 👤{_format.htmlmentionuser(full.first_name , full.id)}"
+            resalt += f"\n<b>From : </b> 👤{_format.htmlmentionuser(full.first_name , full.id)}"
         if messaget is not None:
-            resalt += f"\n<b>Tipe Pesan : </b><code>{messaget}</code>"
+            resalt += f"\n<b>Message type : </b><code>{messaget}</code>"
         else:
-            resalt += f"\n<b>Pesan : </b>{event.message.message}"
-        resalt += f"\n<b>Link pesan : </b><a href = 'https://t.me/c/{hmm.id}/{event.message.id}'> link</a>"
+            resalt += f"\n<b>Message : </b>{event.message.message}"
+        resalt += f"\n<b>Message link: </b><a href = 'https://t.me/c/{hmm.id}/{event.message.id}'> link</a>"
         if not event.is_private:
             await event.client.send_message(
                 Config.PM_LOGGER_GROUP_ID,
@@ -179,17 +179,17 @@ async def _(event):
             AFK_.reason = input_str
             AFK_.msg_link = False
         last_seen_status = await event.client(
-            Fungsis.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
+            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
         )
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             AFK_.afk_time = datetime.now()
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
             await edit_delete(
-                event, f"`Offline dulu sappo! Karena ~` {AFK_.reason}", 5
+                event, f"`I shall be Going afk! because ~` {AFK_.reason}", 5
             )
         else:
-            await edit_delete(event, f"`Saya harus offline dulu! `", 5)
+            await edit_delete(event, f"`I shall be Going afk! `", 5)
         if BOTLOG:
             if AFK_.reason:
                 await event.client.send_message(
@@ -211,11 +211,11 @@ async def _(event):
     media_t = media_type(reply)
     if media_t == "Sticker" or not media_t:
         return await edit_or_reply(
-            event, "`Kamu harus mereply media untuk menggunakan ini`"
+            event, "`You haven't replied to any media to activate media afk`"
         )
     if not BOTLOG:
         return await edit_or_reply(
-            event, "`Untuk menggunakan AFK media mohon set PRIVATE_GROUP_BOT_API_ID config`"
+            event, "`To use media afk you need to set PRIVATE_GROUP_BOT_API_ID config`"
         )
     AFK_.USERAFK_ON = {}
     AFK_.afk_time = None
@@ -229,17 +229,17 @@ async def _(event):
         input_str = event.pattern_match.group(1)
         AFK_.reason = input_str
         last_seen_status = await event.client(
-            Fungsis.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
+            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
         )
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             AFK_.afk_time = datetime.now()
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
             await edit_delete(
-                event, f"`Offline dulu sappo! karena ~` {AFK_.reason}", 5
+                event, f"`I shall be Going afk! because ~` {AFK_.reason}", 5
             )
         else:
-            await edit_delete(event, f"`Saya harus offline dulu! `", 5)
+            await edit_delete(event, f"`I shall be Going afk! `", 5)
         AFK_.media_afk = await reply.forward_to(BOTLOG_CHATID)
         if AFK_.reason:
             await event.client.send_message(
@@ -256,17 +256,18 @@ async def _(event):
 CMD_HELP.update(
     {
         "afk": """**Plugin : **`afk`
+__afk means away from keyboard/keypad__
 
-  **Perintah : **`.mafk [Optional Reason]`
-  **Fungsi : **__Menandakan diri anda offline bisa dengan media.__
+•  **Syntax : **`.mafk [Optional Reason]`
+•  **Function : **__Sets you as afk and Replies to anyone who tags/PM's you telling them that you are in AFK(reason) with the media which you replied using mafk.__
 
-  **Perintah : **`.afk [Optional Reason]`
-  **Fungsi : **__Untuk memberitahukan teman jika anda ingin atau sedang off (Alasan).__
+•  **Syntax : **`.afk [Optional Reason]`
+•  **Function : **__Sets you as afk and Replies to anyone who tags/PM's you telling them that you are in AFK(reason).__
 
-  **Catatan :**Jika kamu ingin Afk Media gunakan [ ; ] Setelah Alasan anda, Kemudian tempel link media anda.
-  **Contoh :** `.afk sibuk sekarang ; <Media_link>`
+•  **Note :** If you want AFK with hyperlink use [ ; ] after reason, then paste the media link.
+•  **Example :** `.afk busy now ; <Media_link>`
 
-  **Catatan :** __Jika anda memilih untuk tidak afk cukup mengirim pesan__\
+•  **Note :** __Switches off AFK when you type back anything, anywhere. You can use #afk in message to continue in afk without breaking it__\
         """
     }
 )
