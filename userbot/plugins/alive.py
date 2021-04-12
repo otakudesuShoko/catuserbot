@@ -26,7 +26,7 @@ async def amireallyalive(alive):
         cat_caption += f"**⚒ Catuserbot Version :** `{catversion}`\n"
         cat_caption += f"**🛠 Python Version :** `{python_version()}\n`"
         cat_caption += f"**⚡ Uptime :** `{uptime}\n`"
-        cat_caption += f"**🌟 Master:** {mention}\n"
+        cat_caption += f"** ✴ Master:** {mention}\n"
         await alive.client.send_file(
             alive.chat_id, CAT_IMG, caption=cat_caption, reply_to=reply_to_id
         )
