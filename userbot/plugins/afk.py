@@ -107,9 +107,7 @@ async def on_afk(event):
         msg = None
         if AFK_.afk_type == "text":
             if AFK_.msg_link and AFK_.reason:
-                message_to_reply = (
-                    f"**Sappo AFK.\n\nOffline sejak  {endtime}\nAlasan : **{AFK_.reason}"
-                )
+                message_to_reply = f"**Sappo AFK.\n\nOffline sejak  {endtime}\nAlasan : **{AFK_.reason}"
             elif AFK_.reason:
                 message_to_reply = (
                     f"`Sappo AFK .\n\nOffline sejak {endtime}\nAlasan : {AFK_.reason}`"
@@ -185,9 +183,7 @@ async def _(event):
             AFK_.afk_time = datetime.now()
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
-            await edit_delete(
-                event, f"`Offline dulu sappo! Karena ~` {AFK_.reason}", 5
-            )
+            await edit_delete(event, f"`Offline dulu sappo! Karena ~` {AFK_.reason}", 5)
         else:
             await edit_delete(event, f"`Saya harus offline dulu! `", 5)
         if BOTLOG:
@@ -215,7 +211,8 @@ async def _(event):
         )
     if not BOTLOG:
         return await edit_or_reply(
-            event, "`Untuk menggunakan AFK media mohon set PRIVATE_GROUP_BOT_API_ID config`"
+            event,
+            "`Untuk menggunakan AFK media mohon set PRIVATE_GROUP_BOT_API_ID config`",
         )
     AFK_.USERAFK_ON = {}
     AFK_.afk_time = None
@@ -235,9 +232,7 @@ async def _(event):
             AFK_.afk_time = datetime.now()
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
-            await edit_delete(
-                event, f"`Offline dulu sappo! karena ~` {AFK_.reason}", 5
-            )
+            await edit_delete(event, f"`Offline dulu sappo! karena ~` {AFK_.reason}", 5)
         else:
             await edit_delete(event, f"`Saya harus offline dulu! `", 5)
         AFK_.media_afk = await reply.forward_to(BOTLOG_CHATID)

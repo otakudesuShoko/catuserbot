@@ -169,7 +169,9 @@ async def upstream(event):
     if conf == "" and not force_update:
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
-        return await event.respond("lakukan `.update deploy` atau `.update now` untuk mengupdate bot")
+        return await event.respond(
+            "lakukan `.update deploy` atau `.update now` untuk mengupdate bot"
+        )
 
     if force_update:
         await event.edit(
@@ -199,7 +201,8 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
                 break
         if heroku_app is None:
             await event.edit(
-                f"{txt}\n" "`Kredensial Heroku Tidak Valid untuk Deployment Userbot Dyno.`"
+                f"{txt}\n"
+                "`Kredensial Heroku Tidak Valid untuk Deployment Userbot Dyno.`"
             )
             return repo.__del__()
         await event.edit(
@@ -222,9 +225,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             return repo.__del__()
         build_status = app.builds(order_by="created_at", sort="desc")[0]
         if build_status.status == "failed":
-            await event.edit(
-                "`Build gagal!\n" "Membatalkan sebab terjadi eror...`"
-            )
+            await event.edit("`Build gagal!\n" "Membatalkan sebab terjadi eror...`")
             await asyncio.sleep(5)
             return await event.delete()
         await event.edit("`Suksek deploy!\n" "Sedang memuat ulang, mohon tunggu...`")
@@ -304,4 +305,4 @@ CMD_HELP.update(
         "\n\n  **Perintah : **`.badcat`"
         "\n  **Fungsi :** Menampilkan repo catu Jisan"
     }
-) 
+)
