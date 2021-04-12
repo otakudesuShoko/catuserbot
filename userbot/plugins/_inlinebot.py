@@ -25,7 +25,9 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             buttons = [
                 (
                     custom.Button.inline("Stats", data="stats"),
-                    Button.url("Prindapan-Bot", "https://github.com/otakudesuShoko/catuserbot"),
+                    Button.url(
+                        "Prindapan-Bot", "https://github.com/otakudesuShoko/catuserbot"
+                    ),
                 )
             ]
             if CAT_IMG and CAT_IMG.endswith((".jpg", ".png")):
@@ -301,7 +303,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
                 ),
             )
         ]
-           
+
     return pairs
 
 
