@@ -7,7 +7,7 @@ from . import ALIVE_NAME, StartTime, catversion, get_readable_time, mention, rep
 
 DEFAULTUSER = ALIVE_NAME or "cat"
 CAT_IMG = Config.ALIVE_PIC
-CUSTOM_ALIVE_TEXT = Config.CUSTOM_ALIVE_TEXT or "✮ MY BOT IS RUNNING SUCCESSFULLY ✮"
+CUSTOM_ALIVE_TEXT = Config.CUSTOM_ALIVE_TEXT or "** Stop Racism And Bullying **"
 EMOJI = Config.CUSTOM_ALIVE_EMOJI or "  ✥ "
 
 
@@ -21,12 +21,12 @@ async def amireallyalive(alive):
     _, check_sgnirts = check_data_base_heal_th()
     if CAT_IMG:
         cat_caption = f"**{CUSTOM_ALIVE_TEXT}**\n\n"
-        cat_caption += f"**{EMOJI} Database :** `{check_sgnirts}`\n"
-        cat_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
-        cat_caption += f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
-        cat_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
-        cat_caption += f"**{EMOJI} Uptime :** `{uptime}\n`"
-        cat_caption += f"**{EMOJI} Master:** {mention}\n"
+        cat_caption += f"**🗂 Database :** `{check_sgnirts}`\n"
+        cat_caption += f"**🔧 Telethon version :** `{version.__version__}\n`"
+        cat_caption += f"**⚒ Catuserbot Version :** `{catversion}`\n"
+        cat_caption += f"**🛠 Python Version :** `{python_version()}\n`"
+        cat_caption += f"**⚡ Uptime :** `{uptime}\n`"
+        cat_caption += f"**🌟 Master:** {mention}\n"
         await alive.client.send_file(
             alive.chat_id, CAT_IMG, caption=cat_caption, reply_to=reply_to_id
         )

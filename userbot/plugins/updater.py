@@ -48,14 +48,14 @@ requirements_path = os.path.join(
 async def gen_chlog(repo, diff):
     d_form = "%d/%m/%y"
     return "".join(
-        f"  • {c.summary} ({c.committed_datetime.strftime(d_form)}) <{c.author}>\n"
+        f"   {c.summary} ({c.committed_datetime.strftime(d_form)}) <{c.author}>\n"
         for c in repo.iter_commits(diff)
     )
 
 
 async def print_changelogs(event, ac_br, changelog):
     changelog_str = (
-        f"**New UPDATE available for [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`"
+        f"**Update terbaru untuk branch [{ac_br}]:\n\nDaftar update:**\n`{changelog}`"
     )
     if len(changelog_str) > 4096:
         await event.edit("`Changelog is too big, view the file to see it.`")
@@ -97,7 +97,7 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     await event.edit(
-        "`Successfully Updated!\n" "Bot is restarting... Wait for a minute!`"
+        "`Berhasil mengupdate!\n" "Sedang memuat ulang... Tunggu untuk beberapa menit!`"
     )
     # Spin a new instance of bot
     args = [sys.executable, "-m", "userbot"]
@@ -169,14 +169,14 @@ async def upstream(event):
     if conf == "" and not force_update:
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
-        return await event.respond("do `.update deploy` to update the catuserbot")
+        return await event.respond("lakukan `.update deploy` atau `.update now` untuk mengupdate bot")
 
     if force_update:
         await event.edit(
             "`Force-Syncing to latest stable userbot code, please wait...`"
         )
     if conf == "now":
-        await event.edit("`Updating userbot, please wait....`")
+        await event.edit("`Sedang mengupdate bot, mohon menunggu....`")
         await update(event, repo, ups_rem, ac_br)
     return
 
@@ -188,8 +188,8 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         heroku_applications = heroku.apps()
         if HEROKU_APP_NAME is None:
             await event.edit(
-                "`Please set up the` **HEROKU_APP_NAME** `Var`"
-                " to be able to deploy your userbot...`"
+                "`Tolong set ini dulu` **HEROKU_APP_NAME** `Var`"
+                " untuk menetapkan deploy heroku...`"
             )
             repo.__del__()
             return
@@ -199,11 +199,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
                 break
         if heroku_app is None:
             await event.edit(
-                f"{txt}\n" "`Invalid Heroku credentials for deploying userbot dyno.`"
+                f"{txt}\n" "`Kredensial Heroku Tidak Valid untuk Deployment Userbot Dyno.`"
             )
             return repo.__del__()
         await event.edit(
-            "`Userbot dyno build in progress, please wait until the process finishes it usually takes 4 to 5 minutes .`"
+            "`Build userbot dyno dalam proses akan selesai 4 menit sampai 5 menit .`"
         )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
@@ -223,11 +223,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         build_status = app.builds(order_by="created_at", sort="desc")[0]
         if build_status.status == "failed":
             await event.edit(
-                "`Build failed!\n" "Cancelled or there were some errors...`"
+                "`Build gagal!\n" "Membatalkan sebab terjadi eror...`"
             )
             await asyncio.sleep(5)
             return await event.delete()
-        await event.edit("`Successfully deployed!\n" "Restarting, please wait...`")
+        await event.edit("`Suksek deploy!\n" "Sedang memuat ulang, mohon tunggu...`")
     else:
         await event.edit("`Please set up`  **HEROKU_API_KEY**  ` Var...`")
     return
@@ -285,7 +285,7 @@ async def variable(var):
     else:
         return await edit_delete(
             var,
-            "Set the required var in heroku to function this normally `HEROKU_APP_NAME`.",
+            "Set the required var in heroku to Fungsi this normally `HEROKU_APP_NAME`.",
         )
     heroku_var = app.config()
     await edit_or_reply(var, f"`Changing goodcat to badcat wait for 2-3 minutes.`")
@@ -295,16 +295,13 @@ async def variable(var):
 CMD_HELP.update(
     {
         "updater": "**Plugin : **`updater`"
-        "\n\n•  **Syntax : **`.update`"
-        "\n•  **Function :** Checks if the main userbot repository has any updates "
-        "and shows a changelog if so."
-        "\n\n•  **Syntax : **`.update now`"
-        "\n•  **Function :** Update your userbot, "
-        "if there are any updates in your userbot repository.if you restart these goes back to last time when you deployed"
-        "\n\n•  **Syntax : **`.update deploy`"
-        "\n•  **Function :** Deploy your userbot.So even you restart it doesnt go back to previous version"
-        "\nThis will triggered deploy always, even no updates."
-        "\n\n•  **Syntax : **`.badcat`"
-        "\n•  **Function :** Shifts from official cat repo to jisan's repo(for gali commands)"
+        "\n\n  **Perintah : **`.update`"
+        "\n  **Fungsi :** cek info update ubot dan lihat daftar perubahan"
+        "\n\n  **Perintah : **`.update now`"
+        "\n  **Fungsi :** update userbot anda, "
+        "\n\n  **Perintah : **`.update deploy`"
+        "\n  **Fungsi :** Deploy userbot kamu dengan update baru"
+        "\n\n  **Perintah : **`.badcat`"
+        "\n  **Fungsi :** Menampilkan repo catu Jisan"
     }
-)
+) 

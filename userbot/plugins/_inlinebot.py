@@ -295,7 +295,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
                 custom.Button.inline(
                     "⌫", data="{}_prev({})".format(prefix, modulo_page)
                 ),
-                custom.Button.inline("Close", data="tutup"),
+                custom.Button.inline("Tutup", data="close"),
                 custom.Button.inline(
                     "⌦", data="{}_next({})".format(prefix, modulo_page)
                 ),
