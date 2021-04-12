@@ -300,11 +300,8 @@ def paginate_help(page_number, loaded_plugins, prefix):
                     "⌦", data="{}_next({})".format(prefix, modulo_page)
                 ),
             )
-        ],
-           [(
-              custom.Button.inline("Prindapan-Bot", url="t.me/Hyoneechan"),
-           )
         ]
+           
     return pairs
 
 
