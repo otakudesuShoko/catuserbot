@@ -303,7 +303,8 @@ def paginate_help(page_number, loaded_plugins, prefix):
         ],
            [(
               custom.Button.inline("Prindapan-Bot", url="t.me/Hyoneechan"),
-           
+           )
+        ]
     return pairs
 
 
