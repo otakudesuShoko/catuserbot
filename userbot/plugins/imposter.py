@@ -108,7 +108,7 @@ async def _(event):
     event.pattern_match.group(1).lower()
     await edit_or_reply(event, "Anjir group nih sepi bat Goyang dlu ah")
     await asyncio.sleep(2)
-    stcr1 = await event.client.send_file(
+    stcr1 = await event.client.send_sticker(
         event.chat_id,
         "CAACAgQAAx0CVs_uIgADw2B1rgkFThELm-z4lOYbQVXlzYCwAAIHEAACpvFxHrHslPu2V1XQHgQ",
     )
@@ -116,7 +116,7 @@ async def _(event):
     await asyncio.sleep(3)
     await stcr1.delete()
     await text4.delete()
-    stcr2 = await event.client.send_file(
+    stcr2 = await event.client.send_sticker(
         event.chat_id,
         "CAACAgIAAx0CVs_uIgADwmB1r56g8LjaYN8RGiMKqCNyGJcHAAKjAQACEBptIkfOxfML2NdjHgQ",
     )
@@ -124,7 +124,7 @@ async def _(event):
     await asyncio.sleep(3)
     await stcr2.delete()
     await text5.delete()
-    stcr3 = await event.client.send_file(
+    stcr3 = await event.client.send_sticker(
         event.chat_id,
         "CAACAgIAAx0CVs_uIgAD7mB1sLNyuat4uDVwhQ8cdmzwO8-eAAIiAwACbbBCA7zHw9-hcLV4HgQ",
     )
@@ -132,7 +132,7 @@ async def _(event):
     await asyncio.sleep(3)
     await stcr3.delete()
     await text6.delete()
-    stcr4 = await event.client.send_file(
+    stcr4 = await event.client.send_sticker(
         event.chat_id,
         "CAACAgUAAx0CVs_uIgAD-2B1svW7CXnmLh0X7hDAi-pIzsaBAAIQAQACsdHYVBUD2rnCXthBHgQ",
     )
