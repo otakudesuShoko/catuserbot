@@ -104,7 +104,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    hmm = bot.uid
+    bot.uid
     event.pattern_match.group(2)
     event.pattern_match.group(1).lower()
     text1 = await edit_or_reply(event, "Anjir group nih sepi bat Goyang dlu ah")
