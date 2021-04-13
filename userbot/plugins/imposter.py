@@ -99,49 +99,6 @@ async def _(event):
         await event.client.send_file(event.chat_id, "CAADAQADQAADnjOcH-WOkB8DEctJAg")
 
 
-@bot.on(admin_cmd(pattern="sis(|n) (.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="sis(|n) (.*)", allow_sudo=True))
-async def _(event):
-    if event.fwd_from:
-        return
-    event.pattern_match.group(2)
-    event.pattern_match.group(1).lower()
-    await edit_or_reply(event, "Anjir group nih sepi bat Goyang dlu ah")
-    await asyncio.sleep(2)
-    stcr1 = await event.send_sticker(
-        f"CAACAgQAAx0CVs_uIgADw2B1rgkFThELm-z4lOYbQVXlzYCwAAIHEAACpvFxHrHslPu2V1XQHgQ"
-    )
-    text4 = await event.reply(f"Kini tinggal aku sendiri..")
-    await asyncio.sleep(3)
-    await stcr1.delete()
-    await text4.delete()
-    stcr2 = await event.client.send_sticker(
-        event.chat_id,
-        "CAACAgIAAx0CVs_uIgADwmB1r56g8LjaYN8RGiMKqCNyGJcHAAKjAQACEBptIkfOxfML2NdjHgQ",
-    )
-    text5 = await event.reply(f"Hanya berteman dengan sepi.. ")
-    await asyncio.sleep(3)
-    await stcr2.delete()
-    await text5.delete()
-    stcr3 = await event.client.send_sticker(
-        event.chat_id,
-        "CAACAgIAAx0CVs_uIgAD7mB1sLNyuat4uDVwhQ8cdmzwO8-eAAIiAwACbbBCA7zHw9-hcLV4HgQ",
-    )
-    text6 = await event.reply(f"Menanti dirimu kembali. ")
-    await asyncio.sleep(3)
-    await stcr3.delete()
-    await text6.delete()
-    stcr4 = await event.client.send_sticker(
-        event.chat_id,
-        "CAACAgUAAx0CVs_uIgAD-2B1svW7CXnmLh0X7hDAi-pIzsaBAAIQAQACsdHYVBUD2rnCXthBHgQ",
-    )
-    text7 = await event.reply(f"Gini bat dah hidup gua udah **jomblo**")
-    await asyncio.sleep(2)
-    await text7.edit(f"Group chat wa dan tele **sepi**")
-    await asyncio.sleep(2)
-    await text7.edit(f"Gada duit lagi, Anjing beban keluarga")
-
-
 @bot.on(admin_cmd(pattern="timp(|n) (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="timp(|n) (.*)", allow_sudo=True))
 async def _(event):
