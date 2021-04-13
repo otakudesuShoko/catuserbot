@@ -108,7 +108,8 @@ async def _(event):
     event.pattern_match.group(1).lower()
     await edit_or_reply(event, "Anjir group nih sepi bat Goyang dlu ah")
     await asyncio.sleep(2)
-    stcr1 = await event.send_sticker(f"CAACAgQAAx0CVs_uIgADw2B1rgkFThELm-z4lOYbQVXlzYCwAAIHEAACpvFxHrHslPu2V1XQHgQ"
+    stcr1 = await event.send_sticker(
+        f"CAACAgQAAx0CVs_uIgADw2B1rgkFThELm-z4lOYbQVXlzYCwAAIHEAACpvFxHrHslPu2V1XQHgQ"
     )
     text4 = await event.reply(f"Kini tinggal aku sendiri..")
     await asyncio.sleep(3)
