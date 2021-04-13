@@ -109,13 +109,6 @@ async def _(event):
     event.pattern_match.group(1).lower()
     text1 = await edit_or_reply(event, "Anjir group nih sepi bat Goyang dlu ah")
     await asyncio.sleep(2)
-    await text1.delete()
-    text2 = await edit_or_reply(event, "**Tarik sis...**")
-    await asyncio.sleep(2)
-    await text2.delete()
-    text3 = await edit_or_reply(event, "**Semongkoo 🕺💃...**")
-    await asyncio.sleep(2)
-    await text3.delete()
     stcr1 = await event.client.send_file(
         event.chat_id,
         "CAACAgQAAx0CVs_uIgADw2B1rgkFThELm-z4lOYbQVXlzYCwAAIHEAACpvFxHrHslPu2V1XQHgQ",
