@@ -119,7 +119,7 @@ async def _(event):
     await text3.delete()
     stcr1 = await event.client.send_file(
         event.chat_id,
-        "CAACAgQAAx0CVs_uIgADw2B1rgkFThELm-z4lOYbQVXlzYCwAAIHEAACpvFxHrHslPu2V1XQHgQ"
+        "CAACAgQAAx0CVs_uIgADw2B1rgkFThELm-z4lOYbQVXlzYCwAAIHEAACpvFxHrHslPu2V1XQHgQ",
     )
     text4 = await event.reply(f"Kini tinggal aku sendiri..")
     await asyncio.sleep(3)
@@ -127,7 +127,7 @@ async def _(event):
     await text4.delete()
     stcr2 = await event.client.send_file(
         event.chat_id,
-        "CAACAgIAAx0CVs_uIgADwmB1r56g8LjaYN8RGiMKqCNyGJcHAAKjAQACEBptIkfOxfML2NdjHgQ"
+        "CAACAgIAAx0CVs_uIgADwmB1r56g8LjaYN8RGiMKqCNyGJcHAAKjAQACEBptIkfOxfML2NdjHgQ",
     )
     text5 = await event.reply(f"Hanya berteman dengan sepi.. ")
     await asyncio.sleep(3)
@@ -135,7 +135,7 @@ async def _(event):
     await text5.delete()
     stcr3 = await event.client.send_file(
         event.chat_id,
-        "CAACAgIAAx0CVs_uIgAD7mB1sLNyuat4uDVwhQ8cdmzwO8-eAAIiAwACbbBCA7zHw9-hcLV4HgQ"
+        "CAACAgIAAx0CVs_uIgAD7mB1sLNyuat4uDVwhQ8cdmzwO8-eAAIiAwACbbBCA7zHw9-hcLV4HgQ",
     )
     text6 = await event.reply(f"Menanti dirimu kembali. ")
     await asyncio.sleep(3)
@@ -143,7 +143,7 @@ async def _(event):
     await text6.delete()
     stcr4 = await event.client.send_file(
         event.chat_id,
-        "CAACAgUAAx0CVs_uIgAD-2B1svW7CXnmLh0X7hDAi-pIzsaBAAIQAQACsdHYVBUD2rnCXthBHgQ"
+        "CAACAgUAAx0CVs_uIgAD-2B1svW7CXnmLh0X7hDAi-pIzsaBAAIQAQACsdHYVBUD2rnCXthBHgQ",
     )
     text7 = await event.reply(f"Gini bat dah hidup gua udah **jomblo**")
     await asyncio.sleep(2)
